@@ -10,30 +10,11 @@ public class Carta extends ElementoNombreDescripcion {
 	private byte velocidad;
 	private byte alcance;
 	
-
-	public Carta(String nombre, String descripcion, byte puntosAtaque, byte velocidad, byte alcance){
+	public Carta(String nombre, String descripcion, byte puntosAtaque, byte velocidad, byte alcance) {
 		super(nombre, descripcion);
-
-		Statement smt = ConexionBD.conectar();
-
-		try {
-			if (smt.executeUpdate("INSERT INTO cartas VALUES('" + nombre + "','" + descripcion + "'," + puntosAtaque
-					+ "," + velocidad + "," + alcance + ")") > 0) {
-
-				this.puntosAtaque = puntosAtaque;
-				this.velocidad = velocidad;
-				this.alcance = alcance;
-				
-			}else {
-				ConexionBD.desconectar();
-				throw new SQLException("Los valores no han podido insertarse");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		ConexionBD.desconectar();
+		this.puntosAtaque = puntosAtaque;
+		this.velocidad = velocidad;
+		this.alcance = alcance;
 	}
 
 	public byte getPuntosAtaque() {
@@ -59,5 +40,16 @@ public class Carta extends ElementoNombreDescripcion {
 	public void setAlcance(byte alcance) {
 		this.alcance = alcance;
 	}
+
+	@Override
+	public String toString() {
+		return "Carta: "+ getNombre();
+	}
+
+	
+
+	
+	
+	
 
 }
