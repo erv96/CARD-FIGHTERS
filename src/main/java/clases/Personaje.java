@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import exceptions.PersonajeNoExisteException;
 import utils.ConexionBD;
 
 public class Personaje extends ElementoNombreDescripcion {
@@ -13,46 +14,63 @@ public class Personaje extends ElementoNombreDescripcion {
 	private ArrayList<Carta> baraja;
 	private byte energia;
 
-	public Personaje(String nombre, String descripcion, byte vida, byte posicion, ArrayList<Carta> baraja, byte energia)
-			throws SQLException {
+	public Personaje(String nombre, String descripcion, byte posicion, ArrayList<Carta> baraja) {
 		super(nombre, descripcion);
 
 		Statement smt = ConexionBD.conectar();
-		for (byte i = 0; i < 5; i++) {
-			ResultSet cursor = smt.executeQuery("select*from cartas");
-			while (cursor.next()) {
-				Carta barajita = new Carta(cursor.getString("nombre"), cursor.getString("descripcion"),
-						cursor.getByte("puntosAtaque"), cursor.getByte("velocidad"), cursor.getByte("alcance"));
-				baraja.add(barajita);
 
-				System.out.println(barajita);
-			}
-		}
+		try {
 
-			switch (nombre) {
-			case "Steven":
-				for (byte j = 0; j < 2; j++) {
-					ResultSet cursorUlt = smt.executeQuery("select*from ultimates where nombre = 'Bomba imparable'");
-					if (cursorUlt.next()) {
-						Carta bomba = new Ultimate(cursorUlt.getString("nombre"), cursorUlt.getString("descripcion"),
-								cursorUlt.getByte("puntosAtaque"), cursorUlt.getByte("velocidad"),
-								cursorUlt.getByte("alcance"), cursorUlt.getByte("costeEnergia"),
-								cursorUlt.getByte("costeVida"));
-						baraja.add(bomba);
+			ResultSet curPersonaje = smt.executeQuery("SELECT nombre, descripcion FROM personajes WHERE nombre='" + nombre + "'");
+
+			if (curPersonaje.next()) {
+				
+				for (byte i = 0; i < 5; i++) {
+					ResultSet cursor = smt.executeQuery("select*from cartas");
+					while (cursor.next()) {
+						Carta barajita = new Carta(cursor.getString("nombre"), cursor.getString("descripcion"),
+								cursor.getByte("puntosAtaque"), cursor.getByte("velocidad"), cursor.getByte("alcance"));
+						baraja.add(barajita);
+
+						// System.out.println(barajita);
 					}
-
 				}
-				break;
 
+				switch (nombre) {
+				case "Steven":
+					for (byte j = 0; j < 2; j++) {
+						ResultSet cursorUlt = smt
+								.executeQuery("select*from ultimates where nombre = 'Bomba imparable'");
+						if (cursorUlt.next()) {
+							Carta bomba = new Ultimate(cursorUlt.getString("nombre"),
+									cursorUlt.getString("descripcion"), cursorUlt.getByte("puntosAtaque"),
+									cursorUlt.getByte("velocidad"), cursorUlt.getByte("alcance"),
+									cursorUlt.getByte("costeEnergia"), cursorUlt.getByte("costeVida"));
+							baraja.add(bomba);
+						}
+
+					}
+					break;
+				case "Mario":
+
+					break;
+				}
+
+			} else {
+				throw new PersonajeNoExisteException("Ese personaje no se encuentra dentro del roster");
 			}
-		
+
+		} catch (SQLException | PersonajeNoExisteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		ConexionBD.desconectar();
 
-		this.vida = vida;
+		this.vida = 20;
 		this.posicion = posicion;
 		this.baraja = baraja;
-		this.energia = energia;
+		this.energia = 5;
 	}
 
 	public byte getVida() {
@@ -88,16 +106,14 @@ public class Personaje extends ElementoNombreDescripcion {
 		this.energia = energia;
 	}
 
-	public Personaje(String nombre, String descripcion, Carta ataques) {
-		super(nombre, descripcion);
-
-	}
 
 	@Override
 	public String toString() {
-
-		return "Personaje [vida=" + vida + ", posicion=" + posicion + ", baraja=" + baraja + ", energia=" + energia
-				+ "]";
+		return getNombre()+": \n"
+				+ "\tvida: " + vida + "\n"
+				+ "\tbaraja: " + baraja + "\n"
+				+ "\tenergia: " + energia + "\n"
+				+ "\tdescripción: " + getDescripcion();
 	}
 
 }
