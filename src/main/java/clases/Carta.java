@@ -11,7 +11,7 @@ public class Carta extends ElementoNombreDescripcion {
 	private byte alcance;
 	
 	public Carta(String nombre, String descripcion, byte puntosAtaque, byte velocidad, byte alcance) {
-		super(nombre, descripcion);
+		super(nombre,descripcion);
 		this.puntosAtaque = puntosAtaque;
 		this.velocidad = velocidad;
 		this.alcance = alcance;

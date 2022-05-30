@@ -9,10 +9,14 @@ import exceptions.PersonajeNoExisteException;
 import utils.ConexionBD;
 
 public class Personaje extends ElementoNombreDescripcion {
+	private String texto;
 	private byte vida;
 	private byte posicion;
 	private ArrayList<Carta> baraja;
 	private byte energia;
+	
+	
+	
 
 	public Personaje(String nombre, String descripcion, byte posicion, ArrayList<Carta> baraja) {
 		super(nombre, descripcion);
@@ -21,10 +25,12 @@ public class Personaje extends ElementoNombreDescripcion {
 
 		try {
 
-			ResultSet curPersonaje = smt.executeQuery("SELECT nombre, descripcion FROM personajes WHERE nombre='" + nombre + "'");
+			ResultSet curPersonaje = smt
+					.executeQuery("SELECT nombre, descripcion FROM personajes WHERE nombre='" + nombre + "'");
 
 			if (curPersonaje.next()) {
 				
+
 				for (byte i = 0; i < 5; i++) {
 					ResultSet cursor = smt.executeQuery("select*from cartas");
 					while (cursor.next()) {
@@ -35,6 +41,7 @@ public class Personaje extends ElementoNombreDescripcion {
 						// System.out.println(barajita);
 					}
 				}
+				
 
 				switch (nombre) {
 				case "Steven":
@@ -48,7 +55,18 @@ public class Personaje extends ElementoNombreDescripcion {
 									cursorUlt.getByte("costeEnergia"), cursorUlt.getByte("costeVida"));
 							baraja.add(bomba);
 						}
-
+					}
+					
+					for (byte i = 0; i < 3; i++) {
+						ResultSet cursorSp = smt.executeQuery("select*from especiales where nombre='Gancho Rompedor'");
+						
+						if(cursorSp.next()) {
+							Carta gancho = new Especial(cursorSp.getString("nombre"),
+									cursorSp.getString("descripcion"), cursorSp.getByte("puntosAtaque"),
+									cursorSp.getByte("velocidad"), cursorSp.getByte("alcance"),
+									cursorSp.getByte("costeEnergia"));
+							baraja.add(gancho);
+						}
 					}
 					break;
 				case "Mario":
@@ -71,6 +89,7 @@ public class Personaje extends ElementoNombreDescripcion {
 		this.posicion = posicion;
 		this.baraja = baraja;
 		this.energia = 5;
+		
 	}
 
 	public byte getVida() {
@@ -105,15 +124,19 @@ public class Personaje extends ElementoNombreDescripcion {
 	public void setEnergia(byte energia) {
 		this.energia = energia;
 	}
+	
+	public String getTexto() {
+		return texto;
+	}
 
+	public void setTexto(String texto) {
+		this.texto = texto;
+	}
 
 	@Override
 	public String toString() {
-		return getNombre()+": \n"
-				+ "\tvida: " + vida + "\n"
-				+ "\tbaraja: " + baraja + "\n"
-				+ "\tenergia: " + energia + "\n"
-				+ "\tdescripción: " + getDescripcion();
+		return getNombre() + ": \n" + "\tvida: " + vida + "\n" + "\tenergia: " + energia +"\n"
+				+  "\tbaraja: " + baraja + "\n" + "\n" + "\tdescripción: "+ getDescripcion();
 	}
 
 }

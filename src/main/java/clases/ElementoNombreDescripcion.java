@@ -4,7 +4,6 @@ public class ElementoNombreDescripcion {
 	private String nombre;
 	private String descripcion;
 	
-	
 	public ElementoNombreDescripcion(String nombre, String descripcion) {
 		super();
 		this.nombre = nombre;
@@ -27,12 +26,10 @@ public class ElementoNombreDescripcion {
 	}
 
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDesripcion(String desripcion) {
+		this.descripcion = desripcion;
 	}
-	
-	
-	
+
 	
 	
 	
