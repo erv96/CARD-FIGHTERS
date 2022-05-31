@@ -83,8 +83,8 @@ public class Personaje extends ElementoNombreDescripcion {
 			}
 
 		} catch (SQLException | PersonajeNoExisteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ConexionBD.desconectar();
+			System.err.println(e.getMessage());
 		}
 
 		ConexionBD.desconectar();

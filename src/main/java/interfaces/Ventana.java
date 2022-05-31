@@ -6,9 +6,25 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import clases.CampoCombate;
+import clases.Consumible;
+import clases.Personaje;
+import clases.PocionEnergia;
+import clases.PocionFuerza;
+import clases.PocionVida;
+
 public class Ventana extends JFrame {
-	
+	private Personaje jugador1;
+	private Personaje jugador2;
 	private JPanel pantallaActual;
+	
+	Personaje steven = new Personaje("Steven");
+	
+	Consumible pEnergia = new PocionEnergia();
+	Consumible pFuerza = new PocionFuerza();
+	Consumible pVida = new PocionVida();
+	CampoCombate playa = new CampoCombate("Playa enigmática");
+	CampoCombate dojo = new CampoCombate("Dojo");
 	
 	public Ventana() {
 		this.setTitle("Card Fighters");

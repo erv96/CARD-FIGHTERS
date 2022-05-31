@@ -17,6 +17,11 @@ public class ElementoNombreDescripcion {
 		super();
 		this.nombre = nombre;
 	}
+	
+
+	public ElementoNombreDescripcion() {
+		super();
+	}
 
 
 
