@@ -9,7 +9,6 @@ import exceptions.PersonajeNoExisteException;
 import utils.ConexionBD;
 
 public class Personaje extends ElementoNombreDescripcion {
-	private String texto;
 	private byte vida;
 	private byte posicion;
 	private ArrayList<Carta> baraja;
@@ -18,21 +17,22 @@ public class Personaje extends ElementoNombreDescripcion {
 	
 	
 
-	public Personaje(String nombre, String descripcion, byte posicion, ArrayList<Carta> baraja) {
-		super(nombre, descripcion);
+	public Personaje(String nombre) {
+		super(nombre);
+		
+		baraja = new ArrayList<Carta>();
 
 		Statement smt = ConexionBD.conectar();
 
 		try {
 
 			ResultSet curPersonaje = smt
-					.executeQuery("SELECT nombre, descripcion FROM personajes WHERE nombre='" + nombre + "'");
+					.executeQuery("SELECT * FROM personajes WHERE nombre='" + nombre + "'");
 
 			if (curPersonaje.next()) {
+				Statement smt2 = ConexionBD.conectar();
 				
-
-				for (byte i = 0; i < 5; i++) {
-					ResultSet cursor = smt.executeQuery("select*from cartas");
+					ResultSet cursor = smt2.executeQuery("select*from cartas WHERE personaje = '"+nombre+"'");
 					while (cursor.next()) {
 						Carta barajita = new Carta(cursor.getString("nombre"), cursor.getString("descripcion"),
 								cursor.getByte("puntosAtaque"), cursor.getByte("velocidad"), cursor.getByte("alcance"));
@@ -40,7 +40,14 @@ public class Personaje extends ElementoNombreDescripcion {
 
 						// System.out.println(barajita);
 					}
-				}
+					
+					ResultSet cursorDesc = smt2.executeQuery("select * from personajes WHERE nombre= '"+nombre+"'");
+						if(cursorDesc.next()) {
+							String descripcion = cursorDesc.getString("descripcion");
+							setDesripcion(descripcion);
+						}
+					
+				
 				
 
 				switch (nombre) {
@@ -87,10 +94,10 @@ public class Personaje extends ElementoNombreDescripcion {
 
 		this.vida = 20;
 		this.posicion = posicion;
-		this.baraja = baraja;
 		this.energia = 5;
 		
 	}
+	
 
 	public byte getVida() {
 		return vida;
@@ -125,13 +132,7 @@ public class Personaje extends ElementoNombreDescripcion {
 		this.energia = energia;
 	}
 	
-	public String getTexto() {
-		return texto;
-	}
 
-	public void setTexto(String texto) {
-		this.texto = texto;
-	}
 
 	@Override
 	public String toString() {

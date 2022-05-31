@@ -44,6 +44,7 @@ public class Carta extends ElementoNombreDescripcion {
 	@Override
 	public String toString() {
 		return "Carta: "+ getNombre();
+				
 	}
 
 	

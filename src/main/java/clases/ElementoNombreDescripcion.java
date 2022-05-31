@@ -9,6 +9,16 @@ public class ElementoNombreDescripcion {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 	}
+	
+	
+
+
+	protected ElementoNombreDescripcion(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
+
+
 
 
 	public String getNombre() {
