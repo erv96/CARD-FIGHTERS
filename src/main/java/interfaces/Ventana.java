@@ -13,6 +13,7 @@ public class Ventana extends JFrame {
 	public Ventana() {
 		this.setTitle("Card Fighters");
 		this.setSize(800, 576);
+		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setIconImage(new ImageIcon("./icon/punch.png").getImage());
 		this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));

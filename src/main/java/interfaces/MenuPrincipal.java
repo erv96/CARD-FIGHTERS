@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 public class MenuPrincipal extends JPanel {
 	private Ventana ventana;
@@ -19,27 +20,40 @@ public class MenuPrincipal extends JPanel {
 		this.ventana = v;
 		setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("CARD FIGHTERS");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setFont(new Font("Impact", Font.PLAIN, 48));
-		lblNewLabel_1.setBounds(148, 69, 408, 44);
-		add(lblNewLabel_1);
+		JLabel TITULO = new JLabel("CARD FIGHTERS");
+		TITULO.setHorizontalAlignment(SwingConstants.CENTER);
+		TITULO.setForeground(Color.WHITE);
+		TITULO.setFont(new Font("Personal Services", Font.PLAIN, 55));
+		TITULO.setBounds(10, 30, 510, 89);
+		add(TITULO);
 		
-		JButton btnNewButton = new JButton("\u00A1LUCHAR!");
-		btnNewButton.setBackground(Color.RED);
-		btnNewButton.setBounds(286, 239, 131, 44);
-		add(btnNewButton);
+		JButton botonMenu_luch = new JButton("\u00A1LUCHAR!");
+		botonMenu_luch.setFont(UIManager.getFont("Menu.font"));
+		botonMenu_luch.setBackground(Color.RED);
+		botonMenu_luch.setBounds(63, 368, 131, 44);
+		add(botonMenu_luch);
 		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha small.png"));
-		lblNewLabel_2.setBounds(25, -23, 642, 195);
-		add(lblNewLabel_2);
+		JButton botonInst = new JButton("INSTRUCCIONES");
+		botonInst.setFont(UIManager.getFont("Menu.font"));
+		botonInst.setBackground(Color.RED);
+		botonInst.setBounds(330, 368, 131, 44);
+		add(botonInst);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\menu.jpg"));
-		lblNewLabel.setBounds(0, 0, 720, 480);
-		add(lblNewLabel);
+		JButton boton_salir = new JButton("SALIR");
+		boton_salir.setFont(UIManager.getFont("Menu.font"));
+		boton_salir.setBackground(Color.RED);
+		boton_salir.setBounds(596, 368, 131, 44);
+		add(boton_salir);
+		
+		JLabel tinta = new JLabel("");
+		tinta.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha.png"));
+		tinta.setBounds(-312, 152, 1163, 363);
+		add(tinta);
+		
+		JLabel fondo = new JLabel("");
+		fondo.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\menu.png"));
+		fondo.setBounds(0, 0, 800, 576);
+		add(fondo);
 		
 		
 	}
