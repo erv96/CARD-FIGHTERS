@@ -24,30 +24,35 @@ public class MenuPrincipal extends JPanel {
 		TITULO.setHorizontalAlignment(SwingConstants.CENTER);
 		TITULO.setForeground(Color.WHITE);
 		TITULO.setFont(new Font("Personal Services", Font.PLAIN, 55));
-		TITULO.setBounds(10, 30, 510, 89);
+		TITULO.setBounds(24, 28, 510, 89);
 		add(TITULO);
 		
 		JButton botonMenu_luch = new JButton("\u00A1LUCHAR!");
 		botonMenu_luch.setFont(UIManager.getFont("Menu.font"));
 		botonMenu_luch.setBackground(Color.RED);
-		botonMenu_luch.setBounds(63, 368, 131, 44);
+		botonMenu_luch.setBounds(60, 276, 131, 44);
 		add(botonMenu_luch);
 		
 		JButton botonInst = new JButton("INSTRUCCIONES");
 		botonInst.setFont(UIManager.getFont("Menu.font"));
 		botonInst.setBackground(Color.RED);
-		botonInst.setBounds(330, 368, 131, 44);
+		botonInst.setBounds(327, 276, 131, 44);
 		add(botonInst);
 		
 		JButton boton_salir = new JButton("SALIR");
 		boton_salir.setFont(UIManager.getFont("Menu.font"));
 		boton_salir.setBackground(Color.RED);
-		boton_salir.setBounds(596, 368, 131, 44);
+		boton_salir.setBounds(596, 276, 131, 44);
 		add(boton_salir);
+		
+		JLabel tinta_2 = new JLabel("");
+		tinta_2.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha.png"));
+		tinta_2.setBounds(-292, -190, 1163, 363);
+		add(tinta_2);
 		
 		JLabel tinta = new JLabel("");
 		tinta.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha.png"));
-		tinta.setBounds(-312, 152, 1163, 363);
+		tinta.setBounds(-316, 299, 1163, 363);
 		add(tinta);
 		
 		JLabel fondo = new JLabel("");
