@@ -76,9 +76,6 @@ public class Personaje extends ElementoNombreDescripcion {
 						}
 					}
 					break;
-				case "Mario":
-
-					break;
 				}
 
 			} else {
