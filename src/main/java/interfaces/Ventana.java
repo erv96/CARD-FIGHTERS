@@ -1,6 +1,7 @@
 package interfaces;
 
 import java.awt.Cursor;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -14,11 +15,14 @@ import clases.PocionFuerza;
 import clases.PocionVida;
 
 public class Ventana extends JFrame {
-	private Personaje jugador1;
-	private Personaje jugador2;
+
 	private JPanel pantallaActual;
 	
 	Personaje steven = new Personaje("Steven");
+	Sound sound = new Sound();
+	
+	File selector = new File("./songs/selector.wav");
+	File main_title = new File("./songs/main_title.wav");
 	
 	Consumible pEnergia = new PocionEnergia();
 	Consumible pFuerza = new PocionFuerza();
@@ -27,6 +31,7 @@ public class Ventana extends JFrame {
 	CampoCombate dojo = new CampoCombate("Dojo");
 	
 	public Ventana() {
+		loop(main_title);
 		this.setTitle("Card Fighters");
 		this.setSize(800, 576);
 		this.setResizable(false);
@@ -34,7 +39,7 @@ public class Ventana extends JFrame {
 		this.setIconImage(new ImageIcon("./icon/punch.png").getImage());
 		this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.pantallaActual = new MenuPrincipal(this);
+		this.pantallaActual = new PantallaTitulo(this);
 		this.setContentPane(this.pantallaActual); 
 		this.setVisible(true);
 		
@@ -52,9 +57,12 @@ public class Ventana extends JFrame {
 		switch (nombrePantalla) {
 		case "MenuPrincipal":
 			this.pantallaActual = new MenuPrincipal(this);
-			
 
 			break;
+			
+		case "PantallaTitulo":
+			this.pantallaActual = new PantallaTitulo(this);
+			
 		default:
 			break;
 		}
@@ -62,5 +70,20 @@ public class Ventana extends JFrame {
 		this.pantallaActual.setVisible(true);
 		this.setContentPane(pantallaActual);
 	}
+	
+	public void playMusic(File sonido) {
+		sound.setFile(sonido);
+		sound.play();
+	}
+	
+	public void loop(File sonido) {
+		sound.setFile(sonido);
+		sound.loop();
+	}
+	
+	public void stop(File sonido) {
+		sound.stop();
+	}
+	
 
 }
