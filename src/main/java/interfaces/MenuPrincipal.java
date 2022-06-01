@@ -25,38 +25,44 @@ public class MenuPrincipal extends JPanel {
 		this.ventana = v;
 		setLayout(null);
 		
-		JLabel TITULO = new JLabel("CARD FIGHTERS");
+		JLabel TITULO = new JLabel("MEN\u00DA PRINCIPAL");
 		TITULO.setHorizontalAlignment(SwingConstants.CENTER);
 		TITULO.setForeground(Color.WHITE);
 		TITULO.setFont(new Font("Personal Services", Font.PLAIN, 55));
-		TITULO.setBounds(25, 20, 510, 89);
+		TITULO.setBounds(22, 10, 510, 109);
 		add(TITULO);
 		
-		JButton botonMenu_luch = new BotonAnimado("\u00A1LUCHAR!");
-		botonMenu_luch.setBackground(Color.RED);
-		botonMenu_luch.setBounds(60, 276, 131, 44);
-		add(botonMenu_luch);
+		JButton LUCHAR = new BotonAnimado("\u00A1LUCHAR!");
+		LUCHAR.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ventana.irAPantalla("SeleccionPersonaje");
+			}
+		});
+		LUCHAR.setBackground(Color.RED);
+		LUCHAR.setBounds(60, 276, 131, 44);
+		add(LUCHAR);
 		
-		JButton botonInst = new BotonAnimado("INSTRUCCIONES");
-		botonInst.setBackground(Color.RED);
-		botonInst.setBounds(302, 276, 199, 44);
-		add(botonInst);
+		JButton INST = new BotonAnimado("INSTRUCCIONES");
+		INST.setBackground(Color.RED);
+		INST.setBounds(302, 276, 199, 44);
+		add(INST);
 		
-		JButton boton_atras = new BotonAnimado("SALIR");
-		boton_atras.setText("ATRAS");
-		boton_atras.addMouseListener(new MouseAdapter() {
+		JButton ATRAS = new BotonAnimado("SALIR");
+		ATRAS.setText("ATR\u00C1S");
+		ATRAS.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ventana.irAPantalla("PantallaTitulo");
 			}
 		});
-		boton_atras.setBackground(Color.RED);
-		boton_atras.setBounds(596, 276, 131, 44);
-		add(boton_atras);
+		ATRAS.setBackground(Color.RED);
+		ATRAS.setBounds(596, 276, 131, 44);
+		add(ATRAS);
 		
 		JLabel tinta_1 = new JLabel("");
 		tinta_1.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha.png"));
-		tinta_1.setBounds(-316, 57, 1163, 363);
+		tinta_1.setBounds(-316, 46, 1163, 363);
 		add(tinta_1);
 		
 		JLabel tinta_2 = new JLabel("");

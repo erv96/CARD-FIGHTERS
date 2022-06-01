@@ -33,7 +33,7 @@ public class Ventana extends JFrame {
 	public Ventana() {
 		loop(main_title);
 		this.setTitle("Card Fighters");
-		this.setSize(800, 576);
+		this.setSize(800, 600);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setIconImage(new ImageIcon("./icon/punch.png").getImage());
@@ -55,14 +55,24 @@ public class Ventana extends JFrame {
 		this.pantallaActual.setVisible(false);
 		this.pantallaActual = null;
 		switch (nombrePantalla) {
-		case "MenuPrincipal":
-			this.pantallaActual = new MenuPrincipal(this);
-
-			break;
-			
+		
 		case "PantallaTitulo":
 			this.pantallaActual = new PantallaTitulo(this);
 			
+			break;
+			
+		case "MenuPrincipal":
+			sound.stop();
+			this.pantallaActual = new MenuPrincipal(this);
+			loop(main_title);
+			break;
+			
+			
+		case "SeleccionPersonaje":
+			sound.stop();
+			this.pantallaActual = new SeleccionPersonaje(this);
+			loop(selector);
+			break;
 		default:
 			break;
 		}

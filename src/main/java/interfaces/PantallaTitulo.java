@@ -34,7 +34,7 @@ public class PantallaTitulo extends JPanel {
 				ventana.irAPantalla("MenuPrincipal");
 			}
 		});
-		empezar.setBounds(281, 180, 215, 73);
+		empezar.setBounds(281, 212, 215, 73);
 
 		add(empezar);
 		
@@ -45,27 +45,28 @@ public class PantallaTitulo extends JPanel {
 				ventana.dispose();
 			}
 		});
-		salir.setBounds(284, 308, 215, 73);
+		salir.setBounds(284, 340, 215, 73);
 		add(salir);
 		
 		JLabel mancha = new JLabel("");
 		mancha.setIcon(new ImageIcon("./background/mancha_small.png"));
 		mancha.setHorizontalAlignment(SwingConstants.CENTER);
-		mancha.setBounds(65, 79, 644, 229);
+		mancha.setBounds(65, 111, 644, 229);
 		add(mancha);
 		
 		JLabel mancha_2 = new JLabel("");
 		mancha_2.setIcon(new ImageIcon("./background/mancha_small.png"));
 		mancha_2.setHorizontalAlignment(SwingConstants.CENTER);
-		mancha_2.setBounds(53, 209, 644, 229);
+		mancha_2.setBounds(53, 241, 644, 229);
 		add(mancha_2);
 		
 		JLabel fighter = new JLabel("");
+		mancha_2.setLabelFor(fighter);
 		fighter.setForeground(Color.WHITE);
 		fighter.setBackground(Color.YELLOW);
 		fighter.setHorizontalAlignment(SwingConstants.CENTER);
-		fighter.setIcon(new ImageIcon("./background/logo.png"));
-		fighter.setBounds(353, 62, 726, 576);
+		fighter.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\logo.png"));
+		fighter.setBounds(348, 10, 726, 673);
 		add(fighter);
 		
 		JLabel fondo = new JLabel("");
