@@ -1,19 +1,11 @@
 use card_fighters;
 
-CREATE TABLE personajes(
+CREATE TABLE personaje(
 	nombre VARCHAR(50) PRIMARY KEY,
-    descripcion VARCHAR(255),
-	especial VARCHAR(100),
-    ultimate VARCHAR(100),
-    CONSTRAINT especial_personaje_fk
-    FOREIGN KEY (especial)
-    REFERENCES especiales(nombre),
-    CONSTRAINT ultimate_personaje_fk
-    FOREIGN KEY (ultimate)
-    REFERENCES ultimates(nombre)
+    descripcion VARCHAR(255)
 );
 
-CREATE TABLE consumibles(
+CREATE TABLE consumible(
 	nombre VARCHAR(50) PRIMARY KEY,
     descripcion VARCHAR(100),
     aumentoEnergia INT,
@@ -21,12 +13,12 @@ CREATE TABLE consumibles(
     aumentoAtaque INT
 );
 
-CREATE TABLE escenarios(
+CREATE TABLE escenario(
 	nombre VARCHAR(50) PRIMARY KEY,
     descripcion VARCHAR(255)
 );
 
-CREATE TABLE cartas(
+CREATE TABLE carta(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nombre VARCHAR(50),
     personaje VARCHAR(50),
@@ -35,27 +27,38 @@ CREATE TABLE cartas(
     velocidad NUMERIC(2),
     alcance NUMERIC(1),
     FOREIGN KEY (personaje)
-    REFERENCES personajes(nombre)
+    REFERENCES personaje(nombre)
 );
 
+select*from carta;
 
-CREATE TABLE especiales(
-	nombre VARCHAR(100) PRIMARY KEY,
-    descripcion VARCHAR(255),
-    puntosAtaque NUMERIC(2),
-    velocidad NUMERIC(2),
-    alcance NUMERIC(1),
-    costeEnergia NUMERIC(1)
-);
 
-CREATE TABLE ultimates(
-	nombre VARCHAR(100) PRIMARY KEY,
+CREATE TABLE especial(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(100),
+    personaje VARCHAR(100),
     descripcion VARCHAR(255),
     puntosAtaque NUMERIC(2),
     velocidad NUMERIC(2),
     alcance NUMERIC(1),
     costeEnergia NUMERIC(1),
-    costeVida NUMERIC(2)
+    FOREIGN KEY (personaje)
+    REFERENCES personaje(nombre)
+);
+
+
+CREATE TABLE ultimate(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(100),
+    personaje VARCHAR(100),
+    descripcion VARCHAR(255),
+    puntosAtaque NUMERIC(2),
+    velocidad NUMERIC(2),
+    alcance NUMERIC(1),
+    costeEnergia NUMERIC(1),
+    costeVida NUMERIC(2),
+    FOREIGN KEY (personaje)
+    REFERENCES personaje(nombre)
 );
 
 
