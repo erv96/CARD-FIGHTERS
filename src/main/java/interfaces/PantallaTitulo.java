@@ -34,7 +34,7 @@ public class PantallaTitulo extends JPanel {
 				ventana.irAPantalla("MenuPrincipal");
 			}
 		});
-		empezar.setBounds(281, 212, 215, 73);
+		empezar.setBounds(281, 204, 215, 73);
 
 		add(empezar);
 		
@@ -45,19 +45,19 @@ public class PantallaTitulo extends JPanel {
 				ventana.dispose();
 			}
 		});
-		salir.setBounds(284, 340, 215, 73);
+		salir.setBounds(284, 332, 215, 73);
 		add(salir);
 		
 		JLabel mancha = new JLabel("");
 		mancha.setIcon(new ImageIcon("./background/mancha_small.png"));
 		mancha.setHorizontalAlignment(SwingConstants.CENTER);
-		mancha.setBounds(65, 111, 644, 229);
+		mancha.setBounds(65, 103, 644, 229);
 		add(mancha);
 		
 		JLabel mancha_2 = new JLabel("");
 		mancha_2.setIcon(new ImageIcon("./background/mancha_small.png"));
 		mancha_2.setHorizontalAlignment(SwingConstants.CENTER);
-		mancha_2.setBounds(53, 241, 644, 229);
+		mancha_2.setBounds(53, 233, 644, 229);
 		add(mancha_2);
 		
 		JLabel fighter = new JLabel("");
@@ -71,7 +71,7 @@ public class PantallaTitulo extends JPanel {
 		
 		JLabel fondo = new JLabel("");
 		fondo.setIcon(new ImageIcon("./background/pantallaTitulo.jpg"));
-		fondo.setBounds(0, 0, 800, 576);
+		fondo.setBounds(0, 0, 800, 579);
 		add(fondo);
 		
 		

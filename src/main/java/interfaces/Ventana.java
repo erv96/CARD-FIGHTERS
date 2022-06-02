@@ -18,15 +18,24 @@ public class Ventana extends JFrame {
 
 	private JPanel pantallaActual;
 	
+	// PERSONAJES
+	
 	Personaje steven = new Personaje("Steven");
+	
+	// CANCIONES
+	
 	Sound sound = new Sound();
 	
 	File selector = new File("./songs/selector.wav");
 	File main_title = new File("./songs/main_title.wav");
 	
+	// CONSUMIBLES
+	
 	Consumible pEnergia = new PocionEnergia();
 	Consumible pFuerza = new PocionFuerza();
 	Consumible pVida = new PocionVida();
+	
+	// ESCENARIOS
 	CampoCombate playa = new CampoCombate("Playa enigmática");
 	CampoCombate dojo = new CampoCombate("Dojo");
 	

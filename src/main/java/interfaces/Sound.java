@@ -17,10 +17,9 @@ import javazoom.jl.player.Player;
 
 public class Sound {
 	Clip clip;
-	URL soundURL[] = new URL[30];
 
 	public Sound() {
-		soundURL[0] = getClass().getResource("./songs/selector.wav");
+		
 	}
 
 	public void setFile(File sonido) {

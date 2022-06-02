@@ -13,42 +13,35 @@ public class Personaje extends ElementoNombreDescripcion {
 	private byte posicion;
 	private ArrayList<Carta> baraja;
 	private byte energia;
-	
-	
-	
 
 	public Personaje(String nombre) {
 		super(nombre);
-		
+
 		baraja = new ArrayList<Carta>();
 
 		Statement smt = ConexionBD.conectar();
 
 		try {
 
-			ResultSet curPersonaje = smt
-					.executeQuery("SELECT * FROM personajes WHERE nombre='" + nombre + "'");
+			ResultSet curPersonaje = smt.executeQuery("SELECT * FROM personajes WHERE nombre='" + nombre + "'");
 
 			if (curPersonaje.next()) {
 				Statement smt2 = ConexionBD.conectar();
-				
-					ResultSet cursor = smt2.executeQuery("select*from cartas WHERE personaje = '"+nombre+"'");
-					while (cursor.next()) {
-						Carta barajita = new Carta(cursor.getString("nombre"), cursor.getString("descripcion"),
-								cursor.getByte("puntosAtaque"), cursor.getByte("velocidad"), cursor.getByte("alcance"));
-						baraja.add(barajita);
 
-						// System.out.println(barajita);
-					}
-					
-					ResultSet cursorDesc = smt2.executeQuery("select * from personajes WHERE nombre= '"+nombre+"'");
-						if(cursorDesc.next()) {
-							String descripcion = cursorDesc.getString("descripcion");
-							setDesripcion(descripcion);
-						}
-					
-				
-				
+				ResultSet cursor = smt2.executeQuery("select*from cartas WHERE personaje = '" + nombre + "'");
+				while (cursor.next()) {
+					Carta barajita = new Carta(cursor.getString("nombre"), cursor.getString("descripcion"),
+							cursor.getByte("puntosAtaque"), cursor.getByte("velocidad"), cursor.getByte("alcance"));
+					baraja.add(barajita);
+
+					// System.out.println(barajita);
+				}
+
+				ResultSet cursorDesc = smt2.executeQuery("select * from personajes WHERE nombre= '" + nombre + "'");
+				if (cursorDesc.next()) {
+					String descripcion = cursorDesc.getString("descripcion");
+					setDesripcion(descripcion);
+				}
 
 				switch (nombre) {
 				case "Steven":
@@ -63,15 +56,14 @@ public class Personaje extends ElementoNombreDescripcion {
 							baraja.add(bomba);
 						}
 					}
-					
+
 					for (byte i = 0; i < 3; i++) {
 						ResultSet cursorSp = smt.executeQuery("select*from especiales where nombre='Gancho Rompedor'");
-						
-						if(cursorSp.next()) {
-							Carta gancho = new Especial(cursorSp.getString("nombre"),
-									cursorSp.getString("descripcion"), cursorSp.getByte("puntosAtaque"),
-									cursorSp.getByte("velocidad"), cursorSp.getByte("alcance"),
-									cursorSp.getByte("costeEnergia"));
+
+						if (cursorSp.next()) {
+							Carta gancho = new Especial(cursorSp.getString("nombre"), cursorSp.getString("descripcion"),
+									cursorSp.getByte("puntosAtaque"), cursorSp.getByte("velocidad"),
+									cursorSp.getByte("alcance"), cursorSp.getByte("costeEnergia"));
 							baraja.add(gancho);
 						}
 					}
@@ -88,13 +80,13 @@ public class Personaje extends ElementoNombreDescripcion {
 		}
 
 		ConexionBD.desconectar();
-
+		
+		this.setNombre(nombre);
 		this.vida = 20;
 		this.posicion = posicion;
 		this.energia = 5;
-		
+
 	}
-	
 
 	public byte getVida() {
 		return vida;
@@ -128,13 +120,11 @@ public class Personaje extends ElementoNombreDescripcion {
 	public void setEnergia(byte energia) {
 		this.energia = energia;
 	}
-	
-
 
 	@Override
 	public String toString() {
-		return getNombre() + ": \n" + "\tvida: " + vida + "\n" + "\tenergia: " + energia +"\n"
-				+  "\tbaraja: " + baraja + "\n" + "\n" + "\tdescripción: "+ getDescripcion();
+		return getNombre() + ": \n" + "\tvida: " + vida + "\n" + "\tenergia: " + energia + "\n" + "\tbaraja: " + baraja
+				+ "\n" + "\n" + "\tdescripción: " + getDescripcion();
 	}
 
 }
