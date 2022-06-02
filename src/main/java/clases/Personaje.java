@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 import exceptions.PersonajeNoExisteException;
 import utils.ConexionBD;
@@ -12,7 +13,14 @@ public class Personaje extends ElementoNombreDescripcion {
 	private byte vida;
 	private byte posicion;
 	private ArrayList<Carta> baraja;
+	private String especial;
+	private String ultimate;
 	private byte energia;
+	
+
+	public Personaje() {
+		
+	}
 
 	public Personaje(String nombre) {
 		super(nombre);
@@ -120,11 +128,52 @@ public class Personaje extends ElementoNombreDescripcion {
 	public void setEnergia(byte energia) {
 		this.energia = energia;
 	}
+	
+	
+
+	public String getEspecial() {
+		return especial;
+	}
+
+	public void setEspecial(String especial) {
+		this.especial = especial;
+	}
+
+	public String getUltimate() {
+		return ultimate;
+	}
+
+	public void setUltimate(String ultimate) {
+		this.ultimate = ultimate;
+	}
 
 	@Override
 	public String toString() {
-		return getNombre() + ": \n" + "\tvida: " + vida + "\n" + "\tenergia: " + energia + "\n" + "\tbaraja: " + baraja
-				+ "\n" + "\n" + "\tdescripción: " + getDescripcion();
+		return getNombre() + ": \n"+ "\tEspecial: "+ especial + 
+				"\n\tUltimate: "+ultimate+ "\n" + "\n" + "\tDescripción: " + getDescripcion();
 	}
 
+	
+	public static ArrayList<Personaje> getTodos(){
+		ArrayList<Personaje> ret=new ArrayList<Personaje>();
+		Statement smt=ConexionBD.conectar();
+		try {
+			ResultSet cursor=smt.executeQuery("select * from personajes");
+			while(cursor.next()) {
+				Personaje actual=new Personaje();
+				actual.setNombre(cursor.getString("nombre"));
+				actual.setVida((byte)20);
+				actual.setEnergia((byte)5);
+				actual.setEspecial(cursor.getString("especial"));
+				actual.setUltimate(cursor.getString("ultimate"));
+				actual.setDesripcion(cursor.getString("descripcion"));
+				//actual.energia=cursor.getByte("costeEnergia");
+				ret.add(actual);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ret;
+	}
 }

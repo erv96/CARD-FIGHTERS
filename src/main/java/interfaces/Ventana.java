@@ -20,7 +20,8 @@ public class Ventana extends JFrame {
 	
 	// PERSONAJES
 	
-	Personaje steven = new Personaje("Steven");
+	Personaje jugador;
+	Personaje rival;
 	
 	// CANCIONES
 	

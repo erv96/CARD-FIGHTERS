@@ -27,7 +27,10 @@ public class Main {
 	public static void main(String[] args) {
 
 		Ventana prueba = new Ventana();
-			
+		
+		System.out.println(Personaje.getTodos());
+		//DOCUMENTAR TODAS LAS CLASES
+		//ENCIMA DE CADA VARIABLE INTERNA SE PONE PARA QUE SIRVE.
 	
 }
 	
