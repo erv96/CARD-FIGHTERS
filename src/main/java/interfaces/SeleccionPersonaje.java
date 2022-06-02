@@ -39,6 +39,13 @@ public class SeleccionPersonaje extends JPanel {
 		tituloPantalla.setBounds(20, 10, 725, 99);
 		add(tituloPantalla);
 		
+		JLabel lblNewLabel = new JLabel("VS");
+		lblNewLabel.setForeground(Color.BLACK);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Personal Services", Font.PLAIN, 55));
+		lblNewLabel.setBounds(302, 271, 192, 91);
+		add(lblNewLabel);
+		
 		JLabel riv_title = new JLabel("RIVAL");
 		riv_title.setHorizontalAlignment(SwingConstants.CENTER);
 		riv_title.setForeground(Color.BLACK);
@@ -117,6 +124,8 @@ public class SeleccionPersonaje extends JPanel {
 					jugador = new Personaje(nombreJ);
 					String nombreR = (String)lista_Rival.getSelectedValue();
 					rival = new Personaje(nombreR);
+					ventana.irAPantalla("PantallaCombate");
+					PantallaCombate combate = new PantallaCombate(jugador,rival);
 				}else {
 					JOptionPane.showMessageDialog(v, "Tanto el jugador como el rival deben ser seleccionados","ERROR DE SELECCIÓN",JOptionPane.ERROR_MESSAGE);
 				}

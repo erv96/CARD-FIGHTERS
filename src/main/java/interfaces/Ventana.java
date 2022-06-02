@@ -24,6 +24,7 @@ public class Ventana extends JFrame {
 
 	File selector = new File("./songs/selector.wav");
 	File main_title = new File("./songs/main_title.wav");
+	File combate_playa = new File("./songs/combate_playa.wav");
 
 	public Ventana() {
 		loop(main_title);
@@ -62,6 +63,11 @@ public class Ventana extends JFrame {
 			this.pantallaActual = new SeleccionPersonaje(this);
 			loop(selector);
 			break;
+		case "PantallaCombate":
+			sound.stop();
+			this.pantallaActual = new PantallaCombate(this);
+			loop(combate_playa);
+			
 		default:
 			break;
 		}
