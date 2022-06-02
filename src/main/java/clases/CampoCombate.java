@@ -22,7 +22,7 @@ public class CampoCombate extends ElementoNombreDescripcion {
 			Statement smt = ConexionBD.conectar();
 			
 			try {
-				ResultSet cursor = smt.executeQuery("Select * from escenarios WHERE nombre='"+nombre+"'");
+				ResultSet cursor = smt.executeQuery("Select * from escenario WHERE nombre='"+nombre+"'");
 				if(cursor.next()) {
 					nombre = cursor.getString("nombre");
 					String descripcion = cursor.getString("descripcion");

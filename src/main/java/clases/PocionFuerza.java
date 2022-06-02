@@ -19,7 +19,7 @@ public class PocionFuerza extends Consumible {
 		Statement smt = ConexionBD.conectar();
 
 		try {
-			ResultSet cursor = smt.executeQuery("Select * from consumibles WHERE nombre= 'PocionAtaque'");
+			ResultSet cursor = smt.executeQuery("Select * from consumible WHERE nombre= 'PocionAtaque'");
 			if (cursor.next()) {
 				this.aumentoFuerza = cursor.getByte("aumentoAtaque");
 				String descripcion = cursor.getString("descripcion");

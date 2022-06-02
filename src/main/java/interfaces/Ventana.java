@@ -17,29 +17,14 @@ import clases.PocionVida;
 public class Ventana extends JFrame {
 
 	private JPanel pantallaActual;
-	
-	// PERSONAJES
-	
-	Personaje jugador;
-	Personaje rival;
-	
+
 	// CANCIONES
-	
+
 	Sound sound = new Sound();
-	
+
 	File selector = new File("./songs/selector.wav");
 	File main_title = new File("./songs/main_title.wav");
-	
-	// CONSUMIBLES
-	
-	Consumible pEnergia = new PocionEnergia();
-	Consumible pFuerza = new PocionFuerza();
-	Consumible pVida = new PocionVida();
-	
-	// ESCENARIOS
-	CampoCombate playa = new CampoCombate("Playa enigmática");
-	CampoCombate dojo = new CampoCombate("Dojo");
-	
+
 	public Ventana() {
 		loop(main_title);
 		this.setTitle("Card Fighters");
@@ -50,34 +35,28 @@ public class Ventana extends JFrame {
 		this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pantallaActual = new PantallaTitulo(this);
-		this.setContentPane(this.pantallaActual); 
+		this.setContentPane(this.pantallaActual);
 		this.setVisible(true);
-		
+
 	}
-	
+
 	public void irAPantalla(String nombrePantalla) {
-		/*
-		 * Iterator it = this.pantallas.values().iterator(); while(it.hasNext()) {
-		 * JPanel actual =(JPanel)it.next(); actual.setVisible(false); }
-		 * this.pantallas.get(nombrePantalla).setVisible(true);
-		 * this.setContentPane(this.pantallas.get(nombrePantalla));
-		 */
+
 		this.pantallaActual.setVisible(false);
 		this.pantallaActual = null;
 		switch (nombrePantalla) {
-		
+
 		case "PantallaTitulo":
 			this.pantallaActual = new PantallaTitulo(this);
-			
+
 			break;
-			
+
 		case "MenuPrincipal":
 			sound.stop();
 			this.pantallaActual = new MenuPrincipal(this);
 			loop(main_title);
 			break;
-			
-			
+
 		case "SeleccionPersonaje":
 			sound.stop();
 			this.pantallaActual = new SeleccionPersonaje(this);
@@ -86,24 +65,23 @@ public class Ventana extends JFrame {
 		default:
 			break;
 		}
-		
+
 		this.pantallaActual.setVisible(true);
 		this.setContentPane(pantallaActual);
 	}
-	
+
 	public void playMusic(File sonido) {
 		sound.setFile(sonido);
 		sound.play();
 	}
-	
+
 	public void loop(File sonido) {
 		sound.setFile(sonido);
 		sound.loop();
 	}
-	
+
 	public void stop(File sonido) {
 		sound.stop();
 	}
-	
 
 }
