@@ -64,10 +64,10 @@ public class Personaje extends ElementoNombreDescripcion {
 				ResultSet cursorSp = smt5.executeQuery("select*from especial where personaje = '"+nombre+"'");
 
 				while (cursorSp.next()) {
-					Carta gancho = new Especial(cursorSp.getString("nombre"), cursorSp.getString("descripcion"),
+					Carta spec = new Especial(cursorSp.getString("nombre"), cursorSp.getString("descripcion"),
 							cursorSp.getByte("puntosAtaque"), cursorSp.getByte("velocidad"),
 							cursorSp.getByte("alcance"), cursorSp.getByte("costeEnergia"));
-					baraja.add(gancho);
+					baraja.add(spec);
 				}
 
 			} else {
@@ -105,7 +105,6 @@ public class Personaje extends ElementoNombreDescripcion {
 	}
 
 	public ArrayList<Carta> getBaraja() {
-		ArrayList<Carta> baraja = new ArrayList<Carta>();
 		return baraja;
 	}
 

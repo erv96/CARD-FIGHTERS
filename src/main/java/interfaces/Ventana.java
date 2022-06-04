@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import clases.CampoCombate;
+import clases.Carta;
 import clases.Consumible;
 import clases.Personaje;
 import clases.PocionEnergia;
@@ -63,9 +64,24 @@ public class Ventana extends JFrame {
 			this.pantallaActual = new SeleccionPersonaje(this);
 			loop(selector);
 			break;
+			
+		default:
+			break;
+		}
+
+		this.pantallaActual.setVisible(true);
+		this.setContentPane(pantallaActual);
+	}
+	
+	public void irAPantalla(String nombrePantalla,Personaje jugador, Personaje rival) {
+
+		this.pantallaActual.setVisible(false);
+		this.pantallaActual = null;
+		switch (nombrePantalla) {
+
 		case "PantallaCombate":
 			sound.stop();
-			this.pantallaActual = new PantallaCombate(this);
+			this.pantallaActual = new PantallaCombate(this,jugador,rival);
 			loop(combate_playa);
 			
 		default:

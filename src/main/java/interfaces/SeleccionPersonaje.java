@@ -21,6 +21,14 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
 
 public class SeleccionPersonaje extends JPanel {
 	private Ventana ventana;
@@ -50,24 +58,27 @@ public class SeleccionPersonaje extends JPanel {
 		riv_title.setHorizontalAlignment(SwingConstants.CENTER);
 		riv_title.setForeground(Color.BLACK);
 		riv_title.setFont(new Font("Personal Services", Font.PLAIN, 45));
-		riv_title.setBounds(465, 139, 248, 71);
+		riv_title.setBounds(497, 139, 248, 71);
 		add(riv_title);
 		
 		JLabel jug_title = new JLabel("JUGADOR");
 		jug_title.setHorizontalAlignment(SwingConstants.CENTER);
 		jug_title.setForeground(Color.BLACK);
 		jug_title.setFont(new Font("Personal Services", Font.PLAIN, 45));
-		jug_title.setBounds(77, 139, 248, 71);
+		jug_title.setBounds(59, 139, 248, 71);
 		add(jug_title);
 
 		// LISTA JUGADOR
 
 		JScrollPane scrollJugador = new JScrollPane();
-		scrollJugador.setBounds(30, 220, 347, 195);
+		scrollJugador.setViewportBorder(new LineBorder(new Color(0, 0, 0), 4, true));
+		scrollJugador.setBounds(8, 220, 347, 195);
 		add(scrollJugador, BorderLayout.CENTER);
+		scrollJugador.setFocusable(false);
 
 		final JList lista_Jugador = new JList();
 		scrollJugador.setViewportView(lista_Jugador);
+		lista_Jugador.setFocusable(false);
 
 		final ArrayList<String> todosJugador = Personaje.getTodos();
 		lista_Jugador.setModel(new AbstractListModel() {
@@ -84,11 +95,13 @@ public class SeleccionPersonaje extends JPanel {
 		// LISTA RIVAL
 
 		JScrollPane scrollRival = new JScrollPane();
-		scrollRival.setBounds(416, 220, 347, 195);
+		scrollRival.setViewportBorder(new LineBorder(new Color(0, 0, 0), 4, true));
+		scrollRival.setBounds(435, 220, 347, 195);
 		add(scrollRival, BorderLayout.CENTER);
 
 		final JList lista_Rival = new JList();
 		scrollRival.setViewportView(lista_Rival);
+		lista_Jugador.setFocusable(false);
 
 		final ArrayList<String> todosRival = Personaje.getTodos();
 		lista_Rival.setModel(new AbstractListModel() {
@@ -124,8 +137,8 @@ public class SeleccionPersonaje extends JPanel {
 					jugador = new Personaje(nombreJ);
 					String nombreR = (String)lista_Rival.getSelectedValue();
 					rival = new Personaje(nombreR);
-					ventana.irAPantalla("PantallaCombate");
-					PantallaCombate combate = new PantallaCombate(jugador,rival);
+					ventana.irAPantalla("PantallaCombate",jugador,rival);
+					
 				}else {
 					JOptionPane.showMessageDialog(v, "Tanto el jugador como el rival deben ser seleccionados","ERROR DE SELECCIÓN",JOptionPane.ERROR_MESSAGE);
 				}

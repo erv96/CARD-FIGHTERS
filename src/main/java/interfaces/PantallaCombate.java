@@ -9,15 +9,27 @@ import clases.Personaje;
 import clases.PocionEnergia;
 import clases.PocionFuerza;
 import clases.PocionVida;
+
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.SwingConstants;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Random;
 
-public class PantallaCombate extends JPanel{
+import javax.swing.SwingConstants;
+import javax.swing.BoxLayout;
+import java.awt.BorderLayout;
+import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
+import javax.swing.ImageIcon;
+import javax.swing.border.EmptyBorder;
+
+public class PantallaCombate extends JPanel {
 	private Ventana ventana;
-	private Carta CartaElegidaJugador;
-	private Carta CartaElegidRival;
+	protected Carta CartaElegidaJ;
+	protected Carta CartaElegidaR;
 	private Personaje jugador;
 	private Personaje rival;
 
@@ -30,34 +42,37 @@ public class PantallaCombate extends JPanel{
 	// ESCENARIOS
 	CampoCombate playa = new CampoCombate("Playa enigmática");
 	CampoCombate dojo = new CampoCombate("Dojo");
-	
-	
-	/**
-	 * @wbp.parser.constructor
-	 */
-	public PantallaCombate(Ventana v) {
+
+
+	public PantallaCombate(Ventana v, Personaje jugador, Personaje rival) {
+		Random r = new Random();
 		this.ventana = v;
 		setLayout(null);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 362, 790, 196);
+		add(scrollPane);
+
+		JPanel cartasListaJ = new JPanel();
+		cartasListaJ.setBorder(new EmptyBorder(3, 3, 3, 3));
+		cartasListaJ.setBackground(Color.BLACK);
+		scrollPane.setViewportView(cartasListaJ);
 		
-		JLabel prueba = new JLabel("PRUEBA");
-		prueba.setHorizontalAlignment(SwingConstants.CENTER);
-		prueba.setFont(new Font("Personal Services", Font.PLAIN, 45));
-		prueba.setBackground(Color.BLACK);
-		prueba.setBounds(250, 238, 279, 112);
-		add(prueba);
-		System.out.println("soy ventana");
-			
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha.png"));
+		lblNewLabel.setBounds(-489, 114, 1526, 551);
+		add(lblNewLabel);
+
+		ArrayList<Carta> baraja = jugador.getBaraja();
+		Collections.shuffle(baraja);
+		for (byte i = 0; i < baraja.size(); i++) {
+			cartasListaJ.add(new ListaCarta(ventana, baraja.get(i)));
+		}
+		
+		
+		
+		
+
 	}
-	
-	
-	public PantallaCombate(Personaje jugador, Personaje rival) {
-		super();
-		System.out.println("soy jugador");
-		this.jugador = jugador;
-		this.rival = rival;
-	}
-	
-	
-	
 
 }

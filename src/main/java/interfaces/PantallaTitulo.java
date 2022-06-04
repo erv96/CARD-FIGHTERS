@@ -16,6 +16,7 @@ import java.awt.event.MouseEvent;
 public class PantallaTitulo extends JPanel {
 	private Ventana ventana;
 	
+	
 	public PantallaTitulo(Ventana v) {
 		this.ventana = v;
 		setLayout(null);
