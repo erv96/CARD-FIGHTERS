@@ -21,6 +21,7 @@ CREATE TABLE escenario(
 CREATE TABLE carta(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nombre VARCHAR(50),
+    tipo VARCHAR(20),
     personaje VARCHAR(50),
     descripcion VARCHAR(255),
     puntosAtaque NUMERIC(2),
@@ -30,12 +31,15 @@ CREATE TABLE carta(
     REFERENCES personaje(nombre)
 );
 
-select*from carta;
+DROP TABLE carta;
+
+select*from personaje;
 
 
 CREATE TABLE especial(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nombre VARCHAR(100),
+    tipo VARCHAR(20),
     personaje VARCHAR(100),
     descripcion VARCHAR(255),
     puntosAtaque NUMERIC(2),
@@ -46,10 +50,13 @@ CREATE TABLE especial(
     REFERENCES personaje(nombre)
 );
 
+DROP TABLE ESPECIAL;
+
 
 CREATE TABLE ultimate(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nombre VARCHAR(100),
+    tipo VARCHAR(20),
     personaje VARCHAR(100),
     descripcion VARCHAR(255),
     puntosAtaque NUMERIC(2),
@@ -61,6 +68,6 @@ CREATE TABLE ultimate(
     REFERENCES personaje(nombre)
 );
 
-
+SELECT*FROM especial;
 
 
