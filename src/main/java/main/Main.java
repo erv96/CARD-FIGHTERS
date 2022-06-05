@@ -30,8 +30,6 @@ public class Main {
 		
 		Personaje st = new Personaje("Steven");
 		
-		System.out.println(st);
-		
 		//DOCUMENTAR TODAS LAS CLASES
 		//ENCIMA DE CADA VARIABLE INTERNA SE PONE PARA QUE SIRVE.
 	

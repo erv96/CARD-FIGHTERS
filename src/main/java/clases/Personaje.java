@@ -36,7 +36,7 @@ public class Personaje extends ElementoNombreDescripcion {
 				ResultSet cursor = smt2.executeQuery("select*from carta WHERE personaje = '" + nombre + "'");
 				while (cursor.next()) {
 					Carta barajita = new Carta(cursor.getString("nombre"), cursor.getString("descripcion"),
-							cursor.getByte("puntosAtaque"), cursor.getByte("velocidad"), cursor.getByte("alcance"));
+							cursor.getByte("puntosAtaque"), cursor.getByte("velocidad"), cursor.getByte("alcance"),cursor.getString("tipo"));
 					baraja.add(barajita);
 
 					// System.out.println(barajita);
@@ -55,7 +55,7 @@ public class Personaje extends ElementoNombreDescripcion {
 					Carta ulti = new Ultimate(cursorUlt.getString("nombre"), cursorUlt.getString("descripcion"),
 							cursorUlt.getByte("puntosAtaque"), cursorUlt.getByte("velocidad"),
 							cursorUlt.getByte("alcance"), cursorUlt.getByte("costeEnergia"),
-							cursorUlt.getByte("costeVida"));
+							cursorUlt.getByte("costeVida"),cursorUlt.getString("tipo"));
 					baraja.add(ulti);
 				}
 				
@@ -66,7 +66,7 @@ public class Personaje extends ElementoNombreDescripcion {
 				while (cursorSp.next()) {
 					Carta spec = new Especial(cursorSp.getString("nombre"), cursorSp.getString("descripcion"),
 							cursorSp.getByte("puntosAtaque"), cursorSp.getByte("velocidad"),
-							cursorSp.getByte("alcance"), cursorSp.getByte("costeEnergia"));
+							cursorSp.getByte("alcance"), cursorSp.getByte("costeEnergia"),cursorSp.getString("tipo"));
 					baraja.add(spec);
 				}
 

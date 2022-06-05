@@ -18,6 +18,7 @@ import clases.PocionVida;
 public class Ventana extends JFrame {
 
 	private JPanel pantallaActual;
+	protected Carta cartaElegidaJ;
 
 	// CANCIONES
 
@@ -91,6 +92,13 @@ public class Ventana extends JFrame {
 		this.pantallaActual.setVisible(true);
 		this.setContentPane(pantallaActual);
 	}
+	
+	
+	
+	
+	
+	
+	
 
 	public void playMusic(File sonido) {
 		sound.setFile(sonido);

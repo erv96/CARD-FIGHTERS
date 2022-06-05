@@ -6,8 +6,8 @@ public class Especial extends Carta{
 	private byte costeEnergia;
 
 	public Especial(String nombre, String descripcion, byte puntosAtaque, byte velocidad, byte alcance,
-			byte costeEnergia) throws SQLException {
-		super(nombre, descripcion, puntosAtaque, velocidad, alcance);
+			byte costeEnergia,String tipo) throws SQLException {
+		super(nombre, descripcion, puntosAtaque, velocidad, alcance, tipo);
 		this.costeEnergia = costeEnergia;
 	}
 
@@ -17,6 +17,11 @@ public class Especial extends Carta{
 
 	public void setCosteEnergia(byte costeEnergia) {
 		this.costeEnergia = costeEnergia;
+	}
+
+	@Override
+	public String toString() {
+		return getNombre();
 	}
 	
 	
