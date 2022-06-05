@@ -3,9 +3,10 @@
 INSERT INTO Personaje values('Steven','Luchador especializado en cuerpo a cuerpo no posee ataques a distancia pero hace mucho daño con sus habilidades');
 
 INSERT INTO carta values(1,'Acometida','Básico','Steven','Realiza una acometida que hace un daño decente',4,4,2);
-INSERT INTO carta values(2,'Bloqueo','Básico','Steven','Pose de bloqueo, recibes un 50% menos de daño',0,9,0);
+INSERT INTO carta values(2,'Bloqueo','Básico','Steven','Pose de bloqueo, bloquea la carta del rival',0,9,0);
 INSERT INTO carta values(3,'Puñetazo','Básico','Steven','Puñetazo rápido y de daño bajo',3,8,1);
 
+SELECT*FROM carta;
 -- INSERTANDO CON AUTO_INCREMENT UN TOTAL DE 15 CARTAS COMUNES
 
 INSERT INTO carta (nombre,tipo,personaje,descripcion,puntosAtaque,velocidad,alcance) 
@@ -15,7 +16,7 @@ INSERT INTO carta (nombre,tipo,personaje,descripcion,puntosAtaque,velocidad,alca
 	values('Acometida','Básico','Steven','Realiza una acometida que hace un daño decente',4,4,2);
     
 INSERT INTO carta (nombre,tipo,personaje,descripcion,puntosAtaque,velocidad,alcance)
-	values('Bloqueo','Básico','Steven','Pose de bloqueo, bloque la carta del rival',0,9,0);
+	values('Bloqueo','Básico','Steven','Pose de bloqueo, bloquea la carta del rival',0,9,0);
       
 -- INSERTANDO EN STEVEN SU ESPECIAL 3 VECES Y SU ULTIMATE 2
 

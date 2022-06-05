@@ -29,10 +29,6 @@ import javax.swing.UIManager;
 
 public class PantallaCombate extends JPanel {
 	private Ventana ventana;
-	private Carta cartaElegidaJ;
-	private Carta cartaElegidaR;
-	private Personaje jugador;
-	private Personaje rival;
 
 	// CONSUMIBLES
 
@@ -46,8 +42,6 @@ public class PantallaCombate extends JPanel {
 
 	public PantallaCombate(Ventana v, Personaje jugador, Personaje rival) {
 		this.ventana = v;
-		this.jugador = jugador;
-		this.rival = rival;
 		setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -84,101 +78,255 @@ public class PantallaCombate extends JPanel {
 		byte vidaJ = jugador.getVida();
 		byte vidaR = rival.getVida();
 		byte energiaR = rival.getEnergia();
-		byte energiaJ = rival.getEnergia();
-
+		byte energiaJ = jugador.getEnergia();
+		boolean energiaInsR = false;
+		boolean vidaInsR = false;
+		boolean energiaInsJ = false;
+		boolean vidaInsJ = false;
+		
+		System.out.println("EMPIEZA EL COMBATE");
+		
 		System.out.println("Jugador_vida \t" + vidaJ);
 		System.out.println("Jugador_energia \t" + energiaJ + "\n");
 		System.out.println("Rival_vida \t" + vidaR);
 		System.out.println("Rival_energia \t" + energiaR + "\n");
 
 		Carta cartaRival = barajaR.get(r.nextInt(barajaR.size()));
+		
+		
+		if(elegida.getTipo().equals("Especial")) {
+			if (energiaJ >= elegida.getCosteEnergia()){
+				System.out.println("Te preparas para atacar con: " + elegida.getNombre());
+				energiaJ = (byte) (energiaJ - elegida.getCosteEnergia());
+				
+		}else {
+			energiaInsJ = true;
+		}
+		}
+		
+		if(elegida.getTipo().equals("Ultimate")) {
+			if(elegida.getCosteEnergia()>0) {
+				if (energiaJ >= elegida.getCosteEnergia()) {
+					System.out.println("Te preparas para atacar con: " + elegida.getNombre());
+					energiaJ = (byte) (energiaJ - elegida.getCosteEnergia());
 
-		switch (cartaRival.getTipo()) {
+				}else {
+					energiaInsJ = true;
+				}
+			}else {
+				if(vidaJ>elegida.getCosteVida()) {
+					System.out.println("Te preparas para atacar con: " + elegida.getNombre());
+					vidaJ = (byte) (vidaJ - elegida.getCosteVida());
+					System.out.println("Pierdes "+elegida.getCosteVida()+" de vida por usar el movimiento");
+
+
+				}else {
+					vidaInsJ = true;
+				}
+			}
+		}
+		
+		//////////////////////////////////////////////////////////////////////////////////////
+		
+		if(cartaRival.getTipo().equals("Especial")) {
+			if (energiaR >= cartaRival.getCosteEnergia()){
+				System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
+				energiaR = (byte) (energiaR - cartaRival.getCosteEnergia());
+				
+		}else {
+			energiaInsR = true;
+		}
+		}
+		
+		if(cartaRival.getTipo().equals("Ultimate")) {
+			if(cartaRival.getCosteEnergia()>0) {
+				if (energiaR >= cartaRival.getCosteEnergia()) {
+					System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
+					energiaR = (byte) (energiaR - cartaRival.getCosteEnergia());
+
+				}else {
+					energiaInsR = true;
+				}
+			}else {
+				if(vidaR>cartaRival.getCosteVida()) {
+					System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
+					vidaR = (byte) (vidaR - cartaRival.getCosteVida());
+					System.out.println("El rival ha perdido "+cartaRival.getCosteVida()+" por usar su movimiento");
+
+
+				}else {
+					vidaInsR = true;
+				}
+			}
+		}
+		
+	
+		if(vidaInsJ == true || energiaInsJ == true) {
+			System.out.println("Coste insuficiente pierdes tu turno");
+		}else {
+			if(elegida.getVelocidad()>cartaRival.getVelocidad()) {
+				if(elegida.getNombre().equals("Bloqueo")) {
+					System.out.println("Adoptas pose de bloqueo, el ataque del rival no surte efecto");
+				}else {
+					System.out.println("Atacas primero con "+elegida.getNombre()+" y haces "+elegida.getPuntosAtaque());
+					vidaR = (byte) (vidaR - elegida.getPuntosAtaque());
+				}
+				
+			}
+			if (elegida.getVelocidad()<=cartaRival.getVelocidad() && (energiaInsR == true || vidaInsR == true)) {
+				System.out.println("El rival no tiene fuerzas para ejecutar su movimiento, atacas primero con "+elegida.getNombre());
+				vidaR = (byte) (vidaR - elegida.getPuntosAtaque());
+			}
+			if(elegida.getVelocidad()==cartaRival.getVelocidad()) {
+				System.out.println("Habeis usado movimientos con la misma velocidad, nadie recibe daño");
+			}
+		}
+		
+		if(vidaInsR == true || energiaInsR == true) {
+			
+		}else {
+			if(cartaRival.getVelocidad()>elegida.getVelocidad()) {
+				if(cartaRival.getNombre().equals("Bloqueo")) {
+					System.out.println("El rival adopta pose de bloqueo, tu ataque no surte efecto");
+				}else {
+					System.out.println("El rival ataca primero con "+cartaRival.getNombre());
+					vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
+				}
+			}
+			if (cartaRival.getVelocidad()<=elegida.getVelocidad() && (energiaInsJ == true || vidaInsJ == true) ) {
+				System.out.println("No tienes fuerzas para ejecutar tu movimiento, el rival ataca con "+cartaRival.getNombre()+" y te hace "+cartaRival.getPuntosAtaque()+" de daño.");
+				vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
+			}
+		}
+
+		
+		System.out.println("\nFINAL DEL TURNO\n");
+		
+		System.out.println("Vida jugador: "+vidaJ);
+		System.out.println("Energía jugador: "+energiaJ);
+		System.out.println("Vida rival: "+vidaR);
+		System.out.println("Energía rival: "+energiaR+"\n");
+
+		
+		
+		/*switch (cartaRival.getTipo()) {
 		case "Especial":
-			if (rival.getEnergia() >= cartaRival.getCosteEnergia()) {
+			if (energiaR >= cartaRival.getCosteEnergia()) {
 				System.out.println("Rival se prepara para atacar con: " + cartaRival.getNombre());
 				energiaR = (byte) (energiaR - cartaRival.getCosteEnergia());
 				System.out.println("La energía del rival se reduce a " + energiaR);
+				
+				
 			} else {
 				System.out.println("Energía insuficiente");
+				energiaInsR = true;
+				System.out.println(energiaInsR);
 			}
 			break;
 		case "Ultimate":
 			if (cartaRival.getCosteEnergia() > 0) {
-				if (rival.getEnergia() >= cartaRival.getCosteEnergia()) {
+				if (energiaR >= cartaRival.getCosteEnergia()) {
 					System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
 					energiaR = (byte) (energiaR - cartaRival.getCosteEnergia());
 					System.out.println("La energía del rival se reduce a: " + energiaR);
 				} else {
 					System.out.println("Energía insuficiente");
+					energiaInsR = true;
 				}
 			} else if (cartaRival.getCosteVida() > 0) {
-				if (rival.getVida() > cartaRival.getCosteVida()) {
+				if (vidaR > cartaRival.getCosteVida()) {
 					System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
 					vidaR = (byte) (vidaR - cartaRival.getCosteVida());
 					System.out.println("La vida del rival se reduce a: " + vidaR);
 				} else {
 					System.out.println("Vida insuficiente");
+					vidaInsR = true;
 				}
+				
 			}
+			break;
+			
 		}
 
 		switch (elegida.getTipo()) {
 		case "Especial":
-			if (jugador.getEnergia() >= elegida.getCosteEnergia()) {
+			if (energiaJ >= elegida.getCosteEnergia()) {
 				System.out.println("Atacas con : " + elegida.getNombre());
 				energiaJ = (byte) (energiaJ - elegida.getCosteEnergia());
 				System.out.println("Tu energía se reduce a: " + energiaJ);
+				
+				
 			} else {
 				System.out.println("Energía insuficiente");
+				energiaInsJ = true;
+				System.out.println(energiaInsJ);
+
 			}
 			break;
 		case "Ultimate":
 			if (elegida.getCosteEnergia() > 0) {
-				if (jugador.getEnergia() >= elegida.getCosteEnergia()) {
+				if (energiaJ >= elegida.getCosteEnergia()) {
 					System.out.println("Atacas con: " + elegida.getNombre());
 					energiaJ = (byte) (energiaJ - elegida.getCosteEnergia());
 					System.out.println("Tu energía se reduce a: " + energiaJ);
 				} else {
 					System.out.println("Energía insuficiente");
+					energiaInsJ = true;
+					System.out.println(energiaInsJ);
+
 				}
 			} else if (elegida.getCosteVida() > 0) {
-				if (jugador.getVida() > elegida.getCosteVida()) {
+				if (vidaJ > elegida.getCosteVida()) {
 					System.out.println("Te preparas para atacar con: " + elegida.getNombre());
 					vidaJ = (byte) (vidaJ - elegida.getCosteVida());
 					System.out.println("Tu vida se reduce a: " + vidaJ);
 				} else {
 					System.out.println("Vida insuficiente");
+					vidaInsJ = true;
 				}
 			}
 		}
-
-		if (cartaRival.getVelocidad() > elegida.getVelocidad()) {
-			if(cartaRival.getNombre().equals("Bloqueo")) {
-				System.out.println("Tu rival está bloqueando, tu movimiento no surte efecto en él");
-			}else {
-				System.out.println("Tu rival es más rapido, lanza la carta: " + cartaRival.getNombre());
-				vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
-				System.out.println("Recibes " + cartaRival.getPuntosAtaque() + " de daño");
-				System.out.println("Tu vida se reduce a: " + vidaJ);
+		
+		if(energiaInsR==false && vidaInsR==false){
+			if (cartaRival.getVelocidad() > elegida.getVelocidad()) {
+				if(cartaRival.getNombre().equals("Bloqueo")) {
+					System.out.println("Tu rival está bloqueando, tu movimiento no surte efecto en él");
+				}else {
+					System.out.println("Tu rival ataca, lanza la carta: " + cartaRival.getNombre());
+					vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
+					System.out.println("Recibes " + cartaRival.getPuntosAtaque() + " de daño");
+					System.out.println("Tu vida se reduce a: " + vidaJ);
+				}
+				
 			}
-			
-		} else if(elegida.getVelocidad() > cartaRival.getVelocidad()) {
-			if(elegida.getNombre().equals("Bloqueo")) {
-				System.out.println("Adoptas la pose de bloqueo, el ataque del rival no surte efecto");
-			}else {
-				System.out.println("Eres más rapido que el rival, golpeas con " + elegida.getNombre() + " y haces "
-						+ elegida.getPuntosAtaque() + " puntos de daño");
-				vidaR = (byte) (vidaR - elegida.getPuntosAtaque());
-				System.out.println("La vida del rival se reduce a " + vidaR);
-			}
-			
-		} else if(elegida.getVelocidad() == cartaRival.getVelocidad()) {
-			System.out.println("EMPATE, vuestros puños chocan y no llegais a conectar un buen golpe.");
+		}else {
+			System.out.println("Coste insuficiente, el rival pierde su turno");
 		}
+		
+		if(energiaInsJ==false && vidaInsJ==false) {
+			if(elegida.getVelocidad() > cartaRival.getVelocidad()) {
+				if(elegida.getNombre().equals("Bloqueo")) {
+					System.out.println("Adoptas la pose de bloqueo, el ataque del rival no surte efecto");
+				}else {
+					System.out.println("Eres más rapido que el rival, golpeas con " + elegida.getNombre() + " y haces "
+							+ elegida.getPuntosAtaque() + " puntos de daño");
+					vidaR = (byte) (vidaR - elegida.getPuntosAtaque());
+					System.out.println("La vida del rival se reduce a " + vidaR);
+				}
+				
+			} else if(elegida.getVelocidad() == cartaRival.getVelocidad()) {
+				System.out.println("EMPATE, vuestros puños chocan y no llegais a conectar un buen golpe.");
+			}
+		}else {
+			System.out.println("Coste insuficiente, pierdes tu turno");
+		}*/
+
+		  
 
 		System.out.println("Se ha eliminado la " + cartaRival + " del mazo del rival" + "\n");
 		barajaR.remove(cartaRival);
 
 	}
+	
+	
 }

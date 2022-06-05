@@ -24,6 +24,11 @@ public class Sound {
 
 	public void setFile(File sonido) {
 
+		
+
+	}
+
+	public void play(File sonido) {
 		try {
 			AudioInputStream ais = AudioSystem.getAudioInputStream(sonido);
 			clip = AudioSystem.getClip();
@@ -39,15 +44,26 @@ public class Sound {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-	}
-
-	public void play() {
 		clip.start();
 
 	}
 
-	public void loop() {
+	public void loop(File sonido) {
+		try {
+			AudioInputStream ais = AudioSystem.getAudioInputStream(sonido);
+			clip = AudioSystem.getClip();
+			clip.open(ais);
+
+		} catch (UnsupportedAudioFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 

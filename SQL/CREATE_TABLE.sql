@@ -31,11 +31,6 @@ CREATE TABLE carta(
     REFERENCES personaje(nombre)
 );
 
-DROP TABLE carta;
-
-select*from personaje;
-
-
 CREATE TABLE especial(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nombre VARCHAR(100),
@@ -67,7 +62,3 @@ CREATE TABLE ultimate(
     FOREIGN KEY (personaje)
     REFERENCES personaje(nombre)
 );
-
-SELECT*FROM especial;
-
-

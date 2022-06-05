@@ -26,13 +26,22 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Ventana prueba = new Ventana();
+		Ventana cardFighters = new Ventana();
 		
-		Personaje st = new Personaje("Steven");
+		//ARGUMENTO PARA IR DIRECTAMENTE A LA PANTALLA DE SELECCIÓN DE PERSONAJE.
 		
-		//DOCUMENTAR TODAS LAS CLASES
-		//ENCIMA DE CADA VARIABLE INTERNA SE PONE PARA QUE SIRVE.
-	
-}
-	
+		/*String pantallaElegida = "";
+
+		for (byte i = 0; i < args.length; i++) {
+			if (args[i].equals("-pantalla")) {
+				pantallaElegida = args[i + 1];
+			}
+		}
+		cardFighters.irAPantalla(pantallaElegida);*/
+
+		// DOCUMENTAR TODAS LAS CLASES
+		// ENCIMA DE CADA VARIABLE INTERNA SE PONE PARA QUE SIRVE.
+
+	}
+
 }

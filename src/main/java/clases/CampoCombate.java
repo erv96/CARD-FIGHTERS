@@ -7,7 +7,11 @@ import java.util.Arrays;
 
 import exceptions.EscenarioNoExisteException;
 import utils.ConexionBD;
-
+/**
+ * Clase que define el nombre y la descripción de cada escenario en el que se pelea.
+ * @author toled
+ *
+ */
 public class CampoCombate extends ElementoNombreDescripcion {
 	private byte[] tamaño;
 
