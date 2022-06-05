@@ -51,7 +51,7 @@ public class SeleccionPersonaje extends JPanel {
 		lblNewLabel.setForeground(Color.BLACK);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Personal Services", Font.PLAIN, 55));
-		lblNewLabel.setBounds(302, 271, 192, 91);
+		lblNewLabel.setBounds(300, 271, 192, 91);
 		add(lblNewLabel);
 		
 		JLabel riv_title = new JLabel("RIVAL");
@@ -96,7 +96,7 @@ public class SeleccionPersonaje extends JPanel {
 
 		JScrollPane scrollRival = new JScrollPane();
 		scrollRival.setViewportBorder(new LineBorder(new Color(0, 0, 0), 4, true));
-		scrollRival.setBounds(435, 220, 347, 195);
+		scrollRival.setBounds(433, 220, 347, 195);
 		add(scrollRival, BorderLayout.CENTER);
 
 		final JList lista_Rival = new JList();

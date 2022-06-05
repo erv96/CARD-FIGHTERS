@@ -44,9 +44,6 @@ public class PantallaCombate extends JPanel {
 	CampoCombate playa = new CampoCombate("Playa enigmática");
 	CampoCombate dojo = new CampoCombate("Dojo");
 
-	/**
-	 * @wbp.parser.constructor
-	 */
 	public PantallaCombate(Ventana v, Personaje jugador, Personaje rival) {
 		this.ventana = v;
 		this.jugador = jugador;
@@ -58,7 +55,8 @@ public class PantallaCombate extends JPanel {
 		add(scrollPane);
 
 		JPanel cartasListaJ = new JPanel();
-		cartasListaJ.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		cartasListaJ.setForeground(Color.BLACK);
+		cartasListaJ.setBorder(new EmptyBorder(3, 3, 3, 3));
 		cartasListaJ.setBackground(Color.BLACK);
 		scrollPane.setViewportView(cartasListaJ);
 
@@ -75,11 +73,11 @@ public class PantallaCombate extends JPanel {
 		}
 
 	}
-
-	public PantallaCombate() {
-		
-	}
 	
+	public PantallaCombate() {
+
+	}
+
 	public void pelear(Personaje jugador, Personaje rival, Carta elegida) {
 		Random r = new Random();
 		ArrayList<Carta> barajaR = rival.getBaraja();
@@ -87,11 +85,11 @@ public class PantallaCombate extends JPanel {
 		byte vidaR = rival.getVida();
 		byte energiaR = rival.getEnergia();
 		byte energiaJ = rival.getEnergia();
-		
-		System.out.println("Jugador_vida \t"+ vidaJ);
-		System.out.println("Jugador_energia \t"+ energiaJ+"\n");
-		System.out.println("Rival_vida \t"+ vidaR);
-		System.out.println("Rival_energia \t"+ energiaR+"\n");
+
+		System.out.println("Jugador_vida \t" + vidaJ);
+		System.out.println("Jugador_energia \t" + energiaJ + "\n");
+		System.out.println("Rival_vida \t" + vidaR);
+		System.out.println("Rival_energia \t" + energiaR + "\n");
 
 		Carta cartaRival = barajaR.get(r.nextInt(barajaR.size()));
 
@@ -100,7 +98,7 @@ public class PantallaCombate extends JPanel {
 			if (rival.getEnergia() >= cartaRival.getCosteEnergia()) {
 				System.out.println("Rival se prepara para atacar con: " + cartaRival.getNombre());
 				energiaR = (byte) (energiaR - cartaRival.getCosteEnergia());
-				System.out.println("La energía del rival se reduce a "+energiaR);
+				System.out.println("La energía del rival se reduce a " + energiaR);
 			} else {
 				System.out.println("Energía insuficiente");
 			}
@@ -110,7 +108,7 @@ public class PantallaCombate extends JPanel {
 				if (rival.getEnergia() >= cartaRival.getCosteEnergia()) {
 					System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
 					energiaR = (byte) (energiaR - cartaRival.getCosteEnergia());
-					System.out.println("La energía del rival se reduce a: "+energiaR);
+					System.out.println("La energía del rival se reduce a: " + energiaR);
 				} else {
 					System.out.println("Energía insuficiente");
 				}
@@ -118,19 +116,19 @@ public class PantallaCombate extends JPanel {
 				if (rival.getVida() > cartaRival.getCosteVida()) {
 					System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
 					vidaR = (byte) (vidaR - cartaRival.getCosteVida());
-					System.out.println("La vida del rival se reduce a: "+vidaR);
+					System.out.println("La vida del rival se reduce a: " + vidaR);
 				} else {
 					System.out.println("Vida insuficiente");
 				}
 			}
 		}
-		
+
 		switch (elegida.getTipo()) {
 		case "Especial":
 			if (jugador.getEnergia() >= elegida.getCosteEnergia()) {
 				System.out.println("Atacas con : " + elegida.getNombre());
 				energiaJ = (byte) (energiaJ - elegida.getCosteEnergia());
-				System.out.println("Tu energía se reduce a: "+energiaJ);
+				System.out.println("Tu energía se reduce a: " + energiaJ);
 			} else {
 				System.out.println("Energía insuficiente");
 			}
@@ -140,7 +138,7 @@ public class PantallaCombate extends JPanel {
 				if (jugador.getEnergia() >= elegida.getCosteEnergia()) {
 					System.out.println("Atacas con: " + elegida.getNombre());
 					energiaJ = (byte) (energiaJ - elegida.getCosteEnergia());
-					System.out.println("Tu energía se reduce a: "+energiaJ);
+					System.out.println("Tu energía se reduce a: " + energiaJ);
 				} else {
 					System.out.println("Energía insuficiente");
 				}
@@ -148,7 +146,7 @@ public class PantallaCombate extends JPanel {
 				if (jugador.getVida() > elegida.getCosteVida()) {
 					System.out.println("Te preparas para atacar con: " + elegida.getNombre());
 					vidaJ = (byte) (vidaJ - elegida.getCosteVida());
-					System.out.println("Tu vida se reduce a: "+vidaJ);
+					System.out.println("Tu vida se reduce a: " + vidaJ);
 				} else {
 					System.out.println("Vida insuficiente");
 				}
@@ -156,18 +154,30 @@ public class PantallaCombate extends JPanel {
 		}
 
 		if (cartaRival.getVelocidad() > elegida.getVelocidad()) {
-			System.out.println("Tu rival es más rapido, lanza la carta: " + cartaRival.getNombre());
-			vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
-			System.out.println("Recibes "+cartaRival.getPuntosAtaque()+" de daño");
-			System.out.println("Tu vida se reduce a: "+vidaJ);
-		} else {
-			System.out.println("Eres más rapido que el rival golpeas con " + elegida.getNombre() + " y haces "+elegida.getPuntosAtaque()+" puntos de daño");
-			vidaR = (byte) (vidaR - elegida.getPuntosAtaque());
-			System.out.println("La vida del rival se reduce a "+vidaR);
+			if(cartaRival.getNombre().equals("Bloqueo")) {
+				System.out.println("Tu rival está bloqueando, tu movimiento no surte efecto en él");
+			}else {
+				System.out.println("Tu rival es más rapido, lanza la carta: " + cartaRival.getNombre());
+				vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
+				System.out.println("Recibes " + cartaRival.getPuntosAtaque() + " de daño");
+				System.out.println("Tu vida se reduce a: " + vidaJ);
+			}
+			
+		} else if(elegida.getVelocidad() > cartaRival.getVelocidad()) {
+			if(elegida.getNombre().equals("Bloqueo")) {
+				System.out.println("Adoptas la pose de bloqueo, el ataque del rival no surte efecto");
+			}else {
+				System.out.println("Eres más rapido que el rival, golpeas con " + elegida.getNombre() + " y haces "
+						+ elegida.getPuntosAtaque() + " puntos de daño");
+				vidaR = (byte) (vidaR - elegida.getPuntosAtaque());
+				System.out.println("La vida del rival se reduce a " + vidaR);
+			}
+			
+		} else if(elegida.getVelocidad() == cartaRival.getVelocidad()) {
+			System.out.println("EMPATE, vuestros puños chocan y no llegais a conectar un buen golpe.");
 		}
 
-
-		System.out.println("Se ha eliminado la " + cartaRival+" del mazo del rival"+"\n");
+		System.out.println("Se ha eliminado la " + cartaRival + " del mazo del rival" + "\n");
 		barajaR.remove(cartaRival);
 
 	}
