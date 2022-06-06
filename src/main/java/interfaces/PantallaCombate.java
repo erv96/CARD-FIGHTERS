@@ -13,6 +13,7 @@ import clases.PocionVida;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -64,7 +65,7 @@ public class PantallaCombate extends JPanel {
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(
 				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha.png"));
-		lblNewLabel.setBounds(-489, 114, 1526, 551);
+		lblNewLabel.setBounds(-489, 85, 1526, 580);
 		add(lblNewLabel);
 
 		ArrayList<Carta> baraja = jugador.getBaraja();
@@ -98,6 +99,7 @@ public class PantallaCombate extends JPanel {
 		boolean vidaInsJ = false;
 
 		System.out.println("EMPIEZA EL COMBATE");
+		
 
 		System.out.println("Jugador_vida \t" + vidaJ);
 		System.out.println("Jugador_energia \t" + energiaJ + "\n");

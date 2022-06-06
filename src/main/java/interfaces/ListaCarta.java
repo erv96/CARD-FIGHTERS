@@ -99,6 +99,8 @@ public class ListaCarta extends JPanel {
 				setVisible(false);
 				PantallaCombate pelea = new PantallaCombate();
 				pelea.pelear(jugador, rival, c);
+				
+				
 
 			}
 		});
@@ -152,8 +154,8 @@ public class ListaCarta extends JPanel {
 		}
 
 		JLabel fondo = new JLabel("");
-		fondo.setIcon(new ImageIcon("C:\\Users\\toled\\Downloads\\Webp.net-resizeimage.png"));
-		fondo.setBounds(10, 76, 124, 187);
+		fondo.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\splat (1).png"));
+		fondo.setBounds(10, 58, 124, 187);
 		panel.add(fondo);
 	}
 
