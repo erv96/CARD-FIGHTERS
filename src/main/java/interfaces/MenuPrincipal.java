@@ -44,6 +44,12 @@ public class MenuPrincipal extends JPanel {
 		add(LUCHAR);
 		
 		JButton INST = new BotonAnimado("INSTRUCCIONES");
+		INST.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ventana.irAPantalla("Instrucciones");
+			}
+		});
 		INST.setBackground(Color.RED);
 		INST.setBounds(302, 276, 199, 44);
 		add(INST);

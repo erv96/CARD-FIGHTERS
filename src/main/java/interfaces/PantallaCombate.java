@@ -103,7 +103,10 @@ public class PantallaCombate extends JPanel {
 		System.out.println("Jugador_energia \t" + energiaJ + "\n");
 		System.out.println("Rival_vida \t" + vidaR);
 		System.out.println("Rival_energia \t" + energiaR + "\n");
-
+		
+		while(vidaJ<=0 || vidaR<=0 || barajaR.isEmpty()) {
+			
+		}
 		Carta cartaRival = barajaR.get(r.nextInt(barajaR.size()));
 		
 		////////////OBTENIENDO INFORMACIÓN DE LA CARTA DEL JUGADOR

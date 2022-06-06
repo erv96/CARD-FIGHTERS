@@ -20,15 +20,16 @@ import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Random;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
 
 public class ListaCarta extends JPanel {
 	private Ventana ventana;
-	private Carta carta;	
+	private Carta carta;
 
-
-	public ListaCarta(Ventana v, final Carta c,final Personaje jugador, final Personaje rival) {
+	public ListaCarta(Ventana v, final Carta c, final Personaje jugador, final Personaje rival) {
 
 		setBackground(Color.BLACK);
 		this.ventana = v;
@@ -98,36 +99,34 @@ public class ListaCarta extends JPanel {
 				setVisible(false);
 				PantallaCombate pelea = new PantallaCombate();
 				pelea.pelear(jugador, rival, c);
-			
-				
+
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 9));
 		btnNewButton.setBounds(10, 135, 100, 21);
 		panel.add(btnNewButton);
-		
-		if(carta.getTipo().equals("Ultimate")) {
-			
-			
+
+		if (carta.getTipo().equals("Ultimate")) {
+
 			JLabel vida = new JLabel("C.vida");
 			vida.setFont(new Font("Tahoma", Font.BOLD, 10));
 			vida.setForeground(Color.RED);
 			vida.setBounds(10, 80, 63, 13);
 			panel.add(vida);
-			
+
 			JLabel c_Energia = new JLabel("C.energ");
 			c_Energia.setForeground(new Color(0, 51, 255));
 			c_Energia.setFont(new Font("Tahoma", Font.BOLD, 10));
 			c_Energia.setBounds(10, 96, 63, 13);
 			panel.add(c_Energia);
-			
+
 			JLabel numeroEnergia = new JLabel(String.valueOf(carta.getCosteEnergia()));
 			numeroEnergia.setForeground(new Color(0, 51, 204));
 			numeroEnergia.setFont(new Font("Tahoma", Font.BOLD, 10));
 			numeroEnergia.setHorizontalAlignment(SwingConstants.CENTER);
 			numeroEnergia.setBounds(65, 96, 45, 13);
 			panel.add(numeroEnergia);
-			
+
 			JLabel vidaNumero = new JLabel(String.valueOf(String.valueOf(carta.getCosteVida())));
 			vidaNumero.setHorizontalAlignment(SwingConstants.CENTER);
 			vidaNumero.setForeground(Color.RED);
@@ -135,15 +134,15 @@ public class ListaCarta extends JPanel {
 			vidaNumero.setBounds(65, 80, 45, 13);
 			panel.add(vidaNumero);
 		}
-		
-		if(carta.getTipo().equals("Especial")) {
-			
+
+		if (carta.getTipo().equals("Especial")) {
+
 			JLabel c_Energia = new JLabel("C.energ");
 			c_Energia.setForeground(new Color(0, 51, 255));
 			c_Energia.setFont(new Font("Tahoma", Font.BOLD, 10));
 			c_Energia.setBounds(10, 96, 63, 13);
 			panel.add(c_Energia);
-			
+
 			JLabel numeroEnergia = new JLabel(String.valueOf(carta.getCosteEnergia()));
 			numeroEnergia.setForeground(new Color(0, 51, 204));
 			numeroEnergia.setFont(new Font("Tahoma", Font.BOLD, 10));
@@ -151,15 +150,13 @@ public class ListaCarta extends JPanel {
 			numeroEnergia.setBounds(65, 96, 45, 13);
 			panel.add(numeroEnergia);
 		}
-		
-		
 
 		JLabel fondo = new JLabel("");
 		fondo.setIcon(new ImageIcon("C:\\Users\\toled\\Downloads\\Webp.net-resizeimage.png"));
 		fondo.setBounds(10, 76, 124, 187);
 		panel.add(fondo);
-		}
-		
-
 	}
 
+	
+
+}
