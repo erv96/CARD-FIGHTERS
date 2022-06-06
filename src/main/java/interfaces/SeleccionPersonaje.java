@@ -32,9 +32,8 @@ import javax.swing.UIManager;
 
 public class SeleccionPersonaje extends JPanel {
 	private Ventana ventana;
-
-	Personaje jugador;
-	Personaje rival;
+	private Personaje jugador;
+	private Personaje rival;
 
 	public SeleccionPersonaje(final Ventana v) {
 		this.ventana = v;

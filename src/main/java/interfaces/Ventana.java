@@ -39,6 +39,8 @@ public class Ventana extends JFrame {
 	File selector = new File("./songs/selector.wav");
 	File main_title = new File("./songs/main_title.wav");
 	File combate_playa = new File("./songs/combate_playa.wav");
+	
+	
 
 	/**
 	 * Constructor que nos permite definir las propiedades generales de las

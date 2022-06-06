@@ -25,11 +25,7 @@ import java.awt.event.InputMethodEvent;
 
 public class ListaCarta extends JPanel {
 	private Ventana ventana;
-	private Carta carta;
-	private Ultimate ult;
-	
-
-
+	private Carta carta;	
 
 
 	public ListaCarta(Ventana v, final Carta c,final Personaje jugador, final Personaje rival) {
