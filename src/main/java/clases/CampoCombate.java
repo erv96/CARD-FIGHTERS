@@ -49,10 +49,10 @@ public class CampoCombate extends ElementoNombreDescripcion {
 
 	}
 	
-	public static String[] generaMapa() {
+	public static String[] generaMapa(byte posJugador, byte posRival) {
 		String[]tamaño = new String[8];
-		tamaño[2] = "./icon/punch.png";
-		tamaño[5] =	"./icon/punch_rival.png";
+		tamaño[posJugador] = "./icon/punch.png";
+		tamaño[posRival] =	"./icon/punch_rival.png";
 		
 		
 		return tamaño;

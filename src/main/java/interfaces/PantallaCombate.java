@@ -32,8 +32,6 @@ import java.awt.SystemColor;
 
 public class PantallaCombate extends JPanel {
 	private Ventana ventana;
-	private Personaje jugador;
-	private Personaje rival;
 	private String[] mapa;
 
 	// CONSUMIBLES
@@ -47,6 +45,8 @@ public class PantallaCombate extends JPanel {
 
 	public PantallaCombate(Ventana v, Personaje jugador, Personaje rival) {
 		this.ventana = v;
+		jugador.setPosicion((byte)2);
+		rival.setPosicion((byte)5);
 		
 		setLayout(null);
 		
@@ -118,7 +118,7 @@ public class PantallaCombate extends JPanel {
 			cartasListaJ.add(new ListaCarta(ventana, baraja.get(i), jugador, rival));
 		}
 		CampoCombate playa = new CampoCombate("Playa enigmática");
-		this.mapa = playa.generaMapa();
+		this.mapa = playa.generaMapa(jugador.getPosicion(),rival.getPosicion());
 		
 		JLabel manchaInfoR = new JLabel("");
 		manchaInfoR.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\splat.png"));
