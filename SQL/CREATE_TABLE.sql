@@ -45,9 +45,6 @@ CREATE TABLE especial(
     REFERENCES personaje(nombre)
 );
 
-DROP TABLE ESPECIAL;
-
-
 CREATE TABLE ultimate(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nombre VARCHAR(100),

@@ -81,7 +81,6 @@ public class Ventana extends JFrame {
 	 * @param nombrePantalla Parámetro por el cual indicamos la pantalla de destino.
 	 */
 	public void irAPantalla(String nombrePantalla) {
-
 		this.pantallaActual.setVisible(false);
 		this.pantallaActual = null;
 		switch (nombrePantalla) {

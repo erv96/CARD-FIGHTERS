@@ -23,25 +23,30 @@ import javazoom.jl.player.Player;
 import utils.ConexionBD;
 
 public class Main {
+	//ESTA VARIABLE INTERNA LA UTILIZO PARA PASAR LOS ARGUMENTOS DE PROGRAMA HACIA LA PANTALLA DE SELECCIÓN DE PERSONAJE
+	private static String[] savedArgs;
 
 	public static void main(String[] args) {
 
 		Ventana cardFighters = new Ventana();
 		
-		//ARGUMENTO PARA IR DIRECTAMENTE A LA PANTALLA DE SELECCIÓN DE PERSONAJE.
+		//IGUALO EL ARRAY DE STRING SAVEDARGS A LOS ARGUMENTOS DE PROGRAMA
+		savedArgs = args;
 		
-		/*String pantallaElegida = "";
-
-		for (byte i = 0; i < args.length; i++) {
-			if (args[i].equals("-pantalla")) {
-				pantallaElegida = args[i + 1];
-			}
-		}
-		cardFighters.irAPantalla(pantallaElegida);*/
+		
 
 		// DOCUMENTAR TODAS LAS CLASES
 		// ENCIMA DE CADA VARIABLE INTERNA SE PONE PARA QUE SIRVE.
 
+	}
+	
+	
+	/**
+	 * ESTE MÉTODO LO UTILIZO PARA OBTENER LOS ARGUMENTOS DE PROGRAMA EN LA CLASE DE SELEECIONPERSONAJE.
+	 * @return
+	 */
+	public static String[] getArgs() {
+		return savedArgs;
 	}
 
 }

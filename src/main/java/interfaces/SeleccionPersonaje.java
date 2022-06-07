@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import clases.Personaje;
 import componentesVisuales.BotonAnimado;
 import componentesVisuales.BotonAnimadoNegro;
+import main.Main;
 
 import javax.swing.JLabel;
 import javax.swing.AbstractListModel;
@@ -34,6 +35,7 @@ public class SeleccionPersonaje extends JPanel {
 	private Ventana ventana;
 	private Personaje jugador;
 	private Personaje rival;
+	private String[] argumentosPersonaje = Main.getArgs();
 
 	public SeleccionPersonaje(final Ventana v) {
 		this.ventana = v;
@@ -131,6 +133,7 @@ public class SeleccionPersonaje extends JPanel {
 		COMENZAR.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 				if(lista_Jugador.getSelectedValue()!=null && lista_Rival.getSelectedValue()!=null) {
 					String nombreJ = (String)lista_Jugador.getSelectedValue();
 					jugador = new Personaje(nombreJ);
@@ -138,8 +141,24 @@ public class SeleccionPersonaje extends JPanel {
 					rival = new Personaje(nombreR);
 					ventana.irAPantalla("PantallaCombate",jugador,rival);
 					
-				}else {
-					JOptionPane.showMessageDialog(v, "Tanto el jugador como el rival deben ser seleccionados","ERROR DE SELECCIÓN",JOptionPane.ERROR_MESSAGE);
+				}else if(lista_Jugador.getSelectedValue()==null && lista_Rival.getSelectedValue()==null){
+					String jugadorArg="";
+					String rivalArg="";
+					for (byte i = 0; i < argumentosPersonaje.length; i++) {
+						if (argumentosPersonaje[i].equals("-jugador")) {
+							jugadorArg = argumentosPersonaje[i + 1];
+						}
+						if (argumentosPersonaje[i].equals("-rival")) {
+							rivalArg = argumentosPersonaje[i + 1];
+						}
+						
+					}
+					
+					JOptionPane.showMessageDialog(v, "El jugador no ha elegido ningún personaje ni ningún rival se procederá a la selección automática por argumentos","SELECCIÓN POR ARGUMENTOS",JOptionPane.INFORMATION_MESSAGE);
+
+					jugador = new Personaje(jugadorArg);
+					rival = new Personaje(rivalArg);
+					ventana.irAPantalla("PantallaCombate",jugador,rival);
 				}
 				
 				

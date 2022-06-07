@@ -46,6 +46,7 @@ public class PantallaCombate extends JPanel {
 
 	public PantallaCombate(Ventana v, Personaje jugador, Personaje rival) {
 		this.ventana = v;
+		
 		setLayout(null);
 		
 		JPanel campoPosicion = new JPanel();
