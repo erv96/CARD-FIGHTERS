@@ -28,6 +28,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
 import javax.swing.UIManager;
+import java.awt.SystemColor;
 
 public class PantallaCombate extends JPanel {
 	private Ventana ventana;
@@ -49,9 +50,9 @@ public class PantallaCombate extends JPanel {
 		
 		setLayout(null);
 		
-		JPanel campoPosicion = new JPanel();
-		campoPosicion.setBounds(25, 123, 741, 100);
-		add(campoPosicion);
+		JPanel campoMapa = new JPanel();
+		campoMapa.setBounds(25, 123, 741, 100);
+		add(campoMapa);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(25, 348, 741, 202);
@@ -62,12 +63,54 @@ public class PantallaCombate extends JPanel {
 		cartasListaJ.setBorder(new EmptyBorder(3, 3, 3, 3));
 		cartasListaJ.setBackground(Color.BLACK);
 		scrollPane.setViewportView(cartasListaJ);
+		
+		JLabel personaje_Jugador = new JLabel(jugador.getNombre());
+		personaje_Jugador.setHorizontalAlignment(SwingConstants.CENTER);
+		personaje_Jugador.setForeground(Color.WHITE);
+		personaje_Jugador.setFont(new Font("Personal Services", Font.BOLD, 16));
+		personaje_Jugador.setBounds(0, 10, 125, 35);
+		add(personaje_Jugador);
+		
+		JLabel vidaJugador = new JLabel(String.valueOf(jugador.getVida()));
+		vidaJugador.setHorizontalAlignment(SwingConstants.CENTER);
+		vidaJugador.setForeground(Color.RED);
+		vidaJugador.setFont(new Font("Personal Services", Font.PLAIN, 12));
+		vidaJugador.setBounds(47, 44, 39, 31);
+		add(vidaJugador);
+		
+		JLabel energiaJugador = new JLabel(String.valueOf(jugador.getEnergia()));
+		energiaJugador.setHorizontalAlignment(SwingConstants.CENTER);
+		energiaJugador.setForeground(SystemColor.textHighlight);
+		energiaJugador.setFont(new Font("Personal Services", Font.PLAIN, 12));
+		energiaJugador.setBounds(47, 67, 39, 31);
+		add(energiaJugador);
+		
+		JLabel personajeRival = new JLabel(rival.getNombre());
+		personajeRival.setHorizontalAlignment(SwingConstants.CENTER);
+		personajeRival.setForeground(Color.WHITE);
+		personajeRival.setFont(new Font("Personal Services", Font.BOLD, 16));
+		personajeRival.setBounds(654, 10, 125, 35);
+		add(personajeRival);
+		
+		JLabel vidaRival = new JLabel(String.valueOf(rival.getVida()));
+		vidaRival.setHorizontalAlignment(SwingConstants.CENTER);
+		vidaRival.setForeground(Color.RED);
+		vidaRival.setFont(new Font("Personal Services", Font.PLAIN, 12));
+		vidaRival.setBounds(700, 44, 39, 31);
+		add(vidaRival);
+		
+		JLabel energiaRival = new JLabel(String.valueOf(rival.getEnergia()));
+		energiaRival.setHorizontalAlignment(SwingConstants.CENTER);
+		energiaRival.setForeground(SystemColor.textHighlight);
+		energiaRival.setFont(new Font("Personal Services", Font.PLAIN, 12));
+		energiaRival.setBounds(700, 67, 39, 31);
+		add(energiaRival);
 
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(
+		JLabel fondoCartas = new JLabel("");
+		fondoCartas.setIcon(new ImageIcon(
 				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha.png"));
-		lblNewLabel.setBounds(-489, 85, 1526, 580);
-		add(lblNewLabel);
+		fondoCartas.setBounds(-489, 85, 1526, 580);
+		add(fondoCartas);
 
 		ArrayList<Carta> baraja = jugador.getBaraja();
 		Collections.shuffle(baraja);
@@ -76,8 +119,18 @@ public class PantallaCombate extends JPanel {
 		}
 		CampoCombate playa = new CampoCombate("Playa enigmática");
 		this.mapa = playa.generaMapa();
+		
+		JLabel manchaInfoR = new JLabel("");
+		manchaInfoR.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\splat.png"));
+		manchaInfoR.setBounds(250, -299, 1526, 580);
+		add(manchaInfoR);
+		
+		JLabel manchaInfoP = new JLabel("");
+		manchaInfoP.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\splat.png"));
+		manchaInfoP.setBounds(-450, -300, 1526, 580);
+		add(manchaInfoP);
 		for (byte i = 0; i < mapa.length; i++) {
-			campoPosicion.add(new Mapa(ventana,mapa[i]));
+			campoMapa.add(new Mapa(ventana,mapa[i]));
 		}
 
 
