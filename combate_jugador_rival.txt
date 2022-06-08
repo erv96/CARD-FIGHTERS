@@ -1,0 +1,11 @@
+
+
+Personaje Jugador: Ryu
+Personaje Rival: Steven
+
+Personaje Jugador: Ryu
+Personaje Rival: Ryu
+
+Personaje Jugador: Ryu
+Personaje Rival: Steven
+

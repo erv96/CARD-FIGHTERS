@@ -24,16 +24,15 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
+import javax.swing.JRadioButton;
 
 public class ListaCarta extends JPanel {
-	private Ventana ventana;
-	private Carta carta;
+	private Carta elegida;
+	
 
-	public ListaCarta(Ventana v, final Carta c, final Personaje jugador, final Personaje rival) {
-
+	public ListaCarta(final Carta c) {
 		setBackground(Color.BLACK);
-		this.ventana = v;
-		this.carta = c;
+		this.elegida = c;
 		setLayout(null);
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -53,7 +52,7 @@ public class ListaCarta extends JPanel {
 		gbc_panel.gridy = 0;
 		add(panel, gbc_panel);
 
-		JLabel nombre_Carta = new JLabel(carta.getNombre());
+		JLabel nombre_Carta = new JLabel(elegida.getNombre());
 		nombre_Carta.setHorizontalAlignment(SwingConstants.CENTER);
 		nombre_Carta.setFont(new Font("Tahoma", Font.BOLD, 10));
 		nombre_Carta.setBounds(10, 10, 100, 13);
@@ -64,7 +63,7 @@ public class ListaCarta extends JPanel {
 		daño.setBounds(10, 35, 45, 13);
 		panel.add(daño);
 
-		JLabel numero_daño = new JLabel(String.valueOf(carta.getPuntosAtaque()));
+		JLabel numero_daño = new JLabel(String.valueOf(elegida.getPuntosAtaque()));
 		numero_daño.setFont(new Font("Tahoma", Font.BOLD, 10));
 		numero_daño.setHorizontalAlignment(SwingConstants.CENTER);
 		numero_daño.setBounds(65, 33, 45, 13);
@@ -75,7 +74,7 @@ public class ListaCarta extends JPanel {
 		velocidad.setBounds(10, 50, 45, 13);
 		panel.add(velocidad);
 
-		JLabel numero_Velocidad = new JLabel(String.valueOf(carta.getVelocidad()));
+		JLabel numero_Velocidad = new JLabel(String.valueOf(elegida.getVelocidad()));
 		numero_Velocidad.setFont(new Font("Tahoma", Font.BOLD, 10));
 		numero_Velocidad.setHorizontalAlignment(SwingConstants.CENTER);
 		numero_Velocidad.setBounds(65, 50, 45, 13);
@@ -86,29 +85,27 @@ public class ListaCarta extends JPanel {
 		alcance.setBounds(10, 65, 63, 13);
 		panel.add(alcance);
 
-		JLabel numero_Alcance = new JLabel(String.valueOf(carta.getAlcance()));
+		JLabel numero_Alcance = new JLabel(String.valueOf(elegida.getAlcance()));
 		numero_Alcance.setFont(new Font("Tahoma", Font.BOLD, 10));
 		numero_Alcance.setHorizontalAlignment(SwingConstants.CENTER);
 		numero_Alcance.setBounds(65, 65, 45, 13);
 		panel.add(numero_Alcance);
+		
 
-		JButton btnNewButton = new JButton("Usar");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		final JButton usarButton = new JButton("Usar");
+		usarButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
-				PantallaCombate pelea = new PantallaCombate();
-				pelea.pelear(jugador, rival, c);
 				
 				
-
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 9));
-		btnNewButton.setBounds(10, 135, 100, 21);
-		panel.add(btnNewButton);
+		usarButton.setFont(new Font("Tahoma", Font.BOLD, 9));
+		usarButton.setBounds(10, 135, 100, 21);
+		panel.add(usarButton);
 
-		if (carta.getTipo().equals("Ultimate")) {
+		if (elegida.getTipo().equals("Ultimate")) {
 
 			JLabel vida = new JLabel("C.vida");
 			vida.setFont(new Font("Tahoma", Font.BOLD, 10));
@@ -122,14 +119,14 @@ public class ListaCarta extends JPanel {
 			c_Energia.setBounds(10, 96, 63, 13);
 			panel.add(c_Energia);
 
-			JLabel numeroEnergia = new JLabel(String.valueOf(carta.getCosteEnergia()));
+			JLabel numeroEnergia = new JLabel(String.valueOf(elegida.getCosteEnergia()));
 			numeroEnergia.setForeground(new Color(0, 51, 204));
 			numeroEnergia.setFont(new Font("Tahoma", Font.BOLD, 10));
 			numeroEnergia.setHorizontalAlignment(SwingConstants.CENTER);
 			numeroEnergia.setBounds(65, 96, 45, 13);
 			panel.add(numeroEnergia);
 
-			JLabel vidaNumero = new JLabel(String.valueOf(String.valueOf(carta.getCosteVida())));
+			JLabel vidaNumero = new JLabel(String.valueOf(String.valueOf(elegida.getCosteVida())));
 			vidaNumero.setHorizontalAlignment(SwingConstants.CENTER);
 			vidaNumero.setForeground(Color.RED);
 			vidaNumero.setFont(new Font("Tahoma", Font.BOLD, 10));
@@ -137,7 +134,7 @@ public class ListaCarta extends JPanel {
 			panel.add(vidaNumero);
 		}
 
-		if (carta.getTipo().equals("Especial")) {
+		if (elegida.getTipo().equals("Especial")) {
 
 			JLabel c_Energia = new JLabel("C.energ");
 			c_Energia.setForeground(new Color(0, 51, 255));
@@ -145,7 +142,7 @@ public class ListaCarta extends JPanel {
 			c_Energia.setBounds(10, 96, 63, 13);
 			panel.add(c_Energia);
 
-			JLabel numeroEnergia = new JLabel(String.valueOf(carta.getCosteEnergia()));
+			JLabel numeroEnergia = new JLabel(String.valueOf(elegida.getCosteEnergia()));
 			numeroEnergia.setForeground(new Color(0, 51, 204));
 			numeroEnergia.setFont(new Font("Tahoma", Font.BOLD, 10));
 			numeroEnergia.setHorizontalAlignment(SwingConstants.CENTER);
@@ -154,11 +151,14 @@ public class ListaCarta extends JPanel {
 		}
 
 		JLabel fondo = new JLabel("");
-		fondo.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\splat (1).png"));
+		fondo.setIcon(new ImageIcon(
+				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\splat (1).png"));
 		fondo.setBounds(10, 58, 124, 187);
 		panel.add(fondo);
+		
 	}
 
-	
-
+	public Carta getElegida() {
+		return elegida;
+	}
 }

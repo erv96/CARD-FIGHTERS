@@ -16,6 +16,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.Font;
 import javax.swing.JList;
@@ -40,28 +44,27 @@ public class SeleccionPersonaje extends JPanel {
 	public SeleccionPersonaje(final Ventana v) {
 		this.ventana = v;
 		setLayout(null);
-		
 
 		JLabel tituloPantalla = new JLabel("SELECCI\u00D3N DE PERSONAJE");
 		tituloPantalla.setFont(new Font("Personal Services", Font.PLAIN, 45));
 		tituloPantalla.setForeground(Color.WHITE);
 		tituloPantalla.setBounds(20, 10, 725, 99);
 		add(tituloPantalla);
-		
+
 		JLabel lblNewLabel = new JLabel("VS");
 		lblNewLabel.setForeground(Color.BLACK);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Personal Services", Font.PLAIN, 55));
 		lblNewLabel.setBounds(300, 271, 192, 91);
 		add(lblNewLabel);
-		
+
 		JLabel riv_title = new JLabel("RIVAL");
 		riv_title.setHorizontalAlignment(SwingConstants.CENTER);
 		riv_title.setForeground(Color.BLACK);
 		riv_title.setFont(new Font("Personal Services", Font.PLAIN, 45));
 		riv_title.setBounds(497, 139, 248, 71);
 		add(riv_title);
-		
+
 		JLabel jug_title = new JLabel("JUGADOR");
 		jug_title.setHorizontalAlignment(SwingConstants.CENTER);
 		jug_title.setForeground(Color.BLACK);
@@ -115,9 +118,9 @@ public class SeleccionPersonaje extends JPanel {
 			}
 
 		});
-		
-		//BOTONES
-		
+
+		// BOTONES
+
 		JButton ATRAS = new BotonAnimadoNegro("ATR\u00C1S");
 		ATRAS.setForeground(Color.BLACK);
 		ATRAS.setBounds(31, 506, 119, 38);
@@ -128,22 +131,29 @@ public class SeleccionPersonaje extends JPanel {
 				ventana.irAPantalla("MenuPrincipal");
 			}
 		});
-		
+
 		JButton COMENZAR = new BotonAnimadoNegro("ATR\u00C1S");
 		COMENZAR.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				if(lista_Jugador.getSelectedValue()!=null && lista_Rival.getSelectedValue()!=null) {
-					String nombreJ = (String)lista_Jugador.getSelectedValue();
+
+				if (lista_Jugador.getSelectedValue() != null && lista_Rival.getSelectedValue() != null) {
+					String nombreJ = (String) lista_Jugador.getSelectedValue();
 					jugador = new Personaje(nombreJ);
-					String nombreR = (String)lista_Rival.getSelectedValue();
+					String nombreR = (String) lista_Rival.getSelectedValue();
 					rival = new Personaje(nombreR);
-					ventana.irAPantalla("PantallaCombate",jugador,rival);
-					
-				}else if(lista_Jugador.getSelectedValue()==null && lista_Rival.getSelectedValue()==null){
-					String jugadorArg="";
-					String rivalArg="";
+					ventana.irAPantalla("PantallaCombate", jugador, rival);
+
+				} else if (lista_Jugador.getSelectedValue() == null && lista_Rival.getSelectedValue() == null
+						&& argumentosPersonaje.length == 0){
+					JOptionPane.showMessageDialog(v,
+							"Se debe elegir tanto un personaje para el jugador como para el rival.",
+							"ERROR DE SELECCIÓN", JOptionPane.ERROR_MESSAGE);
+				}
+				if (lista_Jugador.getSelectedValue() == null && lista_Rival.getSelectedValue() == null
+						&& argumentosPersonaje.length != 0) {
+					String jugadorArg = "";
+					String rivalArg = "";
 					for (byte i = 0; i < argumentosPersonaje.length; i++) {
 						if (argumentosPersonaje[i].equals("-jugador")) {
 							jugadorArg = argumentosPersonaje[i + 1];
@@ -151,19 +161,54 @@ public class SeleccionPersonaje extends JPanel {
 						if (argumentosPersonaje[i].equals("-rival")) {
 							rivalArg = argumentosPersonaje[i + 1];
 						}
-						
+
 					}
-					
-					JOptionPane.showMessageDialog(v, "El jugador no ha elegido ningún personaje ni ningún rival se procederá a la selección automática por argumentos","SELECCIÓN POR ARGUMENTOS",JOptionPane.INFORMATION_MESSAGE);
+
+					JOptionPane.showMessageDialog(v,
+							"El jugador no ha elegido ningún personaje ni ningún rival se procederá a la selección automática por argumentos.",
+							"SELECCIÓN POR ARGUMENTOS", JOptionPane.INFORMATION_MESSAGE);
 
 					jugador = new Personaje(jugadorArg);
 					rival = new Personaje(rivalArg);
-					ventana.irAPantalla("PantallaCombate",jugador,rival);
+					ventana.irAPantalla("PantallaCombate", jugador, rival);
 				}
-				
-				
+
+				if (argumentosPersonaje.length == 0 && lista_Jugador.getSelectedValue() == null && lista_Rival.getSelectedValue() == null) {
+					JOptionPane.showMessageDialog(v,
+							"No hay argumentos disponibles para la selección por favor elije un personaje jugador y rival.",
+							"ERROR SELECCIÓN POR ARGUMENTOS", JOptionPane.ERROR_MESSAGE);
+				}
+
 			}
 		});
+
+		BotonAnimado leerFichero = new BotonAnimado("ATR\u00C1S");
+		leerFichero.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				BufferedReader lector;
+				try {
+					lector = new BufferedReader(new FileReader("./combate_jugador_rival.txt"));
+					String linea = lector.readLine();
+					String texto = "";
+					while (linea != null) {
+						texto = texto + linea + "\n";
+						linea = lector.readLine();
+					}
+					JOptionPane.showMessageDialog(v, texto, "Impresión de combates anteriores",
+							JOptionPane.DEFAULT_OPTION);
+
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		leerFichero.setText("LEER FICHERO DE COMBATES");
+		leerFichero.setForeground(Color.WHITE);
+		leerFichero.setBounds(218, 506, 316, 38);
+		add(leerFichero);
 		COMENZAR.setText("COMENZAR");
 		COMENZAR.setForeground(Color.BLACK);
 		COMENZAR.setBounds(613, 506, 142, 38);
@@ -176,9 +221,10 @@ public class SeleccionPersonaje extends JPanel {
 				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\manchaBlanca.png"));
 		MANCHA.setBounds(461, 425, 536, 151);
 		add(MANCHA);
-		
+
 		JLabel MANCHA_1 = new JLabel("");
-		MANCHA_1.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\manchaBlancaInv.png"));
+		MANCHA_1.setIcon(new ImageIcon(
+				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\manchaBlancaInv.png"));
 		MANCHA_1.setBounds(-328, 425, 536, 151);
 		add(MANCHA_1);
 

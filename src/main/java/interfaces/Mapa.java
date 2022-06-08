@@ -15,14 +15,11 @@ import java.awt.Insets;
 import java.io.File;
 
 public class Mapa extends JPanel{
-	private Personaje rival;
-	private Personaje jugador;
-	private Ventana ventana;
 	
 	
-	public Mapa(Ventana v, String icono) {
+	
+	public Mapa(String icono) {
 		setBackground(Color.WHITE);
-		this.ventana = v;
 		setBorder(new LineBorder(new Color(0, 0, 0), 5));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{75, 0};

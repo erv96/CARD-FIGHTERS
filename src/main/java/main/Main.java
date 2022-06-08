@@ -4,6 +4,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Mixer;
@@ -32,7 +33,6 @@ public class Main {
 		
 		//IGUALO EL ARRAY DE STRING SAVEDARGS A LOS ARGUMENTOS DE PROGRAMA
 		savedArgs = args;
-		
 		
 
 		// DOCUMENTAR TODAS LAS CLASES

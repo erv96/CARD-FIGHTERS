@@ -1,6 +1,6 @@
 package clases;
 
-public class ElementoNombreDescripcion {
+public abstract class ElementoNombreDescripcion {
 	private String nombre;
 	private String descripcion;
 	
