@@ -105,13 +105,13 @@ public class Instrucciones extends JPanel {
 
 		JLabel MANCHA_TOP = new JLabel("");
 		MANCHA_TOP.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha.png"));
+				"./background/mancha.png"));
 		MANCHA_TOP.setBounds(-409, -373, 1588, 608);
 		add(MANCHA_TOP);
 
 		JLabel MANCHA_BOTTOM = new JLabel("");
 		MANCHA_BOTTOM.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha.png"));
+				"./background/mancha.png"));
 		MANCHA_BOTTOM.setBounds(-409, 264, 1467, 398);
 		add(MANCHA_BOTTOM);
 	}

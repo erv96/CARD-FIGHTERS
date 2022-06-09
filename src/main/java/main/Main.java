@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Mixer;
@@ -32,12 +33,11 @@ public class Main {
 	public static void main(String[] args) {
 
 		Ventana cardFighters = new Ventana();
+	
 		
 		//IGUALO EL ARRAY DE STRING SAVEDARGS A LOS ARGUMENTOS DE PROGRAMA
 		savedArgs = args;
 		
-		System.out.println(savedArgs.length);
-
 		// DOCUMENTAR TODAS LAS CLASES
 		// ENCIMA DE CADA VARIABLE INTERNA SE PONE PARA QUE SIRVE.
 

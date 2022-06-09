@@ -124,13 +124,13 @@ public class ListaCarta extends JPanel {
 		elegir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(pantallaC.getCartaElegida()==null) {
+				if (pantallaC.getCartaElegida() == null) {
 					pantallaC.setCartaElegida(c);
 					setVisible(false);
-				}else if(pantallaC.getCartaElegida()!=null) {
-					JOptionPane.showMessageDialog(combate,"Ya hay una carta elegida: "+pantallaC.getCartaElegida(),"Carta ya elegida",JOptionPane.INFORMATION_MESSAGE);
+				} else if (pantallaC.getCartaElegida() != null) {
+					JOptionPane.showMessageDialog(combate, "Ya hay una carta elegida: " + pantallaC.getCartaElegida(),
+							"Carta ya elegida", JOptionPane.INFORMATION_MESSAGE);
 				}
-				
 
 			}
 		});
@@ -185,7 +185,7 @@ public class ListaCarta extends JPanel {
 
 		JLabel fondo = new JLabel("");
 		fondo.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\splat (1).png"));
+				"./background/splat (1).png"));
 		fondo.setBounds(10, 58, 124, 187);
 		panel.add(fondo);
 

@@ -90,25 +90,25 @@ public class MenuPrincipal extends JPanel {
 
 		JLabel tinta_1 = new JLabel("");
 		tinta_1.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha.png"));
+				"./background/mancha.png"));
 		tinta_1.setBounds(-316, 46, 1163, 363);
 		add(tinta_1);
 
 		JLabel tinta_2 = new JLabel("");
 		tinta_2.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha.png"));
+				"./background/mancha.png"));
 		tinta_2.setBounds(-298, -224, 1163, 363);
 		add(tinta_2);
 
 		JLabel tinta = new JLabel("");
 		tinta.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha.png"));
+				"./background/mancha.png"));
 		tinta.setBounds(-316, 330, 1163, 363);
 		add(tinta);
 
 		JLabel fondo = new JLabel("");
 		fondo.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\menu.png"));
+				"./background/menu.png"));
 		fondo.setBounds(0, 0, 800, 576);
 		add(fondo);
 

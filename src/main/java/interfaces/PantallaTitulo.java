@@ -70,7 +70,7 @@ public class PantallaTitulo extends JPanel {
 		fighter.setForeground(Color.WHITE);
 		fighter.setBackground(Color.YELLOW);
 		fighter.setHorizontalAlignment(SwingConstants.CENTER);
-		fighter.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\logo.png"));
+		fighter.setIcon(new ImageIcon("./background/logo.png"));
 		fighter.setBounds(348, 10, 726, 673);
 		add(fighter);
 		

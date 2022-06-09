@@ -264,19 +264,19 @@ public class SeleccionPersonaje extends JPanel {
 
 		JLabel MANCHA = new JLabel("");
 		MANCHA.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\manchaBlanca.png"));
+				"./background/manchaBlanca.png"));
 		MANCHA.setBounds(461, 425, 536, 151);
 		add(MANCHA);
 
 		JLabel MANCHA_1 = new JLabel("");
 		MANCHA_1.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\manchaBlancaInv.png"));
+				"./background/manchaBlancaInv.png"));
 		MANCHA_1.setBounds(-328, 425, 536, 151);
 		add(MANCHA_1);
 
 		JLabel FONDO = new JLabel("");
 		FONDO.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\character_select.png"));
+				"./background/character_select.png"));
 		FONDO.setBounds(0, 0, 800, 576);
 		add(FONDO);
 

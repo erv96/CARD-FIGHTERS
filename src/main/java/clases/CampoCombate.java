@@ -47,11 +47,8 @@ public class CampoCombate extends ElementoNombreDescripcion {
 	 * @param nombre
 	 */
 
-	public CampoCombate(String nombre) {
+	public CampoCombate(String nombre, Byte posicionJ, Byte posicionR) {
 		super(nombre);
-
-		this.posJugador = 2;
-		this.posRival = 5;
 
 		Statement smt = ConexionBD.conectar();
 
@@ -72,8 +69,8 @@ public class CampoCombate extends ElementoNombreDescripcion {
 		ConexionBD.desconectar();
 
 		this.mapa = new String[8];
-		mapa[posJugador] = "./icon/punch.png";
-		mapa[posRival] = "./icon/punch_rival.png";
+		mapa[posicionJ] = "./icon/punch.png";
+		mapa[posicionR] = "./icon/punch_rival.png";
 
 	}
 
