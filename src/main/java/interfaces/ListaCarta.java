@@ -26,9 +26,33 @@ import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
 import javax.swing.JRadioButton;
 
+/**
+ * Esta clase nos servirá para definir el tamaño de cada carta del jugador, es
+ * como una especie de plantilla que se le añadirá a cada carta que se encuentre
+ * en el ArrayList baraja del personaje, todas estas cartas se representarán
+ * dentro de un JPanel que se encuentra en la clase PantallaCombate.
+ * 
+ * @author toled
+ *
+ */
 public class ListaCarta extends JPanel {
+	/**
+	 * Esta variable representa cada carta del ArrayList de baraja del jugador.
+	 */
 	private Carta elegida;
-	
+
+	/**
+	 * En el siguiente constructor definimos la forma y el aspecto que tendrán las
+	 * cartas que mostraremos por pantalla, dentro de este constructor también hemos
+	 * realizado varios ifs para distinguir entre qué tipo de carta recibimos y
+	 * mostrar su coste de vida o energía.
+	 * 
+	 * @param c Este parámetro es cada carta del ArrayList de baraja del jugador, en
+	 *          la clase PantallaCombate, mediante un bucle for recorremos todo el
+	 *          ArrayList de baraja y en ese mismo bucle a un JPanel creado en la
+	 *          clase PantallaCombate, le añadimos un objeto de tipo ListaCarta que
+	 *          irá iterando hasta que toda la baraja este definida.
+	 */
 
 	public ListaCarta(final Carta c) {
 		setBackground(Color.BLACK);
@@ -90,15 +114,13 @@ public class ListaCarta extends JPanel {
 		numero_Alcance.setHorizontalAlignment(SwingConstants.CENTER);
 		numero_Alcance.setBounds(65, 65, 45, 13);
 		panel.add(numero_Alcance);
-		
 
 		final JButton usarButton = new JButton("Usar");
 		usarButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
-				
-				
+
 			}
 		});
 		usarButton.setFont(new Font("Tahoma", Font.BOLD, 9));
@@ -155,7 +177,7 @@ public class ListaCarta extends JPanel {
 				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\splat (1).png"));
 		fondo.setBounds(10, 58, 124, 187);
 		panel.add(fondo);
-		
+
 	}
 
 	public Carta getElegida() {

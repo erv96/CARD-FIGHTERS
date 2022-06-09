@@ -6,21 +6,29 @@ import java.sql.Statement;
 
 import utils.ConexionBD;
 
-public class PocionEnergia extends Consumible{
+/**
+ * Clase que definirá los atributos y características de la poción de energía
+ * 
+ * @author toled
+ *
+ */
+public class PocionEnergia extends Consumible {
+	/**
+	 * aumentoEnergia: número que aumenta la energía del jugador al recogerla
+	 */
 	private byte aumentoEnergia;
 
-	public PocionEnergia(String nombre, String descripcion, byte aumentoEnergia) {
-		super(nombre, descripcion);
-		this.aumentoEnergia = aumentoEnergia;
-	}
-
+	/**
+	 * En este constructor mediante una consulta a nuestra BBDD recogerémos la
+	 * descripción del objeto y el número que se le sumará a la energía del jugador
+	 */
 	public PocionEnergia() {
-		
+
 		Statement smt = ConexionBD.conectar();
-		
+
 		try {
 			ResultSet cursor = smt.executeQuery("Select * from consumible WHERE nombre= 'PocionEnergia'");
-			if(cursor.next()) {
+			if (cursor.next()) {
 				this.aumentoEnergia = cursor.getByte("aumentoEnergia");
 				String descripcion = cursor.getString("descripcion");
 				setDesripcion(descripcion);
@@ -29,12 +37,10 @@ public class PocionEnergia extends Consumible{
 			ConexionBD.desconectar();
 			e.printStackTrace();
 		}
-		
-		ConexionBD.desconectar();
-		
-	}
 
-	
+		ConexionBD.desconectar();
+
+	}
 
 	public byte getAumentoEnergia() {
 		return aumentoEnergia;
@@ -42,12 +48,10 @@ public class PocionEnergia extends Consumible{
 
 	public void setAumentoEnergia(byte aumentoEnergia) {
 		this.aumentoEnergia = aumentoEnergia;
-	}	
-	
-	
+	}
+
 	@Override
 	public String toString() {
-		return "PocionEnergia [aumentoEnergia=" + aumentoEnergia 
-				+ ", getDescripcion()=" + getDescripcion() + "]";
+		return "PocionEnergia [aumentoEnergia=" + aumentoEnergia + ", getDescripcion()=" + getDescripcion() + "]";
 	}
 }

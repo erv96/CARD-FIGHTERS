@@ -5,7 +5,11 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+/**
+ * Exactamente igual que la clase BotonAnimado pero el color predeterminado de las letras del botón es negro.
+ * @author toled
+ *
+ */
 public class BotonAnimadoNegro extends BotonAnimado {
 
 	public BotonAnimadoNegro(String text) {
@@ -42,7 +46,6 @@ public class BotonAnimadoNegro extends BotonAnimado {
 		this.setBackground(Color.BLACK);
 		this.setForeground(Color.BLACK);
 		this.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
-		// empezar.setBorder();
 		this.setFocusable(false);
 	}
 

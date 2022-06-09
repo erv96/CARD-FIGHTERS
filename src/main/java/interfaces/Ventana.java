@@ -24,24 +24,23 @@ import clases.PocionVida;
  *
  */
 public class Ventana extends JFrame {
-	// ESTA VARIABLE NOS SERVIRÁ EN EL MÉTODO "irAPantalla" PARA HACER QUE LA
-	// VENTANA QUE SE ESTA EJECUTANDO ACTUALMENTE CAMBIE A NULL Y SE PUEDA
-	// INTERCAMBIAR POR OTRA VENTANA DISTINTA.
+	/**
+	 * ESTA VARIABLE NOS SERVIRÁ EN EL MÉTODO "irAPantalla" PARA HACER QUE LA
+	 * VENTANA QUE SE ESTA EJECUTANDO ACTUALMENTE CAMBIE A NULL Y SE PUEDA
+	 * INTERCAMBIAR POR OTRA VENTANA DISTINTA.
+	 */
 	private JPanel pantallaActual;
-
-	// CANCIONES
-
-	// CON ESTE OBJETO SOUND LLAMO A LOS MÉTODOS DE LA CLASE SOUND: loop, play o
-	// stop.
-	Sound sound = new Sound();
+	/**
+	 * Variable musica de tipo Sound que nos servirá para introducir las canciones
+	 * en cada pantalla con los métodos de la clase Sound.
+	 */
+	private Sound musica = new Sound();
 
 	// RUTA DE LAS CANCIONES PARA CADA PANTALLA
 	File selector = new File("./songs/selector.wav");
 	File main_title = new File("./songs/main_title.wav");
 	File combate_playa = new File("./songs/combate_playa.wav");
 	File instrucciones = new File("./songs/instrucciones.wav");
-	
-	
 
 	/**
 	 * Constructor que nos permite definir las propiedades generales de las
@@ -52,7 +51,7 @@ public class Ventana extends JFrame {
 	 * demás propiedades.
 	 */
 	public Ventana() {
-		sound.loop(main_title);
+		musica.loop(main_title);
 		this.setTitle("Card Fighters");
 		this.setSize(800, 600);
 		this.setResizable(false);
@@ -76,7 +75,11 @@ public class Ventana extends JFrame {
 	 * propia clase Ventana (this) para que las características definidas en el
 	 * constructor se mantengan de una pantalla a otra. Luego de esto, fuera del
 	 * switch, indicamos el setVisible(True) y el contentPane(pantallaActual) que ya
-	 * tendrá el valor de la pantalla de destino.
+	 * tendrá el valor de la pantalla de destino. En cada case, llamamos al método
+	 * stop para que la música que se esta reproduciendo actualmente pare, y usamos
+	 * el método con loop con la canción correspondiente al menú en el que nos
+	 * encontremos, así conseguimos que entre pantalla y pantalla suene una melodía
+	 * diferente.
 	 * 
 	 * @param nombrePantalla Parámetro por el cual indicamos la pantalla de destino.
 	 */
@@ -91,22 +94,22 @@ public class Ventana extends JFrame {
 			break;
 
 		case "MenuPrincipal":
-			sound.stop();
-			sound.loop(main_title);
+			musica.stop();
+			musica.loop(main_title);
 			this.pantallaActual = new MenuPrincipal(this);
 
 			break;
 
 		case "SeleccionPersonaje":
-			sound.stop();
+			musica.stop();
 			this.pantallaActual = new SeleccionPersonaje(this);
-			sound.loop(selector);
+			musica.loop(selector);
 			break;
-			
+
 		case "Instrucciones":
-			sound.stop();
+			musica.stop();
 			this.pantallaActual = new Instrucciones(this);
-			sound.loop(instrucciones);
+			musica.loop(instrucciones);
 
 		default:
 			break;
@@ -133,15 +136,14 @@ public class Ventana extends JFrame {
 	 */
 
 	public void irAPantalla(String nombrePantalla, Personaje jugador, Personaje rival) {
-
 		this.pantallaActual.setVisible(false);
 		this.pantallaActual = null;
 		switch (nombrePantalla) {
 
 		case "PantallaCombate":
-			sound.stop();
+			musica.stop();
 			this.pantallaActual = new PantallaCombate(this, jugador, rival);
-			sound.loop(combate_playa);
+			musica.loop(combate_playa);
 
 		default:
 			break;

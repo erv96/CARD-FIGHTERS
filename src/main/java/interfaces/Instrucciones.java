@@ -21,9 +21,29 @@ import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+/**
+ * Clase de la interfaz de instrucciones, en esta pantalla se muestran las
+ * instrucciones y algunos fundamentos del juego
+ * 
+ * @author toled
+ *
+ */
 public class Instrucciones extends JPanel {
+	/**
+	 * La variable interna ventana nos permite utilizar el método irAPantalla dentro
+	 * del constructor de instrucciones para cambiar de pantalla y mantener las
+	 * características generales definidas en las clase Ventana
+	 */
 	private Ventana ventana;
 
+	/**
+	 * Constructor de instrucciones que recibe un objeto de tipo Ventana que nos
+	 * permite mantener las carcterísticas generales de cada pantalla definidas en
+	 * la clase Ventana
+	 * 
+	 * @param v objeto de tipo ventana que contiene la información de las
+	 *          características generales definidas en la clase Ventana
+	 */
 	public Instrucciones(Ventana v) {
 		super();
 		setBackground(Color.WHITE);
@@ -60,8 +80,7 @@ public class Instrucciones extends JPanel {
 						+ "     BLOQUEO.\n\n"
 						+ "     BLOQUEO ES UNA DE LAS CARTAS MÁS CRUCIALES EN EL COMBATE, ESTA CARTA SIEMPRE IRÁ ANTES QUE \n"
 						+ "     CUALQUIERA Y BLOQUEARÁ POR COMPLETO EL GOLPE DE TU RIVAL Y NO RECIBIRÁS DAÑO, SOLO TENDRÁS UNA EN\n"
-						+ "     TU MAZO ASÍ QUE USALA CON CABEZA.\r\n"
-						+ "\r\n"
+						+ "     TU MAZO ASÍ QUE USALA CON CABEZA.\r\n" + "\r\n"
 						+ "     - TIPO ESPECIAL: COMO BIEN DICE SU NOMBRE SON CARTAS ESPECIALES EXCLUSIVAS DE CADA PERSONAJE, PERO \n"
 						+ "     A DIFERENCIA DE LAS BÁSICAS TIENEN UN COSTE DE ENERGÍA QUE SE MOSTRARÁ EN COLOR AZUL EN LA CARTA. \r\n"
 						+ "\r\n"
@@ -72,8 +91,8 @@ public class Instrucciones extends JPanel {
 						+ "     - DAÑO: LA CANTIDAD DE PUNTOS DE ATAQUE QUE LE HARÁS AL RIVAL SI IMPACTAS CON LA CARTA. \r\n"
 						+ "\r\n"
 						+ "     - VELOCIDAD: SI TU CARTA ES MÁS RAPIDA QUE LA DEL RIVAL, ACERTARÁS CON ELLA, SINO TU ATAQUE SERÁ \n"
-						+ "     INTERRUMPIDO Y PERDERÁS TANTO LA CARTA COMO EL TURNO. \r\n"
-						+ "\r\n" + "     - ALCANCE: ES EL RANGO EN EL QUE LA CARTA PUEDE SER IMPACTADA.\r\n" + "\r\n"
+						+ "     INTERRUMPIDO Y PERDERÁS TANTO LA CARTA COMO EL TURNO. \r\n" + "\r\n"
+						+ "     - ALCANCE: ES EL RANGO EN EL QUE LA CARTA PUEDE SER IMPACTADA.\r\n" + "\r\n"
 						+ "LISTO, HORA DE LUCHAR.\r\n" + "");
 
 		JScrollPane scrollPane = new JScrollPane(textito);

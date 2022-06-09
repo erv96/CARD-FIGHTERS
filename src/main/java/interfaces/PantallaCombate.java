@@ -40,7 +40,7 @@ import java.awt.event.MouseAdapter;
 
 public class PantallaCombate extends JPanel {
 	private Ventana ventana;
-	private String[] mapa;
+	private CampoCombate mapa;
 	private byte vidaJ;
 	private Carta cartaElegida;
 	private Carta cartaRival;
@@ -149,8 +149,7 @@ public class PantallaCombate extends JPanel {
 			cartasListaJ.add(cartita);
 		}
 				
-		CampoCombate playa = new CampoCombate("Playa enigmática");
-		this.mapa = playa.generaMapa(jugador.getPosicion(),rival.getPosicion());
+		this.mapa = new CampoCombate("Playa Enigmática");
 		
 		JButton imprimir = new JButton("Imprimir jugador y rival");
 		imprimir.addMouseListener(new MouseAdapter() {
@@ -198,8 +197,8 @@ public class PantallaCombate extends JPanel {
 		add(btnNewButton);
 		
 		
-		for (byte i = 0; i < mapa.length; i++) {
-			campoMapa.add(new Mapa(mapa[i]));
+		for (byte i = 0; i < mapa.getMapa().length; i++) {
+			campoMapa.add(new Mapa(mapa.getMapa()[i]));
 		}
 		
 		

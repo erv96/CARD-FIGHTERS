@@ -6,14 +6,23 @@ import java.sql.Statement;
 
 import utils.ConexionBD;
 
+/**
+ * Clase que definirá los atributos y características de la poción de vida.
+ * 
+ * @author toled
+ *
+ */
 public class PocionVida extends Consumible {
+	/**
+	 * aumentoVida: número que se le sumará a la vida del jugador al recoger la
+	 * poción.
+	 */
 	private byte aumentoVida;
 
-	public PocionVida(String nombre, String descripcion, byte aumentoVida) {
-		super(nombre, descripcion);
-		this.aumentoVida = aumentoVida;
-	}
-
+	/**
+	 * En este constructor mediante una consulta a nuestra BBDD recogerémos la
+	 * descripción del objeto y el número que se le sumará a la vida del jugador.
+	 */
 	public PocionVida() {
 
 		Statement smt = ConexionBD.conectar();
@@ -46,9 +55,5 @@ public class PocionVida extends Consumible {
 	public String toString() {
 		return "PocionVida [aumentoVida=" + aumentoVida + ", getDescripcion()=" + getDescripcion() + "]";
 	}
-	
-	
-	
-	
 
 }

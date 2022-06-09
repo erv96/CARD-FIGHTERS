@@ -11,23 +11,47 @@ import utils.ConexionBD;
 
 /**
  * Clase que define el nombre y la descripción de cada escenario en el que se
- * pelea.
+ * pelea, la posición del jugador, del rival, y el tamaño del mapa que siempre
+ * será el mismo. (ESTA CLASE SE USA EN "PantallaCombate" Y TIENE RELACIÓN CON LA
+ * CLASE "Mapa" DE INTERFACES)
  * 
  * @author toled
  *
  */
 public class CampoCombate extends ElementoNombreDescripcion {
-	private char[] tamaño;
+	/**
+	 * La variable mapa es un array de String ya que al que le pasamos la ruta de
+	 * los iconos pertenecientes al jugador y al rival para que en otra clase de
+	 * interfaces imprima los iconos en las posiciones correspondientes.
+	 */
+	private String[] mapa;
+	/**
+	 * posJugador es la variable que define la posición del jugador, en un principio
+	 * será la posición 2 del array de String mapa.
+	 */
+	private byte posJugador;
+	/**
+	 * posRival es la variable que define la posición del rival, en un principio
+	 * será la posición 5 del array de String mapa.
+	 */
+	private byte posRival;
 
-	public CampoCombate(String nombre, String descripcion, byte[] tamaño) {
-		super(nombre, descripcion);
-		this.tamaño = new char[8];
-	}
+	/**
+	 * Este constructor de CampoCombate recibirá un nombre, dentro del constructor
+	 * se hará una consulta en la BBDD para comprobar si el nombre de ese
+	 * CampoCombate existe, si no existe saltará una excepción personalizada, además
+	 * de todo esto, dentro de este constructor se definirán las posiciones del
+	 * rival y el jugador, el tamaño del array del String y las rutas de los iconos
+	 * del rival y el jugador.
+	 * 
+	 * @param nombre
+	 */
 
 	public CampoCombate(String nombre) {
 		super(nombre);
 
-		this.tamaño = new char[8];
+		this.posJugador = 2;
+		this.posRival = 5;
 
 		Statement smt = ConexionBD.conectar();
 
@@ -47,19 +71,34 @@ public class CampoCombate extends ElementoNombreDescripcion {
 
 		ConexionBD.desconectar();
 
-	}
-	
-	public static String[] generaMapa(byte posJugador, byte posRival) {
-		String[]tamaño = new String[8];
-		tamaño[posJugador] = "./icon/punch.png";
-		tamaño[posRival] =	"./icon/punch_rival.png";
-		
-		
-		return tamaño;
+		this.mapa = new String[8];
+		mapa[posJugador] = "./icon/punch.png";
+		mapa[posRival] = "./icon/punch_rival.png";
+
 	}
 
-	public char[] getTamaño() {
-		return tamaño;
+	public String[] getMapa() {
+		return mapa;
+	}
+
+	public void setMapa(String[] mapa) {
+		this.mapa = mapa;
+	}
+
+	public byte getPosJugador() {
+		return posJugador;
+	}
+
+	public void setPosJugador(byte posJugador) {
+		this.posJugador = posJugador;
+	}
+
+	public byte getPosRival() {
+		return posRival;
+	}
+
+	public void setPosRival(byte posRival) {
+		this.posRival = posRival;
 	}
 
 	@Override

@@ -24,7 +24,9 @@ import javazoom.jl.player.Player;
 import utils.ConexionBD;
 
 public class Main {
-	//ESTA VARIABLE INTERNA LA UTILIZO PARA PASAR LOS ARGUMENTOS DE PROGRAMA HACIA LA PANTALLA DE SELECCIÓN DE PERSONAJE
+	/**
+	 * ESTA VARIABLE INTERNA LA UTILIZO PARA PASAR LOS ARGUMENTOS DE PROGRAMA HACIA LA PANTALLA DE SELECCIÓN DE PERSONAJE
+	 */
 	private static String[] savedArgs;
 
 	public static void main(String[] args) {

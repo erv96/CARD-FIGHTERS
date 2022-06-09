@@ -9,16 +9,46 @@ import java.util.PriorityQueue;
 import exceptions.PersonajeNoExisteException;
 import utils.ConexionBD;
 
+/**
+ * Clase en la que definiremos al objeto personaje en su totalidad, en esta
+ * clase se realizan consultas de BBDD, y se le proporciona el mazo de cartas al
+ * personaje
+ * 
+ * @author toled
+ *
+ */
 public class Personaje extends ElementoNombreDescripcion {
+	/**
+	 * vida: puntos de vida del personaje(20)
+	 */
 	private byte vida;
+	/**
+	 * posicion: posicion del personaje en el mapa
+	 */
 	private byte posicion;
+	/**
+	 * baraja: ArrayList de Carta que se le proporcionará al personaje mediante
+	 * consultas a la BBDD.
+	 */
 	private ArrayList<Carta> baraja;
+	/**
+	 * energia: energia del personaje (5)
+	 */
 	private byte energia;
 
-	public Personaje() {
-
-	}
-
+	/**
+	 * Consctructor de personaje en el que se realizarán varias consultas en la BBDD
+	 * para definir la descripción del personaje y su baraja añadiendo en ella qué
+	 * especiales y ultimates le pertenecen, el constructor cuenta con un parámetro
+	 * nombre, que servirá para buscar en la BBDD todas las cartas pertenecientes a
+	 * ese nombre, si defines un objeto Personaje con un nombre que no se encuentra
+	 * en la BBDD ocurrirá una excepción de tipo PersonajeNoExisteException. Al
+	 * final del constructor se definirá el nombre, la vida, la posición y la
+	 * energía del personaje (Tanto la vida como la energía siempre empezará en 20 y
+	 * 5 respectivamente)
+	 * 
+	 * @param nombre
+	 */
 	public Personaje(String nombre) {
 		super(nombre);
 
@@ -36,7 +66,8 @@ public class Personaje extends ElementoNombreDescripcion {
 				ResultSet cursor = smt2.executeQuery("select*from carta WHERE personaje = '" + nombre + "'");
 				while (cursor.next()) {
 					Carta barajita = new Carta(cursor.getString("nombre"), cursor.getString("descripcion"),
-							cursor.getByte("puntosAtaque"), cursor.getByte("velocidad"), cursor.getByte("alcance"),cursor.getString("tipo"));
+							cursor.getByte("puntosAtaque"), cursor.getByte("velocidad"), cursor.getByte("alcance"),
+							cursor.getString("tipo"));
 					baraja.add(barajita);
 
 					// System.out.println(barajita);
@@ -47,26 +78,26 @@ public class Personaje extends ElementoNombreDescripcion {
 					String descripcion = cursorDesc.getString("descripcion");
 					setDesripcion(descripcion);
 				}
-				
+
 				Statement smt4 = ConexionBD.conectar();
 
-				ResultSet cursorUlt = smt4.executeQuery("select*from ultimate where personaje = '"+nombre+"'");
+				ResultSet cursorUlt = smt4.executeQuery("select*from ultimate where personaje = '" + nombre + "'");
 				while (cursorUlt.next()) {
 					Carta ulti = new Ultimate(cursorUlt.getString("nombre"), cursorUlt.getString("descripcion"),
 							cursorUlt.getByte("puntosAtaque"), cursorUlt.getByte("velocidad"),
 							cursorUlt.getByte("alcance"), cursorUlt.getByte("costeEnergia"),
-							cursorUlt.getByte("costeVida"),cursorUlt.getString("tipo"));
+							cursorUlt.getByte("costeVida"), cursorUlt.getString("tipo"));
 					baraja.add(ulti);
 				}
-				
+
 				Statement smt5 = ConexionBD.conectar();
 
-				ResultSet cursorSp = smt5.executeQuery("select*from especial where personaje = '"+nombre+"'");
+				ResultSet cursorSp = smt5.executeQuery("select*from especial where personaje = '" + nombre + "'");
 
 				while (cursorSp.next()) {
 					Carta spec = new Especial(cursorSp.getString("nombre"), cursorSp.getString("descripcion"),
 							cursorSp.getByte("puntosAtaque"), cursorSp.getByte("velocidad"),
-							cursorSp.getByte("alcance"), cursorSp.getByte("costeEnergia"),cursorSp.getString("tipo"));
+							cursorSp.getByte("alcance"), cursorSp.getByte("costeEnergia"), cursorSp.getString("tipo"));
 					baraja.add(spec);
 				}
 
@@ -121,12 +152,9 @@ public class Personaje extends ElementoNombreDescripcion {
 		this.energia = energia;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return getNombre() + "\n"+"\tBaraja: "+baraja + "\n"
-				+ "\n\tDescripción: " + getDescripcion();
+		return getNombre() + "\n" + "\tBaraja: " + baraja + "\n" + "\n\tDescripción: " + getDescripcion();
 	}
 
 	/*
@@ -143,6 +171,15 @@ public class Personaje extends ElementoNombreDescripcion {
 	 * e.printStackTrace(); } return ret; }
 	 */
 
+	/**
+	 * Método que nos servirá para guardar en un ArrayList todo el roster de
+	 * personaje que se encuentra en nuestra BBDD, este método es funadmental para
+	 * el correcto funcionamiento de la clase "SelecciónPersonaje" ya que en esa
+	 * clase usamos este método para mostrar todos los personajes en una lista de
+	 * selección para el jugador y para el rival
+	 * 
+	 * @return la función devuelve un ArrayList con los nombres de los personajes.
+	 */
 	public static ArrayList<String> getTodos() {
 		ArrayList<String> ret = new ArrayList<String>();
 		Statement smt = ConexionBD.conectar();

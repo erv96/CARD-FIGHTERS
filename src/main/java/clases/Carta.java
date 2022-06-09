@@ -5,16 +5,60 @@ import java.sql.Statement;
 
 import utils.ConexionBD;
 
+/**
+ * La clase carta nos permitirá definir las características de un objeto carta,
+ * con esta clase lograremos crear las cartas comunes básicas que tendrá cada
+ * jugador.
+ * 
+ * @author toled
+ *
+ */
 public class Carta extends ElementoNombreDescripcion {
+	/**
+	 * puntosAtaque: el daño que hará la carta.
+	 */
 	private byte puntosAtaque;
+	/**
+	 * velocidad: velocidad que tendrá la carta, a mayor valor, mas posibilidades de
+	 * que golpees primero.
+	 */
 	private byte velocidad;
+	/**
+	 * alcance: rango que tendrá la carta, definirá si la carta puede acertar desde
+	 * una posición alejada de tu oponente en el mapa.
+	 */
 	private byte alcance;
+	/**
+	 * tipo: el tipo que puede ser la carta, básico, especial o ultimate
+	 */
 	private String tipo;
+	/**
+	 * costeVida: (Ultimates) define el coste de vida que tiene usar la carta.
+	 */
 	private byte costeVida;
+	/**
+	 * costeEnergia (Especiales) define el coste de energía que tiene usar la carta.
+	 */
 	private byte costeEnergia;
 	
-	public Carta(String nombre, String descripcion, byte puntosAtaque, byte velocidad, byte alcance,String tipo) {
-		super(nombre,descripcion);
+	/**
+	 * Constructor con el que definirémos la construcción de un objeto Carta, no se
+	 * incluyen los valores de costeVida ni de costeEnergía porque las cartas
+	 * básicas no poseen coste, pero he tenido que crear las variables internas para
+	 * poder crear los métodos de getVida y getEnergia para poder mostrar los costes
+	 * de los ultimates y especiales en la clase ListarCarta la cual tiene como
+	 * parámetro un objeto de tipo Carta.
+	 * 
+	 * @param nombre nombre de la carta
+	 * @param descripcion función que realiza
+	 * @param puntosAtaque
+	 * @param velocidad
+	 * @param alcance
+	 * @param tipo
+	 */
+
+	public Carta(String nombre, String descripcion, byte puntosAtaque, byte velocidad, byte alcance, String tipo) {
+		super(nombre, descripcion);
 		this.puntosAtaque = puntosAtaque;
 		this.velocidad = velocidad;
 		this.alcance = alcance;
@@ -73,14 +117,8 @@ public class Carta extends ElementoNombreDescripcion {
 
 	@Override
 	public String toString() {
-		return "Carta: "+ getNombre();
-				
+		return "Carta: " + getNombre();
+
 	}
-
-	
-
-	
-	
-	
 
 }

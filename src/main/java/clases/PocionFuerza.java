@@ -6,14 +6,24 @@ import java.sql.Statement;
 
 import utils.ConexionBD;
 
+/**
+ * Clase que definirá los atributos y características de la poción de fuerza.
+ * 
+ * @author toled
+ *
+ */
 public class PocionFuerza extends Consumible {
+	/**
+	 * aumentoFuerza este número será sumado al ataque de la siguiente carta que use
+	 * el jugador.
+	 */
 	private byte aumentoFuerza;
 
-	public PocionFuerza(String nombre, String descripcion, byte aumentoFuerza) {
-		super(nombre, descripcion);
-		this.aumentoFuerza = aumentoFuerza;
-	}
-
+	/**
+	 * En este constructor mediante una consulta a nuestra BBDD recogerémos la
+	 * descripción del objeto y el número en el que aumenta la fuerza de la
+	 * siguiente carta del jugador
+	 */
 	public PocionFuerza() {
 
 		Statement smt = ConexionBD.conectar();
