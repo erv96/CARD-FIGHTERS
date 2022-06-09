@@ -41,6 +41,7 @@ public class Ventana extends JFrame {
 	File main_title = new File("./songs/main_title.wav");
 	File combate_playa = new File("./songs/combate_playa.wav");
 	File instrucciones = new File("./songs/instrucciones.wav");
+	File combate_dojo = new File("./songs/combate_dojo.wav");
 
 	/**
 	 * Constructor que nos permite definir las propiedades generales de las
@@ -143,7 +144,24 @@ public class Ventana extends JFrame {
 		case "PantallaCombate":
 			musica.stop();
 			this.pantallaActual = new PantallaCombate(this, jugador, rival);
-			musica.loop(combate_playa);
+			musica.loop(combate_dojo);
+
+		default:
+			break;
+		}
+
+		this.pantallaActual.setVisible(true);
+		this.setContentPane(pantallaActual);
+	}
+	
+	public void irAPantalla(String nombrePantalla, String ganador) {
+		this.pantallaActual.setVisible(false);
+		this.pantallaActual = null;
+		switch (nombrePantalla) {
+
+		case "Resultado":
+			this.pantallaActual = new Resultado(this,ganador);
+			
 
 		default:
 			break;

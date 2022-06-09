@@ -115,7 +115,7 @@ public class Personaje extends ElementoNombreDescripcion {
 		this.setNombre(nombre);
 		this.vida = 20;
 		this.posicion = posicion;
-		this.energia = 5;
+		this.energia = 4;
 
 	}
 

@@ -70,11 +70,14 @@ public class SeleccionPersonaje extends JPanel {
 	 * En este constructor definimos el aspecto de nuestra pantalla de seleccion de
 	 * personaje, en ella hemos instroducido un JList al que le añadimos todos los
 	 * personajes disponibles gracias al método getTodos presente en la clase
-	 * Personaje, además, en esta clase realizamos el requisito de argumentos de programa, 
-	 * en la variable argumentosPersonaje guardamos los argumentos que hayamos definido con el método del main getArgs, luego de eso, 
-	 * mediante un método mouseClicked en el botón comenzar, realizamos varios ifs y comprobaciones para comprobar si el usuario ha elegido personajes o no
-	 * si no ha elegido, ninguno, y hay argumentos de programa definidos, se le mostrará un JOption que le informará que se procederá a la selección automática de 
-	 * personajes 
+	 * Personaje, además, en esta clase realizamos el requisito de argumentos de
+	 * programa, en la variable argumentosPersonaje guardamos los argumentos que
+	 * hayamos definido con el método del main getArgs, luego de eso, mediante un
+	 * método mouseClicked en el botón comenzar, realizamos varios ifs y
+	 * comprobaciones para comprobar si el usuario ha elegido personajes o no si no
+	 * ha elegido, ninguno, y hay argumentos de programa definidos, se le mostrará
+	 * un JOption que le informará que se procederá a la selección automática de
+	 * personajes
 	 * 
 	 * @param v
 	 */
@@ -183,7 +186,9 @@ public class SeleccionPersonaje extends JPanel {
 					ventana.irAPantalla("PantallaCombate", jugador, rival);
 
 				} else if (lista_Jugador.getSelectedValue() == null && lista_Rival.getSelectedValue() == null
-						&& argumentosPersonaje.length == 0) {
+						&& argumentosPersonaje.length == 0
+						|| (lista_Jugador.getSelectedValue() == null && lista_Rival.getSelectedValue() != null)
+						|| (lista_Jugador.getSelectedValue() != null && lista_Rival.getSelectedValue() == null)) {
 					JOptionPane.showMessageDialog(v,
 							"Se debe elegir tanto un personaje para el jugador como para el rival.",
 							"ERROR DE SELECCIÓN", JOptionPane.ERROR_MESSAGE);

@@ -91,7 +91,6 @@ public class PantallaCombate extends JPanel {
 		cartasListaJ.setBackground(Color.BLACK);
 		scrollPane.setViewportView(cartasListaJ);
 		cartasListaJ.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
 
 		JLabel personaje_Jugador = new JLabel(jugador.getNombre());
 		personaje_Jugador.setHorizontalAlignment(SwingConstants.CENTER);
@@ -135,17 +134,17 @@ public class PantallaCombate extends JPanel {
 		energiaRival.setFont(new Font("Personal Services", Font.PLAIN, 12));
 		energiaRival.setBounds(700, 67, 39, 31);
 		add(energiaRival);
-		
+
 		JButton usarCarta = new BotonAnimado("USAR CARTA");
 		usarCarta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Random r = new Random();
-				if(cartaElegida!=null) {
-					
-					 cartaRival = barajaRival.get(r.nextInt(barajaRival.size()));
+				if (cartaElegida != null) {
 
-		//////////// OBTENIENDO INFORMACIÓN DE LA CARTA DEL JUGADOR
+					cartaRival = barajaRival.get(r.nextInt(barajaRival.size()));
+
+					//////////// OBTENIENDO INFORMACIÓN DE LA CARTA DEL JUGADOR
 
 					if (cartaElegida.getTipo().equals("Especial")) {
 						if (energiaJ >= cartaElegida.getCosteEnergia()) {
@@ -172,15 +171,16 @@ public class PantallaCombate extends JPanel {
 							if (vidaJ > cartaElegida.getCosteVida()) {
 								System.out.println("Te preparas para atacar con: " + cartaElegida.getNombre());
 								vidaJ = (byte) (vidaJ - cartaElegida.getCosteVida());
-								System.out.println("Pierdes " + cartaElegida.getCosteVida() + " de vida por usar el movimiento");
+								System.out.println(
+										"Pierdes " + cartaElegida.getCosteVida() + " de vida por usar el movimiento");
 								vidaJugador.setText(String.valueOf(vidaJ));
 							} else {
 								vidaInsJ = true;
 							}
 						}
 					}
-					
-		////////////// OBTENIENDO INFORMACIÓN DE LA CARTA DEL RIVAL
+
+					////////////// OBTENIENDO INFORMACIÓN DE LA CARTA DEL RIVAL
 
 					if (cartaRival.getTipo().equals("Especial")) {
 						if (energiaR >= cartaRival.getCosteEnergia()) {
@@ -207,7 +207,8 @@ public class PantallaCombate extends JPanel {
 							if (vidaR > cartaRival.getCosteVida()) {
 								System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
 								vidaR = (byte) (vidaR - cartaRival.getCosteVida());
-								System.out.println("El rival ha perdido " + cartaRival.getCosteVida() + " por usar su movimiento");
+								System.out.println(
+										"El rival ha perdido " + cartaRival.getCosteVida() + " por usar su movimiento");
 								vidaRival.setText(String.valueOf(vidaR));
 
 							} else {
@@ -215,37 +216,58 @@ public class PantallaCombate extends JPanel {
 							}
 						}
 					}
-					
-		////////////// INTERCAMBIO DE GOLPES JUGADOR
+
+					////////////// INTERCAMBIO DE GOLPES JUGADOR
 
 					if (vidaInsJ == true || energiaInsJ == true) {
 						System.out.println("Coste insuficiente pierdes tu turno");
 					} else {
+						System.out.println("Usas la carta "+cartaElegida.getNombre());
+						System.out.println("Tu rival usa la carta: "+cartaRival.getNombre());
 						if (cartaElegida.getVelocidad() > cartaRival.getVelocidad()) {
 							if (cartaElegida.getNombre().equals("Bloqueo")) {
 								System.out.println("Adoptas pose de bloqueo, el ataque del rival no surte efecto");
 							} else {
-								System.out.println(
-										"Atacas primero con " + cartaElegida.getNombre() + " y haces " + cartaElegida.getPuntosAtaque());
+								System.out.println("Atacas primero con " + cartaElegida.getNombre() + " y haces "
+										+ cartaElegida.getPuntosAtaque());
 								vidaR = (byte) (vidaR - cartaElegida.getPuntosAtaque());
-								vidaRival.setText(String.valueOf(vidaR));
+								if (vidaR <= 0) {
+									vidaR = 0;
+									vidaRival.setText(String.valueOf(vidaR));
+									JOptionPane.showMessageDialog(v,
+											"¡Tu rival ha caido! Eres el ganador de este combate", "GANAS",
+											JOptionPane.INFORMATION_MESSAGE);
+									ventana.irAPantalla("Resultado",jugador.getNombre());
+								} else {
+									vidaRival.setText(String.valueOf(vidaR));
+								}
 							}
 
 						}
-						if (cartaElegida.getVelocidad() <= cartaRival.getVelocidad() && (energiaInsR == true || vidaInsR == true)) {
-							System.out.println("El rival no tiene fuerzas para ejecutar su movimiento, atacas primero con "
-									+ cartaElegida.getNombre());
+						if (cartaElegida.getVelocidad() <= cartaRival.getVelocidad()
+								&& (energiaInsR == true || vidaInsR == true)) {
+							System.out.println(
+									"El rival no tiene fuerzas para ejecutar su movimiento, atacas primero con "
+											+ cartaElegida.getNombre());
 							vidaR = (byte) (vidaR - cartaElegida.getPuntosAtaque());
-							vidaRival.setText(String.valueOf(vidaR));
+							if (vidaR <= 0) {
+								vidaR = 0;
+								vidaRival.setText(String.valueOf(vidaR));
+								JOptionPane.showMessageDialog(v,
+										"¡Tu rival ha caido! Eres el ganador de este combate", "GANAS",
+										JOptionPane.INFORMATION_MESSAGE);
+								ventana.irAPantalla("Resultado",jugador.getNombre());
+							} else {
+								vidaRival.setText(String.valueOf(vidaR));
+							}
 						}
 						if (cartaElegida.getVelocidad() == cartaRival.getVelocidad()) {
 							System.out.println("Habeis usado movimientos con la misma velocidad, nadie recibe daño");
 						}
 					}
-					
-		////////////// INTERCAMBIO DE GOLPES RIVAL
 
-					
+					////////////// INTERCAMBIO DE GOLPES RIVAL
+
 					if (vidaInsR == true || energiaInsR == true) {
 
 					} else {
@@ -256,23 +278,45 @@ public class PantallaCombate extends JPanel {
 								System.out.println("El rival ataca primero con " + cartaRival.getNombre());
 								vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
 								vidaJugador.setText(String.valueOf(vidaJ));
+								if (vidaJ <= 0) {
+									vidaJ = 0;
+									vidaJugador.setText(String.valueOf(vidaJ));
+									JOptionPane.showMessageDialog(v,
+											"¡Has caido! Tu rival ha ganado el combate", "PIERDES",
+											JOptionPane.INFORMATION_MESSAGE);
+									ventana.irAPantalla("Resultado",rival.getNombre());
+								} else {
+									vidaJugador.setText(String.valueOf(vidaJ));
+								}
 
 							}
 						}
-						if (cartaRival.getVelocidad() <= cartaElegida.getVelocidad() && (energiaInsJ == true || vidaInsJ == true)) {
+						if (cartaRival.getVelocidad() <= cartaElegida.getVelocidad()
+								&& (energiaInsJ == true || vidaInsJ == true)) {
 							System.out.println("No tienes fuerzas para ejecutar tu movimiento, el rival ataca con "
-									+ cartaRival.getNombre() + " y te hace " + cartaRival.getPuntosAtaque() + " de daño.");
+									+ cartaRival.getNombre() + " y te hace " + cartaRival.getPuntosAtaque()
+									+ " de daño.");
 							vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
-							vidaJugador.setText(String.valueOf(vidaJ));
+							if (vidaJ <= 0) {
+								vidaJ = 0;
+								vidaJugador.setText(String.valueOf(vidaJ));
+								JOptionPane.showMessageDialog(v,
+										"¡Has caido! Tu rival ha ganado el combate", "PIERDES",
+										JOptionPane.INFORMATION_MESSAGE);
+								ventana.irAPantalla("Resultado",rival.getNombre());
+							} else {
+								vidaJugador.setText(String.valueOf(vidaJ));
+							}
 						}
 					}
-					
-					barajaRival.remove(cartaRival);
 
-					
-					cartaElegida=null;
-				}else {
-					JOptionPane.showMessageDialog(v,"Debes elegir una carta primero para usarla","ERROR DE SELECCIÓN DE CARTA",JOptionPane.ERROR_MESSAGE);
+					barajaRival.remove(cartaRival);
+					barajaJugador.remove(cartaElegida);
+
+					cartaElegida = null;
+				} else {
+					JOptionPane.showMessageDialog(v, "Debes elegir una carta primero para usarla",
+							"ERROR DE SELECCIÓN DE CARTA", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -290,7 +334,7 @@ public class PantallaCombate extends JPanel {
 		ListaCarta cartita = null;
 
 		for (byte i = 0; i < barajaJugador.size(); i++) {
-			cartita = new ListaCarta(barajaJugador.get(i),this);
+			cartita = new ListaCarta(barajaJugador.get(i), this);
 			cartasListaJ.add(cartita);
 		}
 
@@ -332,175 +376,22 @@ public class PantallaCombate extends JPanel {
 		for (byte i = 0; i < mapa.getMapa().length; i++) {
 			campoMapa.add(new Mapa(mapa.getMapa()[i]));
 		}
-		
-		
-		
+
 		JLabel manchita = new JLabel("");
-		manchita.setIcon(new ImageIcon("C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha_small.png"));
+		manchita.setIcon(new ImageIcon(
+				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha_small.png"));
 		manchita.setBounds(85, 120, 576, 312);
 		add(manchita);
-		
-		
-
-		
 
 	}
 
-
-	public byte[] pelear(Personaje jugador, Personaje rival, Carta elegida) {
-		Random r = new Random();
-		ArrayList<Carta> barajaR = rival.getBaraja();
-		byte vidaJ = jugador.getVida();
-		byte vidaR = rival.getVida();
-		byte energiaR = rival.getEnergia();
-		byte energiaJ = jugador.getEnergia();
-		boolean energiaInsR = false;
-		boolean vidaInsR = false;
-		boolean energiaInsJ = false;
-		boolean vidaInsJ = false;
-
-		System.out.println("EMPIEZA EL COMBATE");
-
-		System.out.println("Jugador_vida \t" + vidaJ);
-		System.out.println("Jugador_energia \t" + energiaJ + "\n");
-		System.out.println("Rival_vida \t" + vidaR);
-		System.out.println("Rival_energia \t" + energiaR + "\n");
-
-		Carta cartaRival = barajaR.get(r.nextInt(barajaR.size()));
-
-		//////////// OBTENIENDO INFORMACIÓN DE LA CARTA DEL JUGADOR
-
-		if (elegida.getTipo().equals("Especial")) {
-			if (energiaJ >= elegida.getCosteEnergia()) {
-				System.out.println("Te preparas para atacar con: " + elegida.getNombre());
-				energiaJ = (byte) (energiaJ - elegida.getCosteEnergia());
-
-			} else {
-				energiaInsJ = true;
-			}
-		}
-
-		if (elegida.getTipo().equals("Ultimate")) {
-			if (elegida.getCosteEnergia() > 0) {
-				if (energiaJ >= elegida.getCosteEnergia()) {
-					System.out.println("Te preparas para atacar con: " + elegida.getNombre());
-					energiaJ = (byte) (energiaJ - elegida.getCosteEnergia());
-
-				} else {
-					energiaInsJ = true;
-				}
-			} else {
-				if (vidaJ > elegida.getCosteVida()) {
-					System.out.println("Te preparas para atacar con: " + elegida.getNombre());
-					vidaJ = (byte) (vidaJ - elegida.getCosteVida());
-					System.out.println("Pierdes " + elegida.getCosteVida() + " de vida por usar el movimiento");
-
-				} else {
-					vidaInsJ = true;
-				}
-			}
-		}
-
-		////////////// OBTENIENDO INFORMACIÓN DE LA CARTA DEL RIVAL
-
-		if (cartaRival.getTipo().equals("Especial")) {
-			if (energiaR >= cartaRival.getCosteEnergia()) {
-				System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
-				energiaR = (byte) (energiaR - cartaRival.getCosteEnergia());
-
-			} else {
-				energiaInsR = true;
-			}
-		}
-
-		if (cartaRival.getTipo().equals("Ultimate")) {
-			if (cartaRival.getCosteEnergia() > 0) {
-				if (energiaR >= cartaRival.getCosteEnergia()) {
-					System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
-					energiaR = (byte) (energiaR - cartaRival.getCosteEnergia());
-
-				} else {
-					energiaInsR = true;
-				}
-			} else {
-				if (vidaR > cartaRival.getCosteVida()) {
-					System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
-					vidaR = (byte) (vidaR - cartaRival.getCosteVida());
-					System.out.println("El rival ha perdido " + cartaRival.getCosteVida() + " por usar su movimiento");
-
-				} else {
-					vidaInsR = true;
-				}
-			}
-		}
-
-		// INTERCAMBIO DE GOLPES JUGADOR
-
-		if (vidaInsJ == true || energiaInsJ == true) {
-			System.out.println("Coste insuficiente pierdes tu turno");
-		} else {
-			if (elegida.getVelocidad() > cartaRival.getVelocidad()) {
-				if (elegida.getNombre().equals("Bloqueo")) {
-					System.out.println("Adoptas pose de bloqueo, el ataque del rival no surte efecto");
-				} else {
-					System.out.println(
-							"Atacas primero con " + elegida.getNombre() + " y haces " + elegida.getPuntosAtaque());
-					vidaR = (byte) (vidaR - elegida.getPuntosAtaque());
-				}
-
-			}
-			if (elegida.getVelocidad() <= cartaRival.getVelocidad() && (energiaInsR == true || vidaInsR == true)) {
-				System.out.println("El rival no tiene fuerzas para ejecutar su movimiento, atacas primero con "
-						+ elegida.getNombre());
-				vidaR = (byte) (vidaR - elegida.getPuntosAtaque());
-			}
-			if (elegida.getVelocidad() == cartaRival.getVelocidad()) {
-				System.out.println("Habeis usado movimientos con la misma velocidad, nadie recibe daño");
-			}
-		}
-
-		// INTERCAMBIO DE GOLPES RIVAL
-
-		if (vidaInsR == true || energiaInsR == true) {
-
-		} else {
-			if (cartaRival.getVelocidad() > elegida.getVelocidad()) {
-				if (cartaRival.getNombre().equals("Bloqueo")) {
-					System.out.println("El rival adopta pose de bloqueo, tu ataque no surte efecto");
-				} else {
-					System.out.println("El rival ataca primero con " + cartaRival.getNombre());
-					vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
-				}
-			}
-			if (cartaRival.getVelocidad() <= elegida.getVelocidad() && (energiaInsJ == true || vidaInsJ == true)) {
-				System.out.println("No tienes fuerzas para ejecutar tu movimiento, el rival ataca con "
-						+ cartaRival.getNombre() + " y te hace " + cartaRival.getPuntosAtaque() + " de daño.");
-				vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
-			}
-		}
-
-		System.out.println("\nFINAL DEL TURNO\n");
-
-		System.out.println("Vida jugador: " + vidaJ);
-		System.out.println("Energía jugador: " + energiaJ);
-		System.out.println("Vida rival: " + vidaR);
-		System.out.println("Energía rival: " + energiaR + "\n");
-
-		System.out.println("Se ha eliminado la " + cartaRival + " del mazo del rival" + "\n");
-		barajaR.remove(cartaRival);
-		byte[] vidas = { vidaJ, vidaR };
-		return vidas;
-
-	}
 
 	public void setCartaElegida(Carta cartaElegida) {
 		this.cartaElegida = cartaElegida;
 	}
 
-
 	public Carta getCartaElegida() {
 		return cartaElegida;
 	}
-	
-	
+
 }
