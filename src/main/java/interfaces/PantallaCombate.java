@@ -10,6 +10,7 @@ import clases.PocionEnergia;
 import clases.PocionFuerza;
 import clases.PocionVida;
 import componentesVisuales.BotonAnimado;
+import componentesVisuales.BotonAnimadoNegro;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -155,6 +156,8 @@ public class PantallaCombate extends JPanel {
 				if (cartaElegida != null) {
 
 					System.out.println("\n-------------TURNO: " + turnos + "-------------\n");
+					JOptionPane.showMessageDialog(v, "COMIENZA EL TURNO " + turnos, "CONTADOR DE TURNOS",
+							JOptionPane.INFORMATION_MESSAGE);
 
 					cartaRival = barajaRival.get(r.nextInt(barajaRival.size()));
 
@@ -230,18 +233,12 @@ public class PantallaCombate extends JPanel {
 							}
 						}
 					}
-					
+
 					distanciaJugadores = (byte) (posicionJ - posicionR);
 					if (distanciaJugadores < 0) {
 						distanciaJugadores = (byte) (distanciaJugadores * -1);
 					}
 
-					if (cartaElegida.getVelocidad() == cartaRival.getVelocidad()
-							&& cartaElegida.getAlcance() == distanciaJugadores
-							&& cartaRival.getAlcance() == distanciaJugadores) {
-						System.out.println(
-								"Habeis usado movimientos con la misma velocidad y mismo rango, nadie recibe daño");
-					}
 					if (cartaElegida.getVelocidad() == cartaRival.getVelocidad()
 							&& cartaElegida.getAlcance() >= distanciaJugadores
 							&& cartaRival.getAlcance() < distanciaJugadores) {
@@ -258,7 +255,7 @@ public class PantallaCombate extends JPanel {
 							vidaRival.setText(String.valueOf(vidaR));
 						}
 					}
-					
+
 					if (cartaElegida.getVelocidad() == cartaRival.getVelocidad()
 							&& cartaRival.getAlcance() >= distanciaJugadores
 							&& cartaElegida.getAlcance() < distanciaJugadores) {
@@ -276,12 +273,19 @@ public class PantallaCombate extends JPanel {
 						}
 					}
 
-					////////////// INTERCAMBIO DE GOLPES JUGADOR
+					if (cartaElegida.getVelocidad() == cartaRival.getVelocidad()
+							&& cartaRival.getAlcance() >= distanciaJugadores
+							&& cartaElegida.getAlcance() >= distanciaJugadores) {
+						System.out.println(
+								"Habeis usado movimientos con la misma velocidad y dentro de su rango de impacto, nadie recibe daño");
+					}
 
-					
+					////////////// INTERCAMBIO DE GOLPES JUGADOR
 
 					if (vidaInsJ == true || energiaInsJ == true) {
 						System.out.println("Coste insuficiente pierdes tu turno");
+						System.out.println(cartaRival.getNombre());
+						System.out.println(cartaElegida.getNombre());
 					} else {
 
 						System.out.println("Usas la carta " + cartaElegida.getNombre() + " de daño "
@@ -363,6 +367,9 @@ public class PantallaCombate extends JPanel {
 					////////////// INTERCAMBIO DE GOLPES RIVAL
 
 					if (vidaInsR == true || energiaInsR == true) {
+						System.out.println("Coste insuficiente el rival pierde su turno");
+						System.out.println(cartaRival.getNombre());
+						System.out.println(cartaElegida.getNombre());
 
 					} else {
 						if (cartaRival.getNombre().equals("Bloqueo")) {
@@ -433,6 +440,8 @@ public class PantallaCombate extends JPanel {
 
 					barajaRival.remove(cartaRival);
 					barajaJugador.remove(cartaElegida);
+					energiaInsJ = false;
+					energiaInsR = false;
 
 					cartaElegida = null;
 				} else {
@@ -451,7 +460,8 @@ public class PantallaCombate extends JPanel {
 			campoMapa.add(new Mapa(mapa.getMapa()[i]));
 		}
 
-		JButton derecha = new JButton("Derecha");
+		JButton derecha = new BotonAnimadoNegro("Derecha");
+		derecha.setText("DERECHA");
 		derecha.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -475,6 +485,8 @@ public class PantallaCombate extends JPanel {
 				// OBTENIENDO INFROMACIÓN DE LA CARTA DEL RIVAL
 
 				System.out.println("\n-------------TURNO: " + turnos + "-------------\n");
+				JOptionPane.showMessageDialog(v, "COMIENZA EL TURNO " + turnos, "CONTADOR DE TURNOS",
+						JOptionPane.INFORMATION_MESSAGE);
 
 				cartaRival = barajaRival.get(r.nextInt(barajaRival.size()));
 
@@ -553,7 +565,8 @@ public class PantallaCombate extends JPanel {
 		derecha.setBounds(604, 263, 175, 75);
 		add(derecha);
 
-		JButton izquierda = new JButton("Izquierda");
+		JButton izquierda = new BotonAnimadoNegro("Izquierda");
+		izquierda.setText("IZQUIERDA");
 		izquierda.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -576,6 +589,8 @@ public class PantallaCombate extends JPanel {
 				// OBTENIENDO INFROMACIÓN DE LA CARTA DEL RIVAL
 
 				System.out.println("\n-------------TURNO: " + turnos + "-------------\n");
+				JOptionPane.showMessageDialog(v, "COMIENZA EL TURNO " + turnos, "CONTADOR DE TURNOS",
+						JOptionPane.INFORMATION_MESSAGE);
 
 				cartaRival = barajaRival.get(r.nextInt(barajaRival.size()));
 
@@ -656,6 +671,18 @@ public class PantallaCombate extends JPanel {
 		usarCarta.setBounds(299, 291, 170, 21);
 		add(usarCarta);
 
+		JLabel manchaDerecha = new JLabel("");
+		manchaDerecha.setIcon(new ImageIcon(
+				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\manchaBlanca.png"));
+		manchaDerecha.setBounds(460, 190, 644, 169);
+		add(manchaDerecha);
+
+		JLabel manchaIzquierda = new JLabel("");
+		manchaIzquierda.setIcon(new ImageIcon(
+				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\manchaBlancaInv.png"));
+		manchaIzquierda.setBounds(-260, 190, 644, 169);
+		add(manchaIzquierda);
+
 		JLabel fondoCartas = new JLabel("");
 		fondoCartas.setIcon(new ImageIcon(
 				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha.png"));
@@ -671,7 +698,8 @@ public class PantallaCombate extends JPanel {
 			cartasListaJ.add(cartita);
 		}
 
-		JButton imprimir = new JButton("Imprimir jugador y rival");
+		JButton imprimir = new BotonAnimado("Imprimir jugador y rival");
+		imprimir.setText("IMPRIMIR COMBATE");
 		imprimir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -689,25 +717,32 @@ public class PantallaCombate extends JPanel {
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		imprimir.setBounds(308, 38, 141, 21);
+		imprimir.setBounds(265, 26, 245, 21);
 		add(imprimir);
 
-		JLabel manchaInfoR = new JLabel("");
-		manchaInfoR.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\splat.png"));
-		manchaInfoR.setBounds(250, -299, 1526, 580);
-		add(manchaInfoR);
+		JLabel impresionMancha = new JLabel("");
+		impresionMancha.setHorizontalAlignment(SwingConstants.CENTER);
+		impresionMancha.setIcon(new ImageIcon(
+				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha_small.png"));
+		impresionMancha.setBounds(75, -68, 588, 148);
+		add(impresionMancha);
 
-		JLabel manchaInfoP = new JLabel("");
-		manchaInfoP.setIcon(new ImageIcon(
+		JLabel manchaInfoRival = new JLabel("");
+		manchaInfoRival.setIcon(new ImageIcon(
 				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\splat.png"));
-		manchaInfoP.setBounds(-450, -300, 1526, 580);
-		add(manchaInfoP);
+		manchaInfoRival.setBounds(250, -299, 1526, 580);
+		add(manchaInfoRival);
+
+		JLabel manchaInfoJugador = new JLabel("");
+		manchaInfoJugador.setIcon(new ImageIcon(
+				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\splat.png"));
+		manchaInfoJugador.setBounds(-450, -300, 1526, 580);
+		add(manchaInfoJugador);
 
 		JLabel manchita = new JLabel("");
 		manchita.setIcon(new ImageIcon(
 				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha_small.png"));
-		manchita.setBounds(85, 120, 576, 312);
+		manchita.setBounds(85, 120, 612, 312);
 		add(manchita);
 
 	}
