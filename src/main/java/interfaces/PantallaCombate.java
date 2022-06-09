@@ -91,7 +91,12 @@ public class PantallaCombate extends JPanel {
 		cartasListaJ.setBackground(Color.BLACK);
 		scrollPane.setViewportView(cartasListaJ);
 		cartasListaJ.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		if(jugador.getNombre().equals(rival.getNombre())) {
+			jugador.setNombre(jugador.getNombre()+" (J)");
+			rival.setNombre(rival.getNombre()+" (R)");
 
+		}
 		JLabel personaje_Jugador = new JLabel(jugador.getNombre());
 		personaje_Jugador.setHorizontalAlignment(SwingConstants.CENTER);
 		personaje_Jugador.setForeground(Color.WHITE);

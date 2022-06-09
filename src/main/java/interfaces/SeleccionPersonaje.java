@@ -186,7 +186,8 @@ public class SeleccionPersonaje extends JPanel {
 					ventana.irAPantalla("PantallaCombate", jugador, rival);
 
 				} else if (lista_Jugador.getSelectedValue() == null && lista_Rival.getSelectedValue() == null
-						&& argumentosPersonaje.length == 0
+						&& (argumentosPersonaje.length == 0 || argumentosPersonaje.length <= 3
+								|| argumentosPersonaje.length > 4)
 						|| (lista_Jugador.getSelectedValue() == null && lista_Rival.getSelectedValue() != null)
 						|| (lista_Jugador.getSelectedValue() != null && lista_Rival.getSelectedValue() == null)) {
 					JOptionPane.showMessageDialog(v,
@@ -194,7 +195,7 @@ public class SeleccionPersonaje extends JPanel {
 							"ERROR DE SELECCIÓN", JOptionPane.ERROR_MESSAGE);
 				}
 				if (lista_Jugador.getSelectedValue() == null && lista_Rival.getSelectedValue() == null
-						&& argumentosPersonaje.length != 0) {
+						&& argumentosPersonaje.length == 4) {
 					String jugadorArg = "";
 					String rivalArg = "";
 					for (byte i = 0; i < argumentosPersonaje.length; i++) {
@@ -216,10 +217,11 @@ public class SeleccionPersonaje extends JPanel {
 					ventana.irAPantalla("PantallaCombate", jugador, rival);
 				}
 
-				if (argumentosPersonaje.length == 0 && lista_Jugador.getSelectedValue() == null
+				if ((argumentosPersonaje.length == 0 || argumentosPersonaje.length <= 3
+						|| argumentosPersonaje.length > 4) && lista_Jugador.getSelectedValue() == null
 						&& lista_Rival.getSelectedValue() == null) {
 					JOptionPane.showMessageDialog(v,
-							"No hay argumentos disponibles para la selección por favor elije un personaje jugador y rival.",
+							"No hay argumentos disponibles, son insuficientes o has puesto demasiados para la selección, por favor elije un personaje jugador y rival.",
 							"ERROR SELECCIÓN POR ARGUMENTOS", JOptionPane.ERROR_MESSAGE);
 				}
 

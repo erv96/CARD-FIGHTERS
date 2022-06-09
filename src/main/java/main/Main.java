@@ -36,6 +36,7 @@ public class Main {
 		//IGUALO EL ARRAY DE STRING SAVEDARGS A LOS ARGUMENTOS DE PROGRAMA
 		savedArgs = args;
 		
+		System.out.println(savedArgs.length);
 
 		// DOCUMENTAR TODAS LAS CLASES
 		// ENCIMA DE CADA VARIABLE INTERNA SE PONE PARA QUE SIRVE.

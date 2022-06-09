@@ -49,7 +49,7 @@ public class Resultado extends JPanel {
 		JLabel nombreGanador = new JLabel(g);
 		nombreGanador.setFont(new Font("Personal Services", Font.PLAIN, 45));
 		nombreGanador.setHorizontalAlignment(SwingConstants.CENTER);
-		nombreGanador.setBounds(243, 307, 284, 69);
+		nombreGanador.setBounds(243, 296, 284, 80);
 		add(nombreGanador);
 		
 		JLabel pantallaGanador = new JLabel("GANADOR");
