@@ -35,13 +35,51 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 
+/**
+ * Clase que nos permite elegir nuestro personaje y el del rival, en esta clase
+ * usamos el método definido en personaje llamado getTodos, el cual nos devuelve
+ * un ArrayList con toda la lista de personajes disponibles, además, en esta
+ * clase utilizamos los argumentos de programa para realizar una selección
+ * automática de personaje si ninguno es elegido por el usuario.
+ * 
+ * @author toled
+ *
+ */
 public class SeleccionPersonaje extends JPanel {
+	/**
+	 * La variable interna ventana nos permite utilizar el método irAPantalla dentro
+	 * del constructor de instrucciones para cambiar de pantalla y mantener las
+	 * características generales definidas en las clase Ventana
+	 */
 	private Ventana ventana;
+	/**
+	 * La variable jugador nos permite definir el personaje elegido por el jugador.
+	 */
 	private Personaje jugador;
+	/**
+	 * La variable rival nos permite definir el personaje elegido para el rival.
+	 */
 	private Personaje rival;
-	private String[] argumentosPersonaje = Main.getArgs();
+	/**
+	 * En este array de String almacenamos los argumentos de programa definidos en
+	 * la variable "args" de nuestro main.
+	 */
+	private String[] argumentosPersonaje;
 
+	/**
+	 * En este constructor definimos el aspecto de nuestra pantalla de seleccion de
+	 * personaje, en ella hemos instroducido un JList al que le añadimos todos los
+	 * personajes disponibles gracias al método getTodos presente en la clase
+	 * Personaje, además, en esta clase realizamos el requisito de argumentos de programa, 
+	 * en la variable argumentosPersonaje guardamos los argumentos que hayamos definido con el método del main getArgs, luego de eso, 
+	 * mediante un método mouseClicked en el botón comenzar, realizamos varios ifs y comprobaciones para comprobar si el usuario ha elegido personajes o no
+	 * si no ha elegido, ninguno, y hay argumentos de programa definidos, se le mostrará un JOption que le informará que se procederá a la selección automática de 
+	 * personajes 
+	 * 
+	 * @param v
+	 */
 	public SeleccionPersonaje(final Ventana v) {
+		this.argumentosPersonaje = Main.getArgs();
 		this.ventana = v;
 		setLayout(null);
 
@@ -145,7 +183,7 @@ public class SeleccionPersonaje extends JPanel {
 					ventana.irAPantalla("PantallaCombate", jugador, rival);
 
 				} else if (lista_Jugador.getSelectedValue() == null && lista_Rival.getSelectedValue() == null
-						&& argumentosPersonaje.length == 0){
+						&& argumentosPersonaje.length == 0) {
 					JOptionPane.showMessageDialog(v,
 							"Se debe elegir tanto un personaje para el jugador como para el rival.",
 							"ERROR DE SELECCIÓN", JOptionPane.ERROR_MESSAGE);
@@ -173,7 +211,8 @@ public class SeleccionPersonaje extends JPanel {
 					ventana.irAPantalla("PantallaCombate", jugador, rival);
 				}
 
-				if (argumentosPersonaje.length == 0 && lista_Jugador.getSelectedValue() == null && lista_Rival.getSelectedValue() == null) {
+				if (argumentosPersonaje.length == 0 && lista_Jugador.getSelectedValue() == null
+						&& lista_Rival.getSelectedValue() == null) {
 					JOptionPane.showMessageDialog(v,
 							"No hay argumentos disponibles para la selección por favor elije un personaje jugador y rival.",
 							"ERROR SELECCIÓN POR ARGUMENTOS", JOptionPane.ERROR_MESSAGE);

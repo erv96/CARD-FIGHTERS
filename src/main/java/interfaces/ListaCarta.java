@@ -10,6 +10,8 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.SwingConstants;
@@ -40,6 +42,8 @@ public class ListaCarta extends JPanel {
 	 * Esta variable representa cada carta del ArrayList de baraja del jugador.
 	 */
 	private Carta elegida;
+	private PantallaCombate pantallaC;
+	private Ventana ventana;
 
 	/**
 	 * En el siguiente constructor definimos la forma y el aspecto que tendrán las
@@ -54,9 +58,10 @@ public class ListaCarta extends JPanel {
 	 *          irá iterando hasta que toda la baraja este definida.
 	 */
 
-	public ListaCarta(final Carta c) {
+	public ListaCarta(final Carta c, final PantallaCombate combate) {
 		setBackground(Color.BLACK);
 		this.elegida = c;
+		this.pantallaC = combate;
 		setLayout(null);
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -115,17 +120,23 @@ public class ListaCarta extends JPanel {
 		numero_Alcance.setBounds(65, 65, 45, 13);
 		panel.add(numero_Alcance);
 
-		final JButton usarButton = new JButton("Usar");
-		usarButton.addMouseListener(new MouseAdapter() {
+		final JButton elegir = new JButton("Elegir");
+		elegir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
+				if(pantallaC.getCartaElegida()==null) {
+					pantallaC.setCartaElegida(c);
+					setVisible(false);
+				}else if(pantallaC.getCartaElegida()!=null) {
+					JOptionPane.showMessageDialog(combate,"Ya hay una carta elegida: "+pantallaC.getCartaElegida(),"Carta ya elegida",JOptionPane.INFORMATION_MESSAGE);
+				}
+				
 
 			}
 		});
-		usarButton.setFont(new Font("Tahoma", Font.BOLD, 9));
-		usarButton.setBounds(10, 135, 100, 21);
-		panel.add(usarButton);
+		elegir.setFont(new Font("Tahoma", Font.BOLD, 9));
+		elegir.setBounds(10, 135, 100, 21);
+		panel.add(elegir);
 
 		if (elegida.getTipo().equals("Ultimate")) {
 
@@ -178,9 +189,5 @@ public class ListaCarta extends JPanel {
 		fondo.setBounds(10, 58, 124, 187);
 		panel.add(fondo);
 
-	}
-
-	public Carta getElegida() {
-		return elegida;
 	}
 }

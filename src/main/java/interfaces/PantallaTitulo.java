@@ -12,7 +12,11 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+/**
+ * 
+ * @author toled
+ *
+ */
 public class PantallaTitulo extends JPanel {
 	private Ventana ventana;
 	

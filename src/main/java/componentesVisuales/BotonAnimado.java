@@ -71,6 +71,8 @@ public class BotonAnimado extends JButton {
 		this.setForeground(Color.WHITE);
 		this.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
 		this.setFocusable(false);
+		this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
 	}
 
 }
