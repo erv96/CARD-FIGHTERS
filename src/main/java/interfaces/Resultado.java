@@ -105,7 +105,7 @@ public class Resultado extends JPanel {
 		nombreGanador.setFont(new Font("Personal Services", Font.PLAIN, 45));
 		nombreGanador.setForeground(Color.black);
 		nombreGanador.setHorizontalAlignment(SwingConstants.CENTER);
-		nombreGanador.setBounds(257, 273, 284, 80);
+		nombreGanador.setBounds(250, 273, 284, 80);
 		add(nombreGanador);
 
 		JLabel pantallaGanador = new JLabel("GANADOR");

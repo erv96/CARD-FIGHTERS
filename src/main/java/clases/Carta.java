@@ -34,17 +34,14 @@ public class Carta extends ElementoNombreDescripcion {
 	 * tipo: el tipo que puede ser la carta, básico, especial o ultimate
 	 */
 	private String tipo;
-	/**
-	 * costeVida: (Ultimates) define el coste de vida que tiene usar la carta.
-	 */
-	//private byte costeVida;
-	/**
-	 * costeEnergia (Especiales) define el coste de energía que tiene usar la carta.
-	 */
-	private byte costeEnergia;
 	
+	/**
+	 * Introduzco en esta clase un objeto de tipo ultimate para poder heredar sus métodos y poder mostrar los costes de vida en la pantalla ListaCarta
+	 */
 	private Ultimate heredarMetodoVida;
-	
+	/**
+	 * Introduzco en esta clase un objeto de tipo especial para poder heredar sus métodos y poder mostrar los costes de energia en la pantalla ListaCarta
+	 */
 	private Especial heredarMetodoEnergia;
 
 	/**
@@ -69,13 +66,21 @@ public class Carta extends ElementoNombreDescripcion {
 		this.velocidad = velocidad;
 		this.alcance = alcance;
 		this.tipo = tipo;
-		this.costeEnergia = 0;
 	}
-
+	
+	/**
+	 * Metodo para retornar el coste de vida con el método del objeto ultimate getCosteVida
+	 * @return
+	 */
 	public byte getCosteVida() {
 		return heredarMetodoVida.getCosteVida();
 	}
-
+	
+	
+	/**
+	 * Metodo para retornar el costeEnergia con el método del objeto especial getCosteEnergia
+	 * @return
+	 */
 	public byte getCosteEnergia() {
 		return heredarMetodoEnergia.getCosteEnergia();
 	}
