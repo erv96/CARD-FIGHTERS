@@ -50,10 +50,10 @@ public class PantallaCombate extends JPanel {
 	private byte vidaR;
 	private byte energiaR;
 	private byte energiaJ;
-	private boolean energiaInsR = false;
-	private boolean vidaInsR = false;
-	private boolean energiaInsJ = false;
-	private boolean vidaInsJ = false;
+	private boolean energiaInsR;
+	private boolean vidaInsR;
+	private boolean energiaInsJ;
+	private boolean vidaInsJ;
 	private byte posicionJ;
 	private byte posicionR;
 	private ArrayList<Carta> barajaRival;
@@ -76,6 +76,10 @@ public class PantallaCombate extends JPanel {
 		this.energiaJ = jugador.getEnergia();
 		this.energiaR = rival.getEnergia();
 		this.barajaRival = rival.getBaraja();
+		this.energiaInsJ = false;
+		this.energiaInsR = false;
+		this.vidaInsJ = false;
+		this.vidaInsR = false;
 		this.posicionJ = 2;
 		this.posicionR = 5;
 		this.turnos = 1;
@@ -166,8 +170,14 @@ public class PantallaCombate extends JPanel {
 					if (cartaElegida.getTipo().equals("Especial")) {
 						if (energiaJ >= cartaElegida.getCosteEnergia()) {
 							System.out.println("Te preparas para atacar con: " + cartaElegida.getNombre());
+							JOptionPane.showMessageDialog(v,
+									"Te preparas para atacar con el especial: " + cartaElegida.getNombre(),
+									"ACCIONES JUGADOR", JOptionPane.INFORMATION_MESSAGE);
 							energiaJ = (byte) (energiaJ - cartaElegida.getCosteEnergia());
 							energiaJugador.setText(String.valueOf(energiaJ));
+							JOptionPane.showMessageDialog(v,
+									"Tu energía se reduce en " + cartaElegida.getCosteEnergia(), "ACCIONES JUGADOR",
+									JOptionPane.INFORMATION_MESSAGE);
 
 						} else {
 							energiaInsJ = true;
@@ -178,19 +188,29 @@ public class PantallaCombate extends JPanel {
 						if (cartaElegida.getCosteEnergia() > 0) {
 							if (energiaJ >= cartaElegida.getCosteEnergia()) {
 								System.out.println("Te preparas para atacar con: " + cartaElegida.getNombre());
+								JOptionPane.showMessageDialog(v,
+										"Te preparas para atacar con el ultimate: " + cartaElegida.getNombre(),
+										"ACCIONES JUGADOR", JOptionPane.INFORMATION_MESSAGE);
 								energiaJ = (byte) (energiaJ - cartaElegida.getCosteEnergia());
 								energiaJugador.setText(String.valueOf(energiaJ));
-
+								JOptionPane.showMessageDialog(v,
+										"Tu energía se reduce en " + cartaElegida.getCosteEnergia(), "ACCIONES JUGADOR",
+										JOptionPane.INFORMATION_MESSAGE);
 							} else {
 								energiaInsJ = true;
 							}
 						} else {
 							if (vidaJ > cartaElegida.getCosteVida()) {
-								System.out.println("Te preparas para atacar con: " + cartaElegida.getNombre());
+								JOptionPane.showMessageDialog(v,
+										"Te preparas para atacar con el ultimate: " + cartaElegida.getNombre()
+												+ " pierdes " + cartaElegida.getCosteVida() + " por usarlo",
+										"ACCIONES JUGADOR", JOptionPane.INFORMATION_MESSAGE);
 								vidaJ = (byte) (vidaJ - cartaElegida.getCosteVida());
 								System.out.println(
 										"Pierdes " + cartaElegida.getCosteVida() + " de vida por usar el movimiento");
 								vidaJugador.setText(String.valueOf(vidaJ));
+								JOptionPane.showMessageDialog(v, "Tu vida se reduce en " + cartaElegida.getCosteVida(),
+										"ACCIONES JUGADOR", JOptionPane.INFORMATION_MESSAGE);
 							} else {
 								vidaInsJ = true;
 							}
@@ -201,9 +221,18 @@ public class PantallaCombate extends JPanel {
 
 					if (cartaRival.getTipo().equals("Especial")) {
 						if (energiaR >= cartaRival.getCosteEnergia()) {
-							System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
+							System.out.println(
+									"El rival se prepara para atacar con el especial: " + cartaRival.getNombre());
+							JOptionPane.showMessageDialog(v,
+									"Tu rival prepara su especial : " + cartaRival.getNombre() + "\nAtaque: "
+											+ cartaRival.getPuntosAtaque() + "\nVelocidad: " + cartaRival.getVelocidad()
+											+ "\nAlcance: " + cartaRival.getAlcance(),
+									"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 							energiaR = (byte) (energiaR - cartaRival.getCosteEnergia());
 							energiaRival.setText(String.valueOf(energiaR));
+							JOptionPane.showMessageDialog(v,
+									"La energía del rival se reduce en " + cartaRival.getCosteEnergia(),
+									"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 
 						} else {
 							energiaInsR = true;
@@ -214,8 +243,17 @@ public class PantallaCombate extends JPanel {
 						if (cartaRival.getCosteEnergia() > 0) {
 							if (energiaR >= cartaRival.getCosteEnergia()) {
 								System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
+								JOptionPane.showMessageDialog(v,
+										"Tu rival usa el ultaimte : " + cartaRival.getNombre() + "\nAtaque: "
+												+ cartaRival.getPuntosAtaque() + "\nVelocidad: "
+												+ cartaRival.getVelocidad() + "\nAlcance: " + cartaRival.getAlcance(),
+										"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
+
 								energiaR = (byte) (energiaR - cartaRival.getCosteEnergia());
 								energiaRival.setText(String.valueOf(energiaR));
+								JOptionPane.showMessageDialog(v,
+										"La energía del rival se reduce en " + cartaRival.getCosteEnergia(),
+										"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 
 							} else {
 								energiaInsR = true;
@@ -227,6 +265,9 @@ public class PantallaCombate extends JPanel {
 								System.out.println(
 										"El rival ha perdido " + cartaRival.getCosteVida() + " por usar su movimiento");
 								vidaRival.setText(String.valueOf(vidaR));
+								JOptionPane.showMessageDialog(v,
+										"La vida del rival se reduce en " + cartaRival.getCosteVida(), "ACCIONES RIVAL",
+										JOptionPane.INFORMATION_MESSAGE);
 
 							} else {
 								vidaInsR = true;
@@ -234,16 +275,25 @@ public class PantallaCombate extends JPanel {
 						}
 					}
 
+					// CALCULANDO DISTANCIA ENTRE JUGADORES.
+
 					distanciaJugadores = (byte) (posicionJ - posicionR);
 					if (distanciaJugadores < 0) {
 						distanciaJugadores = (byte) (distanciaJugadores * -1);
 					}
+
+					// SITUACIONES DE EMPATE, CON INSUFICIENCIA DE RANGO POR PARTE DEL RIVAL O POR
+					// PARTE DEL JUGADOR
 
 					if (cartaElegida.getVelocidad() == cartaRival.getVelocidad()
 							&& cartaElegida.getAlcance() >= distanciaJugadores
 							&& cartaRival.getAlcance() < distanciaJugadores) {
 						System.out.println(
 								"Habeis usado movimientos con la misma velocidad pero tu movimiento tiene más alcance que el del rival, tu ataque impacta");
+						JOptionPane.showMessageDialog(v,
+								"Habeis usado movimientos con la misma velocidad pero tu movimiento tiene más alcance que el del rival, tu ataque "
+										+ cartaElegida.getNombre() + " impacta",
+								"ACCIONES JUGADOR", JOptionPane.INFORMATION_MESSAGE);
 						vidaR = (byte) (vidaR - cartaElegida.getPuntosAtaque());
 						if (vidaR <= 0) {
 							vidaR = 0;
@@ -261,6 +311,10 @@ public class PantallaCombate extends JPanel {
 							&& cartaElegida.getAlcance() < distanciaJugadores) {
 						System.out.println(
 								"Habeis usado movimientos con la misma velocidad pero el movimiento de tu rival tiene más alcance que el tuyo, su ataque impacta");
+						JOptionPane.showMessageDialog(v,
+								"Habeis usado movimientos con la misma velocidad pero el movimiento de tu rival tiene más alcance que el tuyo, su ataque "
+										+ cartaRival.getNombre() + " impacta",
+								"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 						vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
 						if (vidaJ <= 0) {
 							vidaJ = 0;
@@ -278,12 +332,24 @@ public class PantallaCombate extends JPanel {
 							&& cartaElegida.getAlcance() >= distanciaJugadores) {
 						System.out.println(
 								"Habeis usado movimientos con la misma velocidad y dentro de su rango de impacto, nadie recibe daño");
+						JOptionPane.showMessageDialog(v,
+								"Habeis usado movimientos con la misma velocidad y dentro de su rango de impacto, nadie recibe daño",
+								"EMPATE", JOptionPane.INFORMATION_MESSAGE);
 					}
 
 					////////////// INTERCAMBIO DE GOLPES JUGADOR
 
+					JOptionPane.showMessageDialog(v,
+							"Intentas usar la carta " + cartaElegida.getNombre() + "\n"
+									+ "Tu rival intenta usar su carta " + cartaRival.getNombre(),
+							"ACCIONES", JOptionPane.INFORMATION_MESSAGE);
+
 					if (vidaInsJ == true || energiaInsJ == true) {
 						System.out.println("Coste insuficiente pierdes tu turno");
+						JOptionPane.showMessageDialog(v,
+								"No cumples los requisitos para realizar el movimiento " + cartaElegida.getNombre()
+										+ " pierdes el turno.",
+								"COSTE INSUFICIENTE (J)", JOptionPane.INFORMATION_MESSAGE);
 						System.out.println(cartaRival.getNombre());
 						System.out.println(cartaElegida.getNombre());
 					} else {
@@ -297,11 +363,17 @@ public class PantallaCombate extends JPanel {
 						if (cartaElegida.getNombre().equals("Bloqueo")) {
 
 							System.out.println("Adoptas pose de bloqueo, el ataque del rival no surte efecto");
+							JOptionPane.showMessageDialog(v,
+									"Adoptas pose de bloqueo, el ataque del rival no surte efecto.", "BLOQUEO",
+									JOptionPane.INFORMATION_MESSAGE);
 
 						} else if ((cartaElegida.getVelocidad() > cartaRival.getVelocidad())) {
 							if (cartaElegida.getAlcance() >= distanciaJugadores) {
 								System.out.println("Atacas primero con " + cartaElegida.getNombre() + " y haces "
 										+ cartaElegida.getPuntosAtaque());
+								JOptionPane.showMessageDialog(v,
+										"Atacas primero, realizas " + cartaElegida.getPuntosAtaque() + " de daño.",
+										"ACCIONES JUGADOR", JOptionPane.INFORMATION_MESSAGE);
 								vidaR = (byte) (vidaR - cartaElegida.getPuntosAtaque());
 								if (vidaR <= 0) {
 									vidaR = 0;
@@ -316,11 +388,17 @@ public class PantallaCombate extends JPanel {
 							} else {
 								System.out.println(
 										"Rango insuficiente tu carta " + cartaElegida.getNombre() + " no impacta");
+								JOptionPane.showMessageDialog(v, "Rango insuficiente, tu carta no impacta",
+										"RANGO INSUFICIENTE (J)", JOptionPane.INFORMATION_MESSAGE);
 								System.out.println(cartaElegida.getAlcance());
 								System.out.println(distanciaJugadores);
 								if (cartaRival.getAlcance() >= distanciaJugadores
 										&& (vidaInsR == false || energiaInsR == false)) {
 									System.out.println("La carta del rival " + cartaElegida.getNombre() + " impacta");
+									JOptionPane.showMessageDialog(v,
+											"La carta de tu rival si entra en rango, te golpea con "
+													+ cartaRival.getPuntosAtaque() + " de daño.",
+											"ACCIONES RIVAL (R)", JOptionPane.INFORMATION_MESSAGE);
 									vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
 									if (vidaJ <= 0) {
 										vidaJ = 0;
@@ -342,6 +420,10 @@ public class PantallaCombate extends JPanel {
 							System.out.println(
 									"El rival no tiene fuerzas para ejecutar su movimiento, atacas primero con \n"
 											+ cartaElegida.getNombre());
+							JOptionPane.showMessageDialog(v,
+									"El rival no tiene fuerzas para ejecutar su movimiento, atacas primero con "
+											+ cartaElegida.getNombre(),
+									"EXTENUACIÓN RIVAL (R)", JOptionPane.INFORMATION_MESSAGE);
 							if (cartaElegida.getAlcance() >= distanciaJugadores) {
 								vidaR = (byte) (vidaR - cartaElegida.getPuntosAtaque());
 								if (vidaR <= 0) {
@@ -356,6 +438,9 @@ public class PantallaCombate extends JPanel {
 								}
 							} else {
 								System.out.println("Tu carta " + cartaElegida.getNombre() + " no impacta");
+								JOptionPane.showMessageDialog(v,
+										"Rango insuficiente, tu carta " + cartaElegida.getNombre() + " no impacta",
+										"RANGO INSUFICIENTE (J)", JOptionPane.INFORMATION_MESSAGE);
 								System.out.println(cartaElegida.getAlcance());
 								System.out.println(distanciaJugadores);
 
@@ -367,6 +452,8 @@ public class PantallaCombate extends JPanel {
 					////////////// INTERCAMBIO DE GOLPES RIVAL
 
 					if (vidaInsR == true || energiaInsR == true) {
+						JOptionPane.showMessageDialog(v, "Coste insuficiente, el rival pierde su turno.",
+								"COSTE INSUFICIENTE (R)", JOptionPane.INFORMATION_MESSAGE);
 						System.out.println("Coste insuficiente el rival pierde su turno");
 						System.out.println(cartaRival.getNombre());
 						System.out.println(cartaElegida.getNombre());
@@ -374,10 +461,18 @@ public class PantallaCombate extends JPanel {
 					} else {
 						if (cartaRival.getNombre().equals("Bloqueo")) {
 							System.out.println("Tu rival adopta la pose de bloqueo, tu ataque no hace daño");
+							JOptionPane.showMessageDialog(v,
+									"Tu rival adopta la pose de bloqueo, tu ataque no surte efecto", "BLOQUEO (R)",
+									JOptionPane.INFORMATION_MESSAGE);
 						} else if ((cartaRival.getVelocidad() > cartaElegida.getVelocidad())) {
 							if (cartaRival.getAlcance() >= distanciaJugadores) {
 								System.out.println("Tu rival ataca primero con " + cartaRival.getNombre()
 										+ " y te hace " + cartaRival.getPuntosAtaque());
+								JOptionPane
+										.showMessageDialog(v,
+												"Tu rival ataca primero, te hace " + cartaElegida.getPuntosAtaque()
+														+ " de daño.",
+												"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 								vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
 								if (vidaJ <= 0) {
 									vidaJ = 0;
@@ -391,11 +486,17 @@ public class PantallaCombate extends JPanel {
 							} else {
 								System.out.println("Rango insuficiente la carta del rival " + cartaRival.getNombre()
 										+ " no impacta");
+								JOptionPane.showMessageDialog(v, "Rango insuficiente, el golpe del rival no impacta",
+										"RANGO INSUFICIENTE (R)", JOptionPane.INFORMATION_MESSAGE);
 								System.out.println(cartaRival.getAlcance());
 								System.out.println(distanciaJugadores);
 								if ((cartaElegida.getAlcance() >= distanciaJugadores)
 										&& (vidaInsJ == false || energiaInsJ == false)) {
 									System.out.println("Tu carta " + cartaElegida.getNombre() + " impacta");
+									JOptionPane.showMessageDialog(v,
+											"Tu carta cumple el alcance y si impacta, realizas "
+													+ cartaElegida.getPuntosAtaque() + " de daño.",
+											"ACCIONES JUGADOR", JOptionPane.INFORMATION_MESSAGE);
 									vidaR = (byte) (vidaR - cartaElegida.getPuntosAtaque());
 									if (vidaR <= 0) {
 										vidaR = 0;
@@ -416,7 +517,13 @@ public class PantallaCombate extends JPanel {
 								&& (energiaInsJ == true || vidaInsJ == true)) {
 							System.out.println("Estas exahusto y no puedes realizar el movimiento, tu rival ataca con "
 									+ cartaRival.getNombre());
+							JOptionPane.showMessageDialog(v,
+									"No cumples los costes del movimiento, el esfuerzo de paraliza y pierdes el turno.",
+									"EXTENUACIÓN(J)", JOptionPane.INFORMATION_MESSAGE);
 							if (cartaRival.getAlcance() >= distanciaJugadores) {
+								JOptionPane.showMessageDialog(v,
+										"Tu rival te ataca con " + cartaRival.getPuntosAtaque() + " de daño.",
+										"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 								vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
 								if (vidaJ <= 0) {
 									vidaJ = 0;
@@ -430,6 +537,9 @@ public class PantallaCombate extends JPanel {
 							} else {
 								System.out.println("Rango insficiente la carta del rival " + cartaRival.getNombre()
 										+ " no impacta");
+
+								JOptionPane.showMessageDialog(v, "El ataque de tu rival no está en rango, falla.",
+										"RANGO INSUFICIENTE (R)", JOptionPane.INFORMATION_MESSAGE);
 								System.out.println(cartaRival.getAlcance());
 								System.out.println(distanciaJugadores);
 
@@ -488,13 +598,24 @@ public class PantallaCombate extends JPanel {
 				JOptionPane.showMessageDialog(v, "COMIENZA EL TURNO " + turnos, "CONTADOR DE TURNOS",
 						JOptionPane.INFORMATION_MESSAGE);
 
+				JOptionPane.showMessageDialog(v, "Te mueves a la derecha", "MOVIMIENTO JUGADOR",
+						JOptionPane.INFORMATION_MESSAGE);
+
 				cartaRival = barajaRival.get(r.nextInt(barajaRival.size()));
 
 				if (cartaRival.getTipo().equals("Especial")) {
 					if (energiaR >= cartaRival.getCosteEnergia()) {
 						System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
+						JOptionPane.showMessageDialog(v,
+								"Tu rival prepara su especial : " + cartaRival.getNombre() + "\nAtaque: "
+										+ cartaRival.getPuntosAtaque() + "\nVelocidad: " + cartaRival.getVelocidad()
+										+ "\nAlcance: " + cartaRival.getAlcance(),
+								"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 						energiaR = (byte) (energiaR - cartaRival.getCosteEnergia());
 						energiaRival.setText(String.valueOf(energiaR));
+						JOptionPane.showMessageDialog(v,
+								"La energía del rival se reduce en " + cartaRival.getCosteEnergia(), "ACCIONES RIVAL",
+								JOptionPane.INFORMATION_MESSAGE);
 
 					} else {
 						energiaInsR = true;
@@ -505,8 +626,16 @@ public class PantallaCombate extends JPanel {
 					if (cartaRival.getCosteEnergia() > 0) {
 						if (energiaR >= cartaRival.getCosteEnergia()) {
 							System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
+							JOptionPane.showMessageDialog(v,
+									"Tu rival prepara su ultimate : " + cartaRival.getNombre() + "\nAtaque: "
+											+ cartaRival.getPuntosAtaque() + "\nVelocidad: " + cartaRival.getVelocidad()
+											+ "\nAlcance: " + cartaRival.getAlcance(),
+									"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 							energiaR = (byte) (energiaR - cartaRival.getCosteEnergia());
 							energiaRival.setText(String.valueOf(energiaR));
+							JOptionPane.showMessageDialog(v,
+									"La energía del rival se reduce en " + cartaRival.getCosteEnergia(),
+									"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 
 						} else {
 							energiaInsR = true;
@@ -514,10 +643,18 @@ public class PantallaCombate extends JPanel {
 					} else {
 						if (vidaR > cartaRival.getCosteVida()) {
 							System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
+							JOptionPane.showMessageDialog(v,
+									"Tu rival prepara su ultimate : " + cartaRival.getNombre() + "\nAtaque: "
+											+ cartaRival.getPuntosAtaque() + "\nVelocidad: " + cartaRival.getVelocidad()
+											+ "\nAlcance: " + cartaRival.getAlcance(),
+									"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 							vidaR = (byte) (vidaR - cartaRival.getCosteVida());
 							System.out.println(
 									"El rival ha perdido " + cartaRival.getCosteVida() + " por usar su movimiento");
 							vidaRival.setText(String.valueOf(vidaR));
+							JOptionPane.showMessageDialog(v,
+									"La vida del rival se reduce en " + cartaRival.getCosteVida(),
+									"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 
 						} else {
 							vidaInsR = true;
@@ -537,8 +674,14 @@ public class PantallaCombate extends JPanel {
 					}
 					if (cartaRival.getNombre().equals("Bloqueo")) {
 						System.out.println("El rival adopta pose de bloqueo");
+						JOptionPane.showMessageDialog(v,
+								"El rival adopta pose de bloqueo",
+								"BLOQUEO RIVAL", JOptionPane.INFORMATION_MESSAGE);
 					} else if (cartaRival.getAlcance() >= distanciaJugadores) {
 						System.out.println("El rival ataca con " + cartaRival.getNombre());
+						JOptionPane.showMessageDialog(v,
+								"El rival te ataca con "+cartaRival.getNombre(),
+								"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 						vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
 						vidaJugador.setText(String.valueOf(vidaJ));
 						if (vidaJ <= 0) {
@@ -553,12 +696,15 @@ public class PantallaCombate extends JPanel {
 
 					} else {
 						System.out.println("Rango insuficiente, el ataque " + cartaRival.getNombre() + " falla");
+						JOptionPane.showMessageDialog(v, "El ataque de tu rival no está en rango, falla.",
+								"RANGO INSUFICIENTE (R)", JOptionPane.INFORMATION_MESSAGE);
 						System.out.println(distanciaJugadores);
 					}
 
 				}
 
 				barajaRival.remove(cartaRival);
+				energiaInsR = false;
 				turnos++;
 			}
 		});
@@ -592,13 +738,24 @@ public class PantallaCombate extends JPanel {
 				JOptionPane.showMessageDialog(v, "COMIENZA EL TURNO " + turnos, "CONTADOR DE TURNOS",
 						JOptionPane.INFORMATION_MESSAGE);
 
+				JOptionPane.showMessageDialog(v, "Te mueves a la izquierda", "MOVIMIENTO JUGADOR",
+						JOptionPane.INFORMATION_MESSAGE);
+
 				cartaRival = barajaRival.get(r.nextInt(barajaRival.size()));
 
 				if (cartaRival.getTipo().equals("Especial")) {
 					if (energiaR >= cartaRival.getCosteEnergia()) {
 						System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
+						JOptionPane.showMessageDialog(v,
+								"Tu rival prepara su especial : " + cartaRival.getNombre() + "\nAtaque: "
+										+ cartaRival.getPuntosAtaque() + "\nVelocidad: " + cartaRival.getVelocidad()
+										+ "\nAlcance: " + cartaRival.getAlcance(),
+								"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 						energiaR = (byte) (energiaR - cartaRival.getCosteEnergia());
 						energiaRival.setText(String.valueOf(energiaR));
+						JOptionPane.showMessageDialog(v,
+								"La energía del rival se reduce en " + cartaRival.getCosteEnergia(), "ACCIONES RIVAL",
+								JOptionPane.INFORMATION_MESSAGE);
 
 					} else {
 						energiaInsR = true;
@@ -609,8 +766,16 @@ public class PantallaCombate extends JPanel {
 					if (cartaRival.getCosteEnergia() > 0) {
 						if (energiaR >= cartaRival.getCosteEnergia()) {
 							System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
+							JOptionPane.showMessageDialog(v,
+									"Tu rival prepara su ultimate : " + cartaRival.getNombre() + "\nAtaque: "
+											+ cartaRival.getPuntosAtaque() + "\nVelocidad: " + cartaRival.getVelocidad()
+											+ "\nAlcance: " + cartaRival.getAlcance(),
+									"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 							energiaR = (byte) (energiaR - cartaRival.getCosteEnergia());
 							energiaRival.setText(String.valueOf(energiaR));
+							JOptionPane.showMessageDialog(v,
+									"La energía del rival se reduce en " + cartaRival.getCosteEnergia(),
+									"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 
 						} else {
 							energiaInsR = true;
@@ -618,10 +783,18 @@ public class PantallaCombate extends JPanel {
 					} else {
 						if (vidaR > cartaRival.getCosteVida()) {
 							System.out.println("El rival se prepara para atacar con: " + cartaRival.getNombre());
+							JOptionPane.showMessageDialog(v,
+									"Tu rival prepara su ultimate : " + cartaRival.getNombre() + "\nAtaque: "
+											+ cartaRival.getPuntosAtaque() + "\nVelocidad: " + cartaRival.getVelocidad()
+											+ "\nAlcance: " + cartaRival.getAlcance(),
+									"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 							vidaR = (byte) (vidaR - cartaRival.getCosteVida());
 							System.out.println(
 									"El rival ha perdido " + cartaRival.getCosteVida() + " por usar su movimiento");
 							vidaRival.setText(String.valueOf(vidaR));
+							JOptionPane.showMessageDialog(v,
+									"La vida del rival se reduce en " + cartaRival.getCosteVida(),
+									"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 
 						} else {
 							vidaInsR = true;
@@ -641,8 +814,14 @@ public class PantallaCombate extends JPanel {
 					}
 					if (cartaRival.getNombre().equals("Bloqueo")) {
 						System.out.println("El rival adopta pose de bloqueo");
+						JOptionPane.showMessageDialog(v,
+								"El rival adopta pose de bloqueo",
+								"BLOQUEO RIVAL", JOptionPane.INFORMATION_MESSAGE);
 					} else if (cartaRival.getAlcance() >= distanciaJugadores) {
 						System.out.println("El rival ataca con " + cartaRival.getNombre());
+						JOptionPane.showMessageDialog(v,
+								"El rival te ataca con "+cartaRival.getNombre(),
+								"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 						vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
 						vidaJugador.setText(String.valueOf(vidaJ));
 						if (vidaJ <= 0) {
@@ -657,12 +836,15 @@ public class PantallaCombate extends JPanel {
 
 					} else {
 						System.out.println("Rango insuficiente, el ataque " + cartaRival.getNombre() + " falla");
+						JOptionPane.showMessageDialog(v, "El ataque de tu rival no está en rango, falla.",
+								"RANGO INSUFICIENTE (R)", JOptionPane.INFORMATION_MESSAGE);
 						System.out.println(distanciaJugadores);
 					}
 
 				}
 
 				barajaRival.remove(cartaRival);
+				energiaInsR = false;
 				turnos++;
 			}
 		});
