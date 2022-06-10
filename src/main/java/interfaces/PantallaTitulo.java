@@ -13,11 +13,16 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 /**
- * 
+ * Clase 
  * @author toled
  *
  */
 public class PantallaTitulo extends JPanel {
+	/**
+	 * La variable interna ventana nos permite utilizar el método irAPantalla dentro
+	 * del constructor de instrucciones para cambiar de pantalla y mantener las
+	 * características generales definidas en las clase Ventana
+	 */
 	private Ventana ventana;
 	
 	

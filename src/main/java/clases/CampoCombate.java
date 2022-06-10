@@ -12,8 +12,8 @@ import utils.ConexionBD;
 /**
  * Clase que define el nombre y la descripción de cada escenario en el que se
  * pelea, la posición del jugador, del rival, y el tamaño del mapa que siempre
- * será el mismo. (ESTA CLASE SE USA EN "PantallaCombate" Y TIENE RELACIÓN CON LA
- * CLASE "Mapa" DE INTERFACES)
+ * será el mismo. (ESTA CLASE SE USA EN "PantallaCombate" Y TIENE RELACIÓN CON
+ * LA CLASE "Mapa" DE INTERFACES)
  * 
  * @author toled
  *
@@ -42,9 +42,12 @@ public class CampoCombate extends ElementoNombreDescripcion {
 	 * CampoCombate existe, si no existe saltará una excepción personalizada, además
 	 * de todo esto, dentro de este constructor se definirán las posiciones del
 	 * rival y el jugador, el tamaño del array del String y las rutas de los iconos
-	 * del rival y el jugador.
+	 * del rival y el jugador. Además recibirá las posiciones del jugador y del
+	 * rival, en este caso la única que se irá actualizando será la del jugador.
 	 * 
-	 * @param nombre
+	 * @param nombre    nombre del escenario
+	 * @param posicionJ posicion del jugador
+	 * @param posicionR posicion del rival
 	 */
 
 	public CampoCombate(String nombre, Byte posicionJ, Byte posicionR) {

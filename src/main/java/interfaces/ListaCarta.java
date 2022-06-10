@@ -42,7 +42,18 @@ public class ListaCarta extends JPanel {
 	 * Esta variable representa cada carta del ArrayList de baraja del jugador.
 	 */
 	private Carta elegida;
+	/**
+	 * Esta variable de tipo PantallaCombate la utilizamos para invocar al método
+	 * setCartaElegida y getCartaElegida, los cuales nos ayudarán a enviar la carta
+	 * que elige el jugador a la clase PantallaCombate para realizar los calculos
+	 * necesarios.
+	 */
 	private PantallaCombate pantallaC;
+	/**
+	 * La variable interna ventana nos permite utilizar el método irAPantalla dentro
+	 * del constructor de instrucciones para cambiar de pantalla y mantener las
+	 * características generales definidas en las clase Ventana
+	 */
 	private Ventana ventana;
 
 	/**
@@ -51,11 +62,15 @@ public class ListaCarta extends JPanel {
 	 * realizado varios ifs para distinguir entre qué tipo de carta recibimos y
 	 * mostrar su coste de vida o energía.
 	 * 
-	 * @param c Este parámetro es cada carta del ArrayList de baraja del jugador, en
-	 *          la clase PantallaCombate, mediante un bucle for recorremos todo el
-	 *          ArrayList de baraja y en ese mismo bucle a un JPanel creado en la
-	 *          clase PantallaCombate, le añadimos un objeto de tipo ListaCarta que
-	 *          irá iterando hasta que toda la baraja este definida.
+	 * @param c       Este parámetro es cada carta del ArrayList de baraja del
+	 *                jugador, en la clase PantallaCombate, mediante un bucle for
+	 *                recorremos todo el ArrayList de baraja y en ese mismo bucle a
+	 *                un JPanel creado en la clase PantallaCombate, le añadimos un
+	 *                objeto de tipo ListaCarta que irá iterando hasta que toda la
+	 *                baraja este definida.
+	 * @param combate Objeto de tipo PantallaCombate que nos permitirá invocar a los
+	 *                métodos get y set cartaElegida para traspasar la elección del
+	 *                jugador a la clase PantallaCombate
 	 */
 
 	public ListaCarta(final Carta c, final PantallaCombate combate) {
@@ -119,6 +134,15 @@ public class ListaCarta extends JPanel {
 		numero_Alcance.setHorizontalAlignment(SwingConstants.CENTER);
 		numero_Alcance.setBounds(65, 65, 45, 13);
 		panel.add(numero_Alcance);
+
+		/**
+		 * El JButton elegir nos permitirá elegir la carta que queramos usar, al
+		 * pulsarlo, comprobará si la variable cartaElegdia de PantallaCombate es null,
+		 * si lo es, su valor será el de la carta que hemos pulsado, la carta
+		 * desaparecerá. Si cartaElegida es distinto de null, osea, ya tiene un valor
+		 * asignado, se nos mostrará un JOptionPane indicándonos que ya hemos elegido
+		 * una carta, junto con la carta que elegimos en un principio.
+		 */
 
 		final JButton elegir = new JButton("Elegir");
 		elegir.addMouseListener(new MouseAdapter() {
@@ -184,8 +208,7 @@ public class ListaCarta extends JPanel {
 		}
 
 		JLabel fondo = new JLabel("");
-		fondo.setIcon(new ImageIcon(
-				"./background/splat (1).png"));
+		fondo.setIcon(new ImageIcon("./background/splat (1).png"));
 		fondo.setBounds(10, 58, 124, 187);
 		panel.add(fondo);
 
