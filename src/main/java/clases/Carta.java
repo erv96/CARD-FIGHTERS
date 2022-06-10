@@ -40,7 +40,7 @@ public class Carta extends ElementoNombreDescripcion {
 	 * costeEnergia (Especiales) define el coste de energía que tiene usar la carta.
 	 */
 	private byte costeEnergia;
-	
+
 	/**
 	 * Constructor con el que definirémos la construcción de un objeto Carta, no se
 	 * incluyen los valores de costeVida ni de costeEnergía porque las cartas
@@ -49,12 +49,12 @@ public class Carta extends ElementoNombreDescripcion {
 	 * de los ultimates y especiales en la clase ListarCarta la cual tiene como
 	 * parámetro un objeto de tipo Carta.
 	 * 
-	 * @param nombre nombre de la carta
-	 * @param descripcion función que realiza
-	 * @param puntosAtaque
-	 * @param velocidad
-	 * @param alcance
-	 * @param tipo
+	 * @param nombre       nombre de la carta
+	 * @param descripcion  función que realiza la carta
+	 * @param puntosAtaque daño que realiza la carta
+	 * @param velocidad    prioridad de la carta en golpear
+	 * @param alcance      rango de impacto de la carta
+	 * @param tipo         el tipo de la carta.
 	 */
 
 	public Carta(String nombre, String descripcion, byte puntosAtaque, byte velocidad, byte alcance, String tipo) {

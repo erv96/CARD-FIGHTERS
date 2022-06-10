@@ -12,31 +12,36 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 /**
- * Clase 
+ * Clase para iniciar el juego, en ella se muestran los botones de salir y
+ * empezar
+ * 
  * @author toled
  *
  */
 public class PantallaTitulo extends JPanel {
 	/**
 	 * La variable interna ventana nos permite utilizar el método irAPantalla dentro
-	 * del constructor de instrucciones para cambiar de pantalla y mantener las
-	 * características generales definidas en las clase Ventana
+	 * del constructor de PantallaTitulo para cambiar de pantalla y mantener las
+	 * características generales definidas en las clase Ventana.
+	 * 
+	 * El boton salir nos cerrará el juego, el botón empezar nos llevará a la
+	 * pantalla de menú principal.
 	 */
 	private Ventana ventana;
-	
-	
+
 	public PantallaTitulo(Ventana v) {
 		this.ventana = v;
 		setLayout(null);
-		
+
 		JLabel titulo = new JLabel("CARD FIGHTERS");
 		titulo.setForeground(Color.WHITE);
 		titulo.setFont(new Font("Personal Services", Font.PLAIN, 66));
 		titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		titulo.setBounds(80, 10, 617, 127);
 		add(titulo);
-		
+
 		JButton empezar = new BotonAnimado("EMPEZAR");
 		empezar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -47,7 +52,7 @@ public class PantallaTitulo extends JPanel {
 		empezar.setBounds(281, 204, 215, 73);
 
 		add(empezar);
-		
+
 		JButton salir = new BotonAnimado("SALIR");
 		salir.addMouseListener(new MouseAdapter() {
 			@Override
@@ -57,19 +62,19 @@ public class PantallaTitulo extends JPanel {
 		});
 		salir.setBounds(284, 332, 215, 73);
 		add(salir);
-		
+
 		JLabel mancha = new JLabel("");
 		mancha.setIcon(new ImageIcon("./background/mancha_small.png"));
 		mancha.setHorizontalAlignment(SwingConstants.CENTER);
 		mancha.setBounds(65, 103, 644, 229);
 		add(mancha);
-		
+
 		JLabel mancha_2 = new JLabel("");
 		mancha_2.setIcon(new ImageIcon("./background/mancha_small.png"));
 		mancha_2.setHorizontalAlignment(SwingConstants.CENTER);
 		mancha_2.setBounds(53, 233, 644, 229);
 		add(mancha_2);
-		
+
 		JLabel fighter = new JLabel("");
 		mancha_2.setLabelFor(fighter);
 		fighter.setForeground(Color.WHITE);
@@ -78,12 +83,11 @@ public class PantallaTitulo extends JPanel {
 		fighter.setIcon(new ImageIcon("./background/logo.png"));
 		fighter.setBounds(348, 10, 726, 673);
 		add(fighter);
-		
+
 		JLabel fondo = new JLabel("");
 		fondo.setIcon(new ImageIcon("./background/pantallaTitulo.jpg"));
 		fondo.setBounds(0, 0, 800, 579);
 		add(fondo);
-		
-		
+
 	}
 }

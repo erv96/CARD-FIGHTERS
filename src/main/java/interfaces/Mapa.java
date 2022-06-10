@@ -42,11 +42,11 @@ public class Mapa extends JPanel {
 		gridBagLayout.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
-		JLabel lblNewLabel = new JLabel();
-		lblNewLabel.setIcon(new ImageIcon(icono));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 0;
-		add(lblNewLabel, gbc_lblNewLabel);
+		JLabel contenedor = new JLabel();
+		contenedor.setIcon(new ImageIcon(icono));
+		GridBagConstraints gbc_contenedor = new GridBagConstraints();
+		gbc_contenedor.gridx = 0;
+		gbc_contenedor.gridy = 0;
+		add(contenedor, gbc_contenedor);
 	}
 }

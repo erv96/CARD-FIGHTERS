@@ -1,5 +1,6 @@
 use card_fighters;
 
+
 CREATE TABLE personaje(
 	nombre VARCHAR(50) PRIMARY KEY,
     descripcion VARCHAR(255)

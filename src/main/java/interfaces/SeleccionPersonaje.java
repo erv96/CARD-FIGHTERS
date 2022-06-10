@@ -42,7 +42,7 @@ import javax.swing.UIManager;
  * usamos el método definido en personaje llamado getTodos, el cual nos devuelve
  * un ArrayList con toda la lista de personajes disponibles, además, en esta
  * clase utilizamos los argumentos de programa para realizar una selección
- * automática de personaje si ninguno es elegido por el usuario.
+ * automática de personaje si se pulsa el botón de comenzar sin elegir ninguno.
  * 
  * @author toled
  *
@@ -50,7 +50,7 @@ import javax.swing.UIManager;
 public class SeleccionPersonaje extends JPanel {
 	/**
 	 * La variable interna ventana nos permite utilizar el método irAPantalla dentro
-	 * del constructor de instrucciones para cambiar de pantalla y mantener las
+	 * del constructor de SeleccionPersonaje para cambiar de pantalla y mantener las
 	 * características generales definidas en las clase Ventana
 	 */
 	private Ventana ventana;
@@ -103,12 +103,12 @@ public class SeleccionPersonaje extends JPanel {
 		tituloPantalla.setBounds(20, 10, 725, 99);
 		add(tituloPantalla);
 
-		JLabel lblNewLabel = new JLabel("VS");
-		lblNewLabel.setForeground(Color.BLACK);
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Personal Services", Font.PLAIN, 55));
-		lblNewLabel.setBounds(300, 271, 192, 91);
-		add(lblNewLabel);
+		JLabel versus = new JLabel("VS");
+		versus.setForeground(Color.BLACK);
+		versus.setHorizontalAlignment(SwingConstants.CENTER);
+		versus.setFont(new Font("Personal Services", Font.PLAIN, 55));
+		versus.setBounds(300, 271, 192, 91);
+		add(versus);
 
 		JLabel riv_title = new JLabel("RIVAL");
 		riv_title.setHorizontalAlignment(SwingConstants.CENTER);

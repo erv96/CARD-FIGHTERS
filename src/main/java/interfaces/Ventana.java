@@ -39,7 +39,6 @@ public class Ventana extends JFrame {
 	// RUTA DE LAS CANCIONES PARA CADA PANTALLA
 	File selector = new File("./songs/selector.wav");
 	File main_title = new File("./songs/main_title.wav");
-	File combate_playa = new File("./songs/combate_playa.wav");
 	File instrucciones = new File("./songs/instrucciones.wav");
 	File combate_dojo = new File("./songs/combate_dojo.wav");
 
@@ -122,7 +121,7 @@ public class Ventana extends JFrame {
 	}
 
 	/**
-	 * Método que cumple la misma función que el anterior, en este añado dos
+	 * Sobrecarga del método anterior que cumple la misma función, en este añado dos
 	 * argumentos de tipo Personaje referenciando al jugador y al rival debido a que
 	 * es necesario transferir estos dos objetos a la pantalla PantallaCombate para
 	 * operar con las variables internas de los personajes que el usuario elige,
@@ -153,15 +152,22 @@ public class Ventana extends JFrame {
 		this.pantallaActual.setVisible(true);
 		this.setContentPane(pantallaActual);
 	}
-	
+
+	/**
+	 * Sobrecarga del método anterior base, lo utilizamos para pasar el nombre del
+	 * ganador del combate, este método lo utilizamos en la clase PantallaCombate
+	 * 
+	 * @param nombrePantalla nombre de la pantalla a la que nos queremos dirigir
+	 * @param ganador        personaje ganador del combate
+	 */
+
 	public void irAPantalla(String nombrePantalla, String ganador) {
 		this.pantallaActual.setVisible(false);
 		this.pantallaActual = null;
 		switch (nombrePantalla) {
 
 		case "Resultado":
-			this.pantallaActual = new Resultado(this,ganador);
-			
+			this.pantallaActual = new Resultado(this, ganador);
 
 		default:
 			break;

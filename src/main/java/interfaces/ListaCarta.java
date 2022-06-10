@@ -137,7 +137,7 @@ public class ListaCarta extends JPanel {
 
 		/**
 		 * El JButton elegir nos permitirá elegir la carta que queramos usar, al
-		 * pulsarlo, comprobará si la variable cartaElegdia de PantallaCombate es null,
+		 * pulsarlo, comprobará si la variable cartaElegida de PantallaCombate es null,
 		 * si lo es, su valor será el de la carta que hemos pulsado, la carta
 		 * desaparecerá. Si cartaElegida es distinto de null, osea, ya tiene un valor
 		 * asignado, se nos mostrará un JOptionPane indicándonos que ya hemos elegido

@@ -97,7 +97,7 @@ public class Resultado extends JPanel {
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha_peque\u00F1a.png"));
+				"./background/mancha_peque\u00F1a.png"));
 		lblNewLabel.setBounds(180, 311, 462, 156);
 		add(lblNewLabel);
 
@@ -121,13 +121,13 @@ public class Resultado extends JPanel {
 
 		JLabel manchaBlancaRight = new JLabel("");
 		manchaBlancaRight.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\manchaBlanca.png"));
+				"./background/manchaBlanca.png"));
 		manchaBlancaRight.setBounds(420, 385, 561, 215);
 		add(manchaBlancaRight);
 
 		JLabel manchaBlancaLeft = new JLabel("");
 		manchaBlancaLeft.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\manchaBlancaInv.png"));
+				"./background/manchaBlancaInv.png"));
 		manchaBlancaLeft.setBounds(-265, 385, 594, 215);
 		add(manchaBlancaLeft);
 

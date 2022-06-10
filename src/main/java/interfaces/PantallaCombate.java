@@ -44,8 +44,9 @@ import java.awt.event.MouseAdapter;
 /**
  * Esta es la clase en la que todo gira alrededor, la clase de PantallaCombate,
  * aquí se encuentran los calculos del alcance, los puntos de daño, reducciones
- * de energía, de vida etc. También se dibuja el mapa y se realiza la escritura
- * en un fichero .txt de qué personajes han combatido
+ * de energía, de vida, se definen los botones de movimiento del personaje, el
+ * botón de usarCarta crucial para el ciclo del programa y se dibuja el la
+ * matriz de 8 con la posición de los personajes
  * 
  * @author toled
  *
@@ -142,7 +143,8 @@ public class PantallaCombate extends JPanel {
 	/**
 	 * En el siguiente constructor se define el aspecto de la pantalla de combate,
 	 * en ella tiene lugar los calculos y las actualizaciones de vida y energía de
-	 * los personajes,
+	 * los personajes, se definen las acciones de movimiento del personaje, el uso
+	 * de cartas
 	 * 
 	 * 
 	 * @param v
@@ -178,7 +180,7 @@ public class PantallaCombate extends JPanel {
 
 		// OBJETO CampoCombate al que le pasamos el nombre del escenario y la posición
 		// de cada jugador. Luego en un bucle for recorremos el objeto mapa con las
-		// rutas de los iconos y lo introducimos en campoCombate con el objeto Mapa que
+		// rutas de los iconos y lo introducimos en campoMapa con el objeto Mapa que
 		// será nuestra plantilla para cada posición
 
 		this.mapa = new CampoCombate("Playa Enigmática", this.posicionJ, this.posicionR);
@@ -265,13 +267,15 @@ public class PantallaCombate extends JPanel {
 		add(energiaRival);
 
 		/**
-		 * El JButton usar carta desencadena todos los procesos que conciernen a la
-		 * decisión de un ganador,una vez usado el JButton "elegir" de la clase
-		 * ListarCarta, cartaElegida pasará a tener el valor de la carta que elegimos en
-		 * la clase ListarCarta, si pulsamos el botón usarCarta sin ninguna carta
-		 * elegida, se nos mostrará un JOptionPane indicándonos que debemos elegir una
-		 * carta para continuar. Una vez elijamos la carta y pulsemos el botón comenzará
-		 * el primer turno.
+		 * Tanto el JButton de usarCarta como los de movimiento del personaje
+		 * desencadenarán todos los procesos que conciernen a la decisión de un
+		 * ganador,una vez usado el JButton "elegir" de la clase ListarCarta,
+		 * cartaElegida pasará a tener el valor de la carta que elegimos en la clase
+		 * ListarCarta, si pulsamos el botón usarCarta sin ninguna carta elegida, se nos
+		 * mostrará un JOptionPane indicándonos que debemos elegir una carta para
+		 * continuar. Una vez elijamos la carta y pulsemos el botón comenzará el primer
+		 * turno.Al final del turno cartaElegida se igualará a null para que en la clase
+		 * ListarCarta se pueda volver a elegir una carta para combatir
 		 * 
 		 * He compuesto los calculos en varias fases:
 		 * 
@@ -318,7 +322,11 @@ public class PantallaCombate extends JPanel {
 		 * pasará a la pantalla de resultados donde se verá el nombre del ganador.
 		 * 
 		 * Si alguno de los dos se queda sin cartas, perderá el combate, si ambos os
-		 * quedais sin cartas ganará el que más vida tenga en ese momento
+		 * quedais sin cartas ganará el que más vida tenga en ese momento.
+		 * 
+		 * Este código esta compuesto por varios JOptionPane para informar al jugador de
+		 * las acciones de lo personajes, además he introducido varios sysouts para una
+		 * mayor comprensión
 		 * 
 		 * 
 		 */
@@ -779,14 +787,16 @@ public class PantallaCombate extends JPanel {
 		/**
 		 * JButton de movimiento del personaje, para actualizar la posición del
 		 * personaje, procedemos a borrar todo lo que había en el JPanel que contiene al
-		 * mapa y una vez introducidos los nuevos valores de posición en mapa y se
-		 * introducen en el JPanel campoMapa luego utilizamos el método revalidate para
-		 * refrescar posiciones. Para que el personaje no se salga del array hemos
-		 * realizado varias sentencias ifs para que su valor de posición se mantenga en
-		 * la posición que queramos.
+		 * mapa y una vez introducidos los nuevos valores de posición en mapa, se
+		 * introducen en el JPanel campoMapa con un bucle for, luego utilizamos el
+		 * método revalidate para refrescar posiciones. Para que el personaje no se
+		 * salga del array hemos realizado varias sentencias ifs para que su valor de
+		 * posición se mantenga en la posición que queramos.
 		 * 
 		 * El movimiento del jugador, es un turno básicamente, un turno en el que el
-		 * rival te atacará y te impactará con sus cartas si están en rango
+		 * rival te atacará y te impactará con sus cartas si están en rango, en los
+		 * botones de movimiento se encuentra el código de acciones del rival algo
+		 * simplificado ya que no hay intercambio de golpes por parte del jugador
 		 */
 		JButton derecha = new BotonAnimadoNegro("Derecha");
 		derecha.setText("DERECHA");
@@ -815,17 +825,11 @@ public class PantallaCombate extends JPanel {
 
 				// OBTENIENDO INFROMACIÓN DE LA CARTA DEL RIVAL
 
-				if (barajaRival.isEmpty() && vidaJ > vidaR) {
+				if (barajaRival.isEmpty()) {
 					JOptionPane.showMessageDialog(v, "A tu rival no le quedan cartas, ganas", "GANAS",
 							JOptionPane.INFORMATION_MESSAGE);
 					ventana.irAPantalla("Resultado", jugador.getNombre());
-				} else if (barajaJugador.isEmpty() && vidaR > vidaJ) {
-					JOptionPane.showMessageDialog(v, "No te quedan más cartas, pierdes", "EMPATE",
-							JOptionPane.INFORMATION_MESSAGE);
-					ventana.irAPantalla("Resultado", rival.getNombre());
-				}
-
-				if (!barajaRival.isEmpty()) {
+				} else {
 					cartaRival = barajaRival.get(r.nextInt(barajaRival.size()));
 					System.out.println("\n-------------TURNO: " + turnos + "-------------\n");
 					JOptionPane.showMessageDialog(v, "COMIENZA EL TURNO " + turnos, "CONTADOR DE TURNOS",
@@ -833,12 +837,6 @@ public class PantallaCombate extends JPanel {
 
 					JOptionPane.showMessageDialog(v, "Te mueves a la derecha", "MOVIMIENTO JUGADOR",
 							JOptionPane.INFORMATION_MESSAGE);
-
-					if (barajaRival.isEmpty()) {
-						System.out.println("ganas");
-					}
-
-					cartaRival = barajaRival.get(r.nextInt(barajaRival.size()));
 
 					if (cartaRival.getTipo().equals("Especial")) {
 						if (energiaR >= cartaRival.getCosteEnergia()) {
@@ -979,17 +977,11 @@ public class PantallaCombate extends JPanel {
 
 				// OBTENIENDO INFROMACIÓN DE LA CARTA DEL RIVAL
 
-				if (barajaRival.isEmpty() && vidaJ > vidaR) {
+				if (barajaRival.isEmpty()) {
 					JOptionPane.showMessageDialog(v, "A tu rival no le quedan cartas, ganas", "GANAS",
 							JOptionPane.INFORMATION_MESSAGE);
 					ventana.irAPantalla("Resultado", jugador.getNombre());
-				} else if (barajaJugador.isEmpty() && vidaR > vidaJ) {
-					JOptionPane.showMessageDialog(v, "No te quedan más cartas, pierdes", "EMPATE",
-							JOptionPane.INFORMATION_MESSAGE);
-					ventana.irAPantalla("Resultado", rival.getNombre());
-				}
-
-				if (!barajaRival.isEmpty()) {
+				} else {
 					cartaRival = barajaRival.get(r.nextInt(barajaRival.size()));
 
 					System.out.println("\n-------------TURNO: " + turnos + "-------------\n");
@@ -998,8 +990,6 @@ public class PantallaCombate extends JPanel {
 
 					JOptionPane.showMessageDialog(v, "Te mueves a la izquierda", "MOVIMIENTO JUGADOR",
 							JOptionPane.INFORMATION_MESSAGE);
-
-					cartaRival = barajaRival.get(r.nextInt(barajaRival.size()));
 
 					if (cartaRival.getTipo().equals("Especial")) {
 						if (energiaR >= cartaRival.getCosteEnergia()) {
@@ -1116,44 +1106,44 @@ public class PantallaCombate extends JPanel {
 
 		JLabel manchaDerecha = new JLabel("");
 		manchaDerecha.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\manchaBlanca.png"));
+				"./background/manchaBlanca.png"));
 		manchaDerecha.setBounds(460, 190, 644, 169);
 		add(manchaDerecha);
 
 		JLabel manchaIzquierda = new JLabel("");
 		manchaIzquierda.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\manchaBlancaInv.png"));
+				"./background/manchaBlancaInv.png"));
 		manchaIzquierda.setBounds(-260, 190, 644, 169);
 		add(manchaIzquierda);
 
 		JLabel fondoCartas = new JLabel("");
 		fondoCartas.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha.png"));
+				"./background/mancha.png"));
 		fondoCartas.setBounds(-489, 85, 1526, 580);
 		add(fondoCartas);
 
 		JLabel impresionMancha = new JLabel("");
 		impresionMancha.setHorizontalAlignment(SwingConstants.CENTER);
 		impresionMancha.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha_small.png"));
+				"./background/mancha_small.png"));
 		impresionMancha.setBounds(75, -68, 588, 148);
 		add(impresionMancha);
 
 		JLabel manchaInfoRival = new JLabel("");
 		manchaInfoRival.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\splat.png"));
+				"./background/splat.png"));
 		manchaInfoRival.setBounds(250, -299, 1526, 580);
 		add(manchaInfoRival);
 
 		JLabel manchaInfoJugador = new JLabel("");
 		manchaInfoJugador.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\splat.png"));
+				"./background/splat.png"));
 		manchaInfoJugador.setBounds(-450, -300, 1526, 580);
 		add(manchaInfoJugador);
 
 		JLabel manchita = new JLabel("");
 		manchita.setIcon(new ImageIcon(
-				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha_small.png"));
+				"./background/mancha_small.png"));
 		manchita.setBounds(85, 120, 612, 312);
 		add(manchita);
 

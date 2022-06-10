@@ -47,7 +47,9 @@ public class Personaje extends ElementoNombreDescripcion {
 	 * energía del personaje (Tanto la vida como la energía siempre empezará en 20 y
 	 * 5 respectivamente)
 	 * 
-	 * @param nombre
+	 * @param nombre nombre que recibe el personaje, con este parámetro se
+	 *               realizarán las consultas en la BBDD y se obtendrán las cartas
+	 *               del personaje concretado
 	 */
 	public Personaje(String nombre) {
 		super(nombre);
@@ -70,7 +72,6 @@ public class Personaje extends ElementoNombreDescripcion {
 							cursor.getString("tipo"));
 					baraja.add(barajita);
 
-					// System.out.println(barajita);
 				}
 				Statement smt3 = ConexionBD.conectar();
 				ResultSet cursorDesc = smt3.executeQuery("select * from personaje WHERE nombre= '" + nombre + "'");
@@ -157,19 +158,6 @@ public class Personaje extends ElementoNombreDescripcion {
 		return getNombre() + "\n" + "\tBaraja: " + baraja + "\n" + "\n\tDescripción: " + getDescripcion();
 	}
 
-	/*
-	 * public static ArrayList<Personaje> getTodos(){ ArrayList<Personaje> ret=new
-	 * ArrayList<Personaje>(); Statement smt=ConexionBD.conectar(); try { ResultSet
-	 * cursor=smt.executeQuery("select * from personajes"); while(cursor.next()) {
-	 * Personaje actual=new Personaje();
-	 * actual.setNombre(cursor.getString("nombre")); actual.setVida((byte)20);
-	 * actual.setEnergia((byte)5); actual.setBaraja(getBaraja());
-	 * actual.setEspecial(cursor.getString("especial"));
-	 * actual.setUltimate(cursor.getString("ultimate"));
-	 * actual.setDesripcion(cursor.getString("descripcion")); ret.add(actual); } }
-	 * catch (SQLException e) { // TODO Auto-generated catch block
-	 * e.printStackTrace(); } return ret; }
-	 */
 
 	/**
 	 * Método que nos servirá para guardar en un ArrayList todo el roster de

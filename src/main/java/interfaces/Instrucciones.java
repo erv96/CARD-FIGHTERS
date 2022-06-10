@@ -39,7 +39,9 @@ public class Instrucciones extends JPanel {
 	/**
 	 * Constructor de instrucciones que recibe un objeto de tipo Ventana que nos
 	 * permite mantener las carcterísticas generales de cada pantalla definidas en
-	 * la clase Ventana
+	 * la clase Ventana. En este constructor utilizamos un ScrollPane el cual
+	 * contiene un JTextArea (en el cual están escritas las instrucciones del
+	 * juego)para aprovechar el espacio general de la pantalla.
 	 * 
 	 * @param v objeto de tipo ventana que contiene la información de las
 	 *          características generales definidas en la clase Ventana
@@ -50,11 +52,11 @@ public class Instrucciones extends JPanel {
 		this.ventana = v;
 		setLayout(null);
 
-		JLabel lblNewLabel_1 = new JLabel("INSTRUCCIONES");
-		lblNewLabel_1.setFont(new Font("Personal Services", Font.PLAIN, 55));
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setBounds(325, 478, 454, 79);
-		add(lblNewLabel_1);
+		JLabel tituloInstrucciones = new JLabel("INSTRUCCIONES");
+		tituloInstrucciones.setFont(new Font("Personal Services", Font.PLAIN, 55));
+		tituloInstrucciones.setForeground(Color.WHITE);
+		tituloInstrucciones.setBounds(325, 478, 454, 79);
+		add(tituloInstrucciones);
 
 		JButton ATRAS = new BotonAnimado("ATR\u00C1S");
 		ATRAS.addMouseListener(new MouseAdapter() {
@@ -115,14 +117,12 @@ public class Instrucciones extends JPanel {
 		add(scrollPane);
 
 		JLabel MANCHA_TOP = new JLabel("");
-		MANCHA_TOP.setIcon(new ImageIcon(
-				"./background/mancha.png"));
+		MANCHA_TOP.setIcon(new ImageIcon("./background/mancha.png"));
 		MANCHA_TOP.setBounds(-409, -373, 1588, 608);
 		add(MANCHA_TOP);
 
 		JLabel MANCHA_BOTTOM = new JLabel("");
-		MANCHA_BOTTOM.setIcon(new ImageIcon(
-				"./background/mancha.png"));
+		MANCHA_BOTTOM.setIcon(new ImageIcon("./background/mancha.png"));
 		MANCHA_BOTTOM.setBounds(-409, 264, 1467, 398);
 		add(MANCHA_BOTTOM);
 	}

@@ -39,7 +39,7 @@ public class BotonAnimado extends JButton {
 
 			@Override
 			/**
-			 * Cuando se clicke sobre el botón, el botón obtendrá una tonalidad rojiza
+			 * Cuando se clickee sobre el botón, el botón obtendrá una tonalidad rojiza
 			 * distina.
 			 */
 			public void mousePressed(MouseEvent e) {
