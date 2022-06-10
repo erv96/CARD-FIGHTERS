@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import clases.Personaje;
 import componentesVisuales.BotonAnimado;
 import componentesVisuales.BotonAnimadoNegro;
+import exceptions.ArchivoNoExisteException;
 import main.Main;
 
 import javax.swing.JLabel;
@@ -17,6 +18,7 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -74,12 +76,21 @@ public class SeleccionPersonaje extends JPanel {
 	 * programa, en la variable argumentosPersonaje guardamos los argumentos que
 	 * hayamos definido con el método del main getArgs, luego de eso, mediante un
 	 * método mouseClicked en el botón comenzar, realizamos varios ifs y
-	 * comprobaciones para comprobar si el usuario ha elegido personajes o no si no
-	 * ha elegido, ninguno, y hay argumentos de programa definidos, se le mostrará
-	 * un JOption que le informará que se procederá a la selección automática de
-	 * personajes
+	 * comprobaciones para comprobar si el usuario ha elegido personajes o no, si no
+	 * ha elegido ninguno, y hay argumentos de programa definidos, se le mostrará un
+	 * JOption que le informará que se procederá a la selección automática de
+	 * personajes, si hay argumentos pero mal definidos, se mostrará una pantalla
+	 * que informará de ello.
 	 * 
-	 * @param v
+	 * Además, en esta pantalla hemos realizado la lectura de archivos, el cual nos
+	 * leerá el .txt que contiene a los anteriores personajes que han ganado un
+	 * combate, hemos añadido una excepción para que si el archivo no existe aún, el
+	 * programa no reviente, si el archivo no existe se nos mostrará un JOptionPane
+	 * indicándonos que debemos imprimir los ganadores de al menos un combate para
+	 * que se muestre algo
+	 * 
+	 * @param v parámetro que usamos para que esta pantalla comparta las
+	 *          características generales de la clase ventana.
 	 */
 	public SeleccionPersonaje(final Ventana v) {
 		this.argumentosPersonaje = Main.getArgs();
@@ -233,27 +244,33 @@ public class SeleccionPersonaje extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				BufferedReader lector;
-				try {
-					lector = new BufferedReader(new FileReader("./combate_jugador_rival.txt"));
-					String linea = lector.readLine();
-					String texto = "";
-					while (linea != null) {
-						texto = texto + linea + "\n";
-						linea = lector.readLine();
-					}
-					JOptionPane.showMessageDialog(v, texto, "Impresión de combates anteriores",
-							JOptionPane.DEFAULT_OPTION);
+				File archivoTexto = new File("./ganadores_combate.txt");
 
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				try {
+					if (archivoTexto.exists()) {
+						lector = new BufferedReader(new FileReader(archivoTexto));
+						String linea = lector.readLine();
+						String texto = "";
+						while (linea != null) {
+							texto = texto + linea + "\n";
+							linea = lector.readLine();
+						}
+						JOptionPane.showMessageDialog(v, texto, "Impresión de ganadores", JOptionPane.DEFAULT_OPTION);
+					} else {
+						throw new ArchivoNoExisteException(
+								"El archivo aún no existe, libra un combate e imprime al ganador en la pantalla resultado");
+
+					}
+
+				} catch (IOException | ArchivoNoExisteException e1) {
+					JOptionPane.showMessageDialog(v, e1.getMessage(), "ARCHIVO NO EXISTE", JOptionPane.ERROR_MESSAGE);
 				}
 
 			}
 		});
-		leerFichero.setText("LEER FICHERO DE COMBATES");
+		leerFichero.setText("LEER FICHERO DE GANADORES");
 		leerFichero.setForeground(Color.WHITE);
-		leerFichero.setBounds(218, 506, 316, 38);
+		leerFichero.setBounds(218, 506, 332, 38);
 		add(leerFichero);
 		COMENZAR.setText("COMENZAR");
 		COMENZAR.setForeground(Color.BLACK);
@@ -263,20 +280,17 @@ public class SeleccionPersonaje extends JPanel {
 		// IMÁGENES
 
 		JLabel MANCHA = new JLabel("");
-		MANCHA.setIcon(new ImageIcon(
-				"./background/manchaBlanca.png"));
+		MANCHA.setIcon(new ImageIcon("./background/manchaBlanca.png"));
 		MANCHA.setBounds(461, 425, 536, 151);
 		add(MANCHA);
 
 		JLabel MANCHA_1 = new JLabel("");
-		MANCHA_1.setIcon(new ImageIcon(
-				"./background/manchaBlancaInv.png"));
+		MANCHA_1.setIcon(new ImageIcon("./background/manchaBlancaInv.png"));
 		MANCHA_1.setBounds(-328, 425, 536, 151);
 		add(MANCHA_1);
 
 		JLabel FONDO = new JLabel("");
-		FONDO.setIcon(new ImageIcon(
-				"./background/character_select.png"));
+		FONDO.setIcon(new ImageIcon("./background/character_select.png"));
 		FONDO.setBounds(0, 0, 800, 576);
 		add(FONDO);
 

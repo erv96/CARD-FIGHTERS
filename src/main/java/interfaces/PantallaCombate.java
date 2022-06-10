@@ -142,8 +142,7 @@ public class PantallaCombate extends JPanel {
 	/**
 	 * En el siguiente constructor se define el aspecto de la pantalla de combate,
 	 * en ella tiene lugar los calculos y las actualizaciones de vida y energía de
-	 * los personajes, también está presente el botón de impresión de combate, el
-	 * cual escribe en texto los dos luchadores que están peleando en ese momento
+	 * los personajes,
 	 * 
 	 * 
 	 * @param v
@@ -587,7 +586,8 @@ public class PantallaCombate extends JPanel {
 								} else {
 									System.out.println(
 											"Rango insuficiente tu carta " + cartaElegida.getNombre() + " no impacta");
-									JOptionPane.showMessageDialog(v, "Rango insuficiente, tu carta no impacta",
+									JOptionPane.showMessageDialog(v,
+											"Rango insuficiente, tu carta " + cartaElegida.getNombre() + " no impacta",
 											"RANGO INSUFICIENTE (J)", JOptionPane.INFORMATION_MESSAGE);
 									System.out.println(cartaElegida.getAlcance());
 									System.out.println(distanciaJugadores);
@@ -689,7 +689,8 @@ public class PantallaCombate extends JPanel {
 									System.out.println("Rango insuficiente la carta del rival " + cartaRival.getNombre()
 											+ " no impacta");
 									JOptionPane.showMessageDialog(v,
-											"Rango insuficiente, el golpe del rival no impacta",
+											"Rango insuficiente, la carta " + cartaRival.getNombre()
+													+ " del rival no impacta",
 											"RANGO INSUFICIENTE (R)", JOptionPane.INFORMATION_MESSAGE);
 									System.out.println(cartaRival.getAlcance());
 									System.out.println(distanciaJugadores);
@@ -744,7 +745,9 @@ public class PantallaCombate extends JPanel {
 									System.out.println("Rango insficiente la carta del rival " + cartaRival.getNombre()
 											+ " no impacta");
 
-									JOptionPane.showMessageDialog(v, "El ataque de tu rival no está en rango, falla.",
+									JOptionPane.showMessageDialog(v,
+											"El ataque de tu rival " + cartaRival.getNombre()
+													+ " no está en rango, falla.",
 											"RANGO INSUFICIENTE (R)", JOptionPane.INFORMATION_MESSAGE);
 									System.out.println(cartaRival.getAlcance());
 									System.out.println(distanciaJugadores);
@@ -848,7 +851,8 @@ public class PantallaCombate extends JPanel {
 							energiaR = (byte) (energiaR - cartaRival.getCosteEnergia());
 							energiaRival.setText(String.valueOf(energiaR));
 							JOptionPane.showMessageDialog(v,
-									"La energía del rival se reduce en " + cartaRival.getCosteEnergia(),
+									"La energía del rival se reduce en " + cartaRival.getCosteEnergia()
+											+ " por usar su carta especial.",
 									"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 
 						} else {
@@ -868,7 +872,8 @@ public class PantallaCombate extends JPanel {
 								energiaR = (byte) (energiaR - cartaRival.getCosteEnergia());
 								energiaRival.setText(String.valueOf(energiaR));
 								JOptionPane.showMessageDialog(v,
-										"La energía del rival se reduce en " + cartaRival.getCosteEnergia(),
+										"La energía del rival se reduce en " + cartaRival.getCosteEnergia()
+												+ " por usar su carta ultimate",
 										"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 
 							} else {
@@ -887,8 +892,9 @@ public class PantallaCombate extends JPanel {
 										"El rival ha perdido " + cartaRival.getCosteVida() + " por usar su movimiento");
 								vidaRival.setText(String.valueOf(vidaR));
 								JOptionPane.showMessageDialog(v,
-										"La vida del rival se reduce en " + cartaRival.getCosteVida(), "ACCIONES RIVAL",
-										JOptionPane.INFORMATION_MESSAGE);
+										"La vida del rival se reduce en " + cartaRival.getCosteVida()
+												+ " por usar su carta ultimate",
+										"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 
 							} else {
 								vidaInsR = true;
@@ -928,7 +934,8 @@ public class PantallaCombate extends JPanel {
 
 						} else {
 							System.out.println("Rango insuficiente, el ataque " + cartaRival.getNombre() + " falla");
-							JOptionPane.showMessageDialog(v, "El ataque de tu rival no está en rango, falla.",
+							JOptionPane.showMessageDialog(v,
+									"El ataque de tu rival " + cartaRival.getNombre() + " no está en rango, falla.",
 									"RANGO INSUFICIENTE (R)", JOptionPane.INFORMATION_MESSAGE);
 							System.out.println(distanciaJugadores);
 						}
@@ -1085,7 +1092,8 @@ public class PantallaCombate extends JPanel {
 
 						} else {
 							System.out.println("Rango insuficiente, el ataque " + cartaRival.getNombre() + " falla");
-							JOptionPane.showMessageDialog(v, "El ataque de tu rival no está en rango, falla.",
+							JOptionPane.showMessageDialog(v,
+									"El ataque de tu rival " + cartaRival.getNombre() + " no está en rango, falla.",
 									"RANGO INSUFICIENTE (R)", JOptionPane.INFORMATION_MESSAGE);
 							System.out.println(distanciaJugadores);
 						}
@@ -1123,32 +1131,6 @@ public class PantallaCombate extends JPanel {
 				"C:\\Users\\toled\\Desktop\\CENEC 2021 - 1\u00BA DAW\\Programaci\u00F3n\\3\u00BA Trimestre\\CARD-FIGHTERS\\background\\mancha.png"));
 		fondoCartas.setBounds(-489, 85, 1526, 580);
 		add(fondoCartas);
-
-		/**
-		 * JButton para imprimir los personajes que están luchando.
-		 */
-
-		JButton imprimir = new BotonAnimado("Imprimir jugador y rival");
-		imprimir.setText("IMPRIMIR COMBATE");
-		imprimir.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				try {
-					FileWriter rivales = new FileWriter("./combate_jugador_rival.txt", true);
-					rivales.write("Personaje Jugador: " + jugador.getNombre() + "\nPersonaje Rival: "
-							+ rival.getNombre() + "\n\n");
-					rivales.flush();
-					rivales.close();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				JOptionPane.showMessageDialog(v, "Este combate se ha impreso con éxito", "Impresión realizada",
-						JOptionPane.INFORMATION_MESSAGE);
-			}
-		});
-		imprimir.setBounds(265, 26, 245, 21);
-		add(imprimir);
 
 		JLabel impresionMancha = new JLabel("");
 		impresionMancha.setHorizontalAlignment(SwingConstants.CENTER);
