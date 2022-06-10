@@ -26,27 +26,34 @@ import utils.ConexionBD;
 
 public class Main {
 	/**
-	 * ESTA VARIABLE INTERNA LA UTILIZO PARA PASAR LOS ARGUMENTOS DE PROGRAMA HACIA LA PANTALLA DE SELECCIÓN DE PERSONAJE
+	 * ESTA VARIABLE INTERNA LA UTILIZO PARA PASAR LOS ARGUMENTOS DE PROGRAMA HACIA
+	 * LA PANTALLA DE SELECCIÓN DE PERSONAJE
 	 */
 	private static String[] savedArgs;
 
+	/**
+	 * Clase main donde inciamos la variable Ventana cardFighters el cual nos
+	 * muestra la pantalla principal de nuestro de juego con todas las
+	 * características generales que hemos añadido en la clase Ventana
+	 * 
+	 * @param args argumentos de programa que guardamos en un array de String para
+	 *             llevarlos a la pantalla de SeleccionPersonaje
+	 */
 	public static void main(String[] args) {
 
 		Ventana cardFighters = new Ventana();
-	
-		
-		//IGUALO EL ARRAY DE STRING SAVEDARGS A LOS ARGUMENTOS DE PROGRAMA
+
+		// IGUALO EL ARRAY DE STRING SAVEDARGS A LOS ARGUMENTOS DE PROGRAMA
 		savedArgs = args;
-		
-		// DOCUMENTAR TODAS LAS CLASES
-		// ENCIMA DE CADA VARIABLE INTERNA SE PONE PARA QUE SIRVE.
+
 
 	}
-	
-	
+
 	/**
-	 * ESTE MÉTODO LO UTILIZO PARA OBTENER LOS ARGUMENTOS DE PROGRAMA EN LA CLASE DE SELEECIONPERSONAJE.
-	 * @return
+	 * ESTE MÉTODO LO UTILIZO PARA OBTENER LOS ARGUMENTOS DE PROGRAMA EN LA CLASE DE
+	 * SELEECIONPERSONAJE.
+	 * 
+	 * @return devuelve el array de argumentos.
 	 */
 	public static String[] getArgs() {
 		return savedArgs;

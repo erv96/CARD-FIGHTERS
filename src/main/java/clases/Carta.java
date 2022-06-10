@@ -10,6 +10,8 @@ import utils.ConexionBD;
  * con esta clase lograremos crear las cartas comunes básicas que tendrá cada
  * jugador.
  * 
+ * NOTA: he tenido que añadir las variables 
+ * 
  * @author toled
  *
  */
@@ -35,11 +37,15 @@ public class Carta extends ElementoNombreDescripcion {
 	/**
 	 * costeVida: (Ultimates) define el coste de vida que tiene usar la carta.
 	 */
-	private byte costeVida;
+	//private byte costeVida;
 	/**
 	 * costeEnergia (Especiales) define el coste de energía que tiene usar la carta.
 	 */
 	private byte costeEnergia;
+	
+	private Ultimate heredarMetodoVida;
+	
+	private Especial heredarMetodoEnergia;
 
 	/**
 	 * Constructor con el que definirémos la construcción de un objeto Carta, no se
@@ -64,24 +70,16 @@ public class Carta extends ElementoNombreDescripcion {
 		this.alcance = alcance;
 		this.tipo = tipo;
 		this.costeEnergia = 0;
-		this.costeVida = 0;
 	}
 
 	public byte getCosteVida() {
-		return costeVida;
-	}
-
-	public void setCosteVida(byte costeVida) {
-		this.costeVida = costeVida;
+		return heredarMetodoVida.getCosteVida();
 	}
 
 	public byte getCosteEnergia() {
-		return costeEnergia;
+		return heredarMetodoEnergia.getCosteEnergia();
 	}
 
-	public void setCosteEnergia(byte costeEnergia) {
-		this.costeEnergia = costeEnergia;
-	}
 
 	public String getTipo() {
 		return tipo;
