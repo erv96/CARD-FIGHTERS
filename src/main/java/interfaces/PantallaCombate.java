@@ -381,6 +381,7 @@ public class PantallaCombate extends JPanel {
 										JOptionPane.INFORMATION_MESSAGE);
 
 							} else {
+								System.out.println("Coste de energía insuficiente");
 								energiaInsJ = true;
 							}
 						}
@@ -398,6 +399,7 @@ public class PantallaCombate extends JPanel {
 											"Tu energía se reduce en " + cartaElegida.getCosteEnergia(),
 											"ACCIONES JUGADOR", JOptionPane.INFORMATION_MESSAGE);
 								} else {
+									System.out.println("Coste de energía insuficiente");
 									energiaInsJ = true;
 								}
 							} else {
@@ -414,6 +416,7 @@ public class PantallaCombate extends JPanel {
 											"Tu vida se reduce en " + cartaElegida.getCosteVida(), "ACCIONES JUGADOR",
 											JOptionPane.INFORMATION_MESSAGE);
 								} else {
+									System.out.println("Coste de vida insuficiente");
 									vidaInsJ = true;
 								}
 							}
@@ -437,6 +440,7 @@ public class PantallaCombate extends JPanel {
 										"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 
 							} else {
+								System.out.println("Coste de energia insuficiente RIVAL");
 								energiaInsR = true;
 							}
 						}
@@ -460,6 +464,7 @@ public class PantallaCombate extends JPanel {
 											"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 
 								} else {
+									System.out.println("Coste de energía insuficiente RIVAL");
 									energiaInsR = true;
 								}
 							} else {
@@ -475,6 +480,7 @@ public class PantallaCombate extends JPanel {
 											"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 
 								} else {
+									System.out.println("Coste de vida insuficiente RIVAL");
 									vidaInsR = true;
 								}
 							}
@@ -494,10 +500,12 @@ public class PantallaCombate extends JPanel {
 
 						// SITUACIONES DE EMPATE, CON INSUFICIENCIA DE RANGO POR PARTE DEL RIVAL O POR
 						// PARTE DEL JUGADOR
-
+						System.out.println(energiaInsJ);
+						System.out.println(vidaInsJ);
 						if (cartaElegida.getVelocidad() == cartaRival.getVelocidad()
 								&& cartaElegida.getAlcance() >= distanciaJugadores
-								&& cartaRival.getAlcance() < distanciaJugadores) {
+								&& cartaRival.getAlcance() < distanciaJugadores
+								&& (energiaInsJ == false && vidaInsJ == false)) {
 							System.out.println(
 									"Habeis usado movimientos con la misma velocidad pero tu movimiento tiene más alcance que el del rival, tu ataque impacta");
 							JOptionPane.showMessageDialog(v,
@@ -515,10 +523,12 @@ public class PantallaCombate extends JPanel {
 								vidaRival.setText(String.valueOf(vidaR));
 							}
 						}
-
+						System.out.println(energiaInsR);
+						System.out.println(vidaInsR);
 						if (cartaElegida.getVelocidad() == cartaRival.getVelocidad()
 								&& cartaRival.getAlcance() >= distanciaJugadores
-								&& cartaElegida.getAlcance() < distanciaJugadores) {
+								&& cartaElegida.getAlcance() < distanciaJugadores
+								&& (energiaInsR == false && vidaInsR == false)) {
 							System.out.println(
 									"Habeis usado movimientos con la misma velocidad pero el movimiento de tu rival tiene más alcance que el tuyo, su ataque impacta");
 							JOptionPane.showMessageDialog(v,
@@ -536,15 +546,59 @@ public class PantallaCombate extends JPanel {
 								vidaJugador.setText(String.valueOf(vidaJ));
 							}
 						}
-
+						System.out.println();
 						if (cartaElegida.getVelocidad() == cartaRival.getVelocidad()
 								&& cartaRival.getAlcance() >= distanciaJugadores
-								&& cartaElegida.getAlcance() >= distanciaJugadores) {
+								&& cartaElegida.getAlcance() >= distanciaJugadores
+								&& (vidaInsJ == false && energiaInsJ == false)
+								&& (vidaInsR == false && energiaInsR == false)) {
 							System.out.println(
 									"Habeis usado movimientos con la misma velocidad y dentro de su rango de impacto, nadie recibe daño");
 							JOptionPane.showMessageDialog(v,
 									"Habeis usado movimientos con la misma velocidad y dentro de su rango de impacto, nadie recibe daño",
 									"EMPATE", JOptionPane.INFORMATION_MESSAGE);
+						} else if (cartaElegida.getVelocidad() == cartaRival.getVelocidad()
+								&& cartaRival.getAlcance() >= distanciaJugadores
+								&& cartaElegida.getAlcance() >= distanciaJugadores
+								&& (energiaInsR == true || vidaInsR == true)) {
+							JOptionPane.showMessageDialog(v,
+									"Habeis usado movimientos con la misma velocidad y dentro de su rango de impacto, pero tu rival esta aturdido, tu carta impacta",
+									"ACCIONES JUGADOR", JOptionPane.INFORMATION_MESSAGE);
+							vidaR = (byte) (vidaR - cartaElegida.getPuntosAtaque());
+							if (vidaR <= 0) {
+								vidaR = 0;
+								vidaRival.setText(String.valueOf(vidaR));
+								JOptionPane.showMessageDialog(v, "¡Tu rival ha caido! Eres el ganador de este combate",
+										"GANAS", JOptionPane.INFORMATION_MESSAGE);
+								ventana.irAPantalla("Resultado", jugador.getNombre());
+							} else {
+								vidaRival.setText(String.valueOf(vidaR));
+							}
+						} else if (cartaElegida.getVelocidad() == cartaRival.getVelocidad()
+								&& cartaRival.getAlcance() >= distanciaJugadores
+								&& cartaElegida.getAlcance() >= distanciaJugadores
+								&& (energiaInsJ == true || vidaInsJ == true)) {
+							JOptionPane.showMessageDialog(v,
+									"Habeis usado movimientos con la misma velocidad y dentro de su rango de impacto, pero estás aturdido, la carta del rival impacta",
+									"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
+							vidaJ = (byte) (vidaJ - cartaRival.getPuntosAtaque());
+							if (vidaJ <= 0) {
+								vidaJ = 0;
+								vidaJugador.setText(String.valueOf(vidaJ));
+								JOptionPane.showMessageDialog(v, "¡Has caido! Tu rival es el ganador de este combate",
+										"PIERDES", JOptionPane.INFORMATION_MESSAGE);
+								ventana.irAPantalla("Resultado", rival.getNombre());
+							} else {
+								vidaJugador.setText(String.valueOf(vidaJ));
+							}
+						} else if (cartaElegida.getVelocidad() == cartaRival.getVelocidad()
+								&& cartaRival.getAlcance() >= distanciaJugadores
+								&& cartaElegida.getAlcance() >= distanciaJugadores
+								&& (energiaInsJ == true || vidaInsJ == true)
+								&& (energiaInsR == true || vidaInsR == true)) {
+							JOptionPane.showMessageDialog(v,
+									"Tanto tú como tu rival estais aturdidos, nadie recibe daño", "EXTENUACIÓN",
+									JOptionPane.INFORMATION_MESSAGE);
 						}
 
 						////////////// INTERCAMBIO DE GOLPES JUGADOR
@@ -555,8 +609,8 @@ public class PantallaCombate extends JPanel {
 									"No cumples los requisitos para realizar el movimiento " + cartaElegida.getNombre()
 											+ " pierdes el turno.",
 									"COSTE INSUFICIENTE (J)", JOptionPane.INFORMATION_MESSAGE);
-							System.out.println(cartaRival.getNombre());
-							System.out.println(cartaElegida.getNombre());
+							vidaInsJ = true;
+							energiaInsJ = true;
 						} else {
 
 							System.out.println("Usas la carta " + cartaElegida.getNombre() + " de daño "
@@ -597,12 +651,9 @@ public class PantallaCombate extends JPanel {
 									JOptionPane.showMessageDialog(v,
 											"Rango insuficiente, tu carta " + cartaElegida.getNombre() + " no impacta",
 											"RANGO INSUFICIENTE (J)", JOptionPane.INFORMATION_MESSAGE);
-									System.out.println(cartaElegida.getAlcance());
-									System.out.println(distanciaJugadores);
 									if (cartaRival.getAlcance() >= distanciaJugadores
-											&& (vidaInsR == false || energiaInsR == false)) {
-										System.out
-												.println("La carta del rival " + cartaElegida.getNombre() + " impacta");
+											&& (vidaInsR == false && energiaInsR == false)) {
+										System.out.println("La carta del rival " + cartaRival.getNombre() + " impacta");
 										JOptionPane.showMessageDialog(v,
 												"La carta de tu rival si entra en rango, te golpea con "
 														+ cartaRival.getPuntosAtaque() + " de daño.",
@@ -618,6 +669,10 @@ public class PantallaCombate extends JPanel {
 										} else {
 											vidaJugador.setText(String.valueOf(vidaJ));
 										}
+									} else {
+										JOptionPane.showMessageDialog(v,
+												"El rival no cumple con los costes de su movimiento o su movimiento no entra en rango, no recibes daño",
+												"ACCIONES RIVAL (R)", JOptionPane.INFORMATION_MESSAGE);
 									}
 
 								}
@@ -650,8 +705,6 @@ public class PantallaCombate extends JPanel {
 									JOptionPane.showMessageDialog(v,
 											"Rango insuficiente, tu carta " + cartaElegida.getNombre() + " no impacta",
 											"RANGO INSUFICIENTE (J)", JOptionPane.INFORMATION_MESSAGE);
-									System.out.println(cartaElegida.getAlcance());
-									System.out.println(distanciaJugadores);
 
 								}
 
@@ -700,10 +753,8 @@ public class PantallaCombate extends JPanel {
 											"Rango insuficiente, la carta " + cartaRival.getNombre()
 													+ " del rival no impacta",
 											"RANGO INSUFICIENTE (R)", JOptionPane.INFORMATION_MESSAGE);
-									System.out.println(cartaRival.getAlcance());
-									System.out.println(distanciaJugadores);
-									if ((cartaElegida.getAlcance() >= distanciaJugadores)
-											&& (vidaInsJ == false || energiaInsJ == false)) {
+									if ((cartaElegida.getAlcance() >= distanciaJugadores) && vidaInsJ == false
+											|| energiaInsJ == false) {
 										System.out.println("Tu carta " + cartaElegida.getNombre() + " impacta");
 										JOptionPane.showMessageDialog(v,
 												"Tu carta cumple el alcance y si impacta, realizas "
@@ -720,6 +771,8 @@ public class PantallaCombate extends JPanel {
 										} else {
 											vidaRival.setText(String.valueOf(vidaR));
 										}
+									} else {
+										System.out.println("Estas aturdido");
 									}
 
 								}
@@ -757,8 +810,6 @@ public class PantallaCombate extends JPanel {
 											"El ataque de tu rival " + cartaRival.getNombre()
 													+ " no está en rango, falla.",
 											"RANGO INSUFICIENTE (R)", JOptionPane.INFORMATION_MESSAGE);
-									System.out.println(cartaRival.getAlcance());
-									System.out.println(distanciaJugadores);
 
 								}
 
@@ -903,7 +954,9 @@ public class PantallaCombate extends JPanel {
 					// EL RIVAL ATACA
 
 					if (vidaInsR == true || energiaInsR == true) {
-
+						JOptionPane.showMessageDialog(v,
+								"El rival no cumple con los costes de su movimiento y se queda paralizado",
+								"EXTENUACIÓN", JOptionPane.INFORMATION_MESSAGE);
 					} else {
 
 						distanciaJugadores = (byte) (posicionJ - posicionR);
@@ -935,7 +988,7 @@ public class PantallaCombate extends JPanel {
 							JOptionPane.showMessageDialog(v,
 									"El ataque de tu rival " + cartaRival.getNombre() + " no está en rango, falla.",
 									"RANGO INSUFICIENTE (R)", JOptionPane.INFORMATION_MESSAGE);
-							System.out.println(distanciaJugadores);
+
 						}
 
 					}
@@ -1006,6 +1059,9 @@ public class PantallaCombate extends JPanel {
 									"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 
 						} else {
+							JOptionPane.showMessageDialog(v,
+									"Tu rival falla al usar su especial : " + cartaRival.getNombre(),
+									"COSTE INSUFICIENTE", JOptionPane.INFORMATION_MESSAGE);
 							energiaInsR = true;
 						}
 					}
@@ -1026,6 +1082,9 @@ public class PantallaCombate extends JPanel {
 										"ACCIONES RIVAL", JOptionPane.INFORMATION_MESSAGE);
 
 							} else {
+								JOptionPane.showMessageDialog(v,
+										"Tu rival falla al usar su ultimate : " + cartaRival.getNombre(),
+										"COSTE INSUFICIENTE", JOptionPane.INFORMATION_MESSAGE);
 								energiaInsR = true;
 							}
 						} else {
@@ -1045,6 +1104,9 @@ public class PantallaCombate extends JPanel {
 										JOptionPane.INFORMATION_MESSAGE);
 
 							} else {
+								JOptionPane.showMessageDialog(v,
+										"Tu rival falla al usar su ultimate : " + cartaRival.getNombre(),
+										"COSTE INSUFICIENTE", JOptionPane.INFORMATION_MESSAGE);
 								vidaInsR = true;
 							}
 						}
@@ -1053,7 +1115,9 @@ public class PantallaCombate extends JPanel {
 					// EL RIVAL ATACA
 
 					if (vidaInsR == true || energiaInsR == true) {
-
+						JOptionPane.showMessageDialog(v,
+								"El rival no cumple con los costes de su movimiento y se queda paralizado",
+								"EXTENUACIÓN", JOptionPane.INFORMATION_MESSAGE);
 					} else {
 
 						distanciaJugadores = (byte) (posicionJ - posicionR);
@@ -1085,7 +1149,7 @@ public class PantallaCombate extends JPanel {
 							JOptionPane.showMessageDialog(v,
 									"El ataque de tu rival " + cartaRival.getNombre() + " no está en rango, falla.",
 									"RANGO INSUFICIENTE (R)", JOptionPane.INFORMATION_MESSAGE);
-							System.out.println(distanciaJugadores);
+
 						}
 
 					}
@@ -1105,45 +1169,38 @@ public class PantallaCombate extends JPanel {
 		add(usarCarta);
 
 		JLabel manchaDerecha = new JLabel("");
-		manchaDerecha.setIcon(new ImageIcon(
-				"./background/manchaBlanca.png"));
+		manchaDerecha.setIcon(new ImageIcon("./background/manchaBlanca.png"));
 		manchaDerecha.setBounds(460, 190, 644, 169);
 		add(manchaDerecha);
 
 		JLabel manchaIzquierda = new JLabel("");
-		manchaIzquierda.setIcon(new ImageIcon(
-				"./background/manchaBlancaInv.png"));
+		manchaIzquierda.setIcon(new ImageIcon("./background/manchaBlancaInv.png"));
 		manchaIzquierda.setBounds(-260, 190, 644, 169);
 		add(manchaIzquierda);
 
 		JLabel fondoCartas = new JLabel("");
-		fondoCartas.setIcon(new ImageIcon(
-				"./background/mancha.png"));
+		fondoCartas.setIcon(new ImageIcon("./background/mancha.png"));
 		fondoCartas.setBounds(-489, 85, 1526, 580);
 		add(fondoCartas);
 
 		JLabel impresionMancha = new JLabel("");
 		impresionMancha.setHorizontalAlignment(SwingConstants.CENTER);
-		impresionMancha.setIcon(new ImageIcon(
-				"./background/mancha_small.png"));
+		impresionMancha.setIcon(new ImageIcon("./background/mancha_small.png"));
 		impresionMancha.setBounds(75, -68, 588, 148);
 		add(impresionMancha);
 
 		JLabel manchaInfoRival = new JLabel("");
-		manchaInfoRival.setIcon(new ImageIcon(
-				"./background/splat.png"));
+		manchaInfoRival.setIcon(new ImageIcon("./background/splat.png"));
 		manchaInfoRival.setBounds(250, -299, 1526, 580);
 		add(manchaInfoRival);
 
 		JLabel manchaInfoJugador = new JLabel("");
-		manchaInfoJugador.setIcon(new ImageIcon(
-				"./background/splat.png"));
+		manchaInfoJugador.setIcon(new ImageIcon("./background/splat.png"));
 		manchaInfoJugador.setBounds(-450, -300, 1526, 580);
 		add(manchaInfoJugador);
 
 		JLabel manchita = new JLabel("");
-		manchita.setIcon(new ImageIcon(
-				"./background/mancha_small.png"));
+		manchita.setIcon(new ImageIcon("./background/mancha_small.png"));
 		manchita.setBounds(85, 120, 612, 312);
 		add(manchita);
 
