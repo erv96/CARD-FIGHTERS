@@ -26,7 +26,7 @@ public abstract class ConexionBD {
 	/**
 	 * Conraseña de acceso a la BBDD
 	 */
-	private final static String passwordBD = "123Koalaenfermo";
+	private final static String passwordBD = "123koalaenfermo";
 	/**
 	 * Variable Connection que nos permite heredear los métodos necesarios para
 	 * operar la BBDD
