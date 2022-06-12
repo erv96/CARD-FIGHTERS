@@ -77,33 +77,14 @@ public class CampoCombate extends ElementoNombreDescripcion {
 
 	}
 
+	/**
+	 * Método que devuelve el array de String
+	 * 
+	 * @return devuelve el array de String
+	 */
+
 	public String[] getMapa() {
 		return mapa;
-	}
-
-	public void setMapa(String[] mapa) {
-		this.mapa = mapa;
-	}
-
-	public byte getPosJugador() {
-		return posJugador;
-	}
-
-	public void setPosJugador(byte posJugador) {
-		this.posJugador = posJugador;
-	}
-
-	public byte getPosRival() {
-		return posRival;
-	}
-
-	public void setPosRival(byte posRival) {
-		this.posRival = posRival;
-	}
-
-	@Override
-	public String toString() {
-		return "Nombre =" + getNombre() + ", getDescripcion()=" + getDescripcion() + "]";
 	}
 
 }

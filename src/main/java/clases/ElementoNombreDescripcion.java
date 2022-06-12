@@ -51,18 +51,42 @@ public abstract class ElementoNombreDescripcion {
 		super();
 	}
 
+	/**
+	 * Método que utilizamos para obtener el nombre de los objetos que heredan de
+	 * esta clase
+	 * 
+	 * @return devuelve un string con su nombre
+	 */
 	public String getNombre() {
 		return nombre;
 	}
 
+	/**
+	 * Método que usamos para asignar un nombre a los objetos que heredan de esta
+	 * clase.
+	 * 
+	 * @param nombre nombre que queremos asignar
+	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
+	/**
+	 * Método que utilizamos para obtener la descripción de los objetos que heredan
+	 * de esta clase
+	 * 
+	 * @return devuelve un String con la descripción del objeto
+	 */
 	public String getDescripcion() {
 		return descripcion;
 	}
 
+	/**
+	 * Método que utilizamos para asignar una descripción a los objetos que heredan
+	 * de esta clase
+	 * 
+	 * @param desripcion descripción que se le va a asignar al objeto
+	 */
 	public void setDesripcion(String desripcion) {
 		this.descripcion = desripcion;
 	}

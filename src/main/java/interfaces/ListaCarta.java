@@ -162,6 +162,12 @@ public class ListaCarta extends JPanel {
 		elegir.setBounds(10, 135, 100, 21);
 		panel.add(elegir);
 
+		/**
+		 * Mediante esta dos setencias if comprobamos si alguna de las cartas que se listan
+		 * es ultimate o especial, según lo que sean, se mostrará en las cartas su coste
+		 * de vida o de energía
+		 */
+
 		if (elegida.getTipo().equals("Ultimate")) {
 
 			JLabel vida = new JLabel("C.vida");

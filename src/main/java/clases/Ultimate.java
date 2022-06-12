@@ -34,17 +34,23 @@ public class Ultimate extends Especial {
 		this.costeVida = costeVida;
 	}
 
-	@Override
-	public String toString() {
-		return getNombre();
-	}
 
+	/**
+	 * Método que utilizamos para obtene rel coste de vida del ultimate
+	 * 
+	 * @return devuelve el coste de vida de la carta
+	 */
 	public byte getCosteVida() {
 		return costeVida;
 	}
 
-	public void setCosteVida(byte costeVida) {
-		this.costeVida = costeVida;
+	
+	/**
+	 * toString que nos muestra el nombre del ultimate.
+	 */
+	@Override
+	public String toString() {
+		return getNombre();
 	}
 
 }

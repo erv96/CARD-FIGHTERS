@@ -205,13 +205,12 @@ public class PantallaCombate extends JPanel {
 		// ALTERAMOS LA POSICIÓN DE LAS CARTAS
 
 		Collections.shuffle(barajaJugador);
-		ListaCarta cartita = null;
 
 		// RECORREMOS EL ARRAYLIST DE CARTAS E INTRODUCIMOS CADA CARTA EN UN OBJETO
 		// ListaCarta QUE A SU VEZ ESTÁ CONTENIDO EN EL JPANEL cartasListaJ
 
 		for (byte i = 0; i < barajaJugador.size(); i++) {
-			cartita = new ListaCarta(barajaJugador.get(i), this);
+			ListaCarta cartita = new ListaCarta(barajaJugador.get(i), this);
 			cartasListaJ.add(cartita);
 		}
 
@@ -223,6 +222,10 @@ public class PantallaCombate extends JPanel {
 			rival.setNombre(rival.getNombre() + " (R)");
 
 		}
+		
+		/**
+		 * Serie de JLabels con el nombre, vida y energía del jugador y del rival.
+		 */
 		JLabel personaje_Jugador = new JLabel(jugador.getNombre());
 		personaje_Jugador.setHorizontalAlignment(SwingConstants.CENTER);
 		personaje_Jugador.setForeground(Color.WHITE);

@@ -80,7 +80,9 @@ public class SeleccionPersonaje extends JPanel {
 	 * ha elegido ninguno, y hay argumentos de programa definidos, se le mostrará un
 	 * JOption que le informará que se procederá a la selección automática de
 	 * personajes, si hay argumentos pero mal definidos, se mostrará una pantalla
-	 * que informará de ello.
+	 * que informará de ello, si no hay argumentos de programa y el usuario no elige
+	 * ni jugador ni rival se mostrará un JOptionaPane en el se indicará un error de
+	 * selección e indicará que debe elegirse un jugador y un rival para comenzar.
 	 * 
 	 * Además, en esta pantalla hemos realizado la lectura de archivos, el cual nos
 	 * leerá el .txt que contiene a los anteriores personajes que han ganado un
@@ -183,7 +185,10 @@ public class SeleccionPersonaje extends JPanel {
 				ventana.irAPantalla("MenuPrincipal");
 			}
 		});
-
+		/**
+		 * En este botón se encuentran todas las acciones que realizamos con los
+		 * argumentos de programa.
+		 */
 		JButton COMENZAR = new BotonAnimadoNegro("ATR\u00C1S");
 		COMENZAR.addMouseListener(new MouseAdapter() {
 			@Override
@@ -238,7 +243,12 @@ public class SeleccionPersonaje extends JPanel {
 
 			}
 		});
-
+		/**
+		 * Botón en el que usamos el BufferedReader, dentro de él introducimos un File
+		 * con la ruta del archivo que hemos generado en la pantalla Resultado, si
+		 * existe, nos leerá el archivo, sino, saltará un JOptionPane con el mensaje de
+		 * la excepción que hemos programado
+		 */
 		BotonAnimado leerFichero = new BotonAnimado("ATR\u00C1S");
 		leerFichero.addMouseListener(new MouseAdapter() {
 			@Override

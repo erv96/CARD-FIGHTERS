@@ -74,6 +74,14 @@ public class Resultado extends JPanel {
 		botonMenu.setBounds(2, 499, 231, 33);
 		add(botonMenu);
 
+		/**
+		 * En este JButton realizamos la impresión del ganador del combate, al pulsar el
+		 * botón llamados a la clase FileWriter para primeramente crear el archivo .txt
+		 * luego de eso introducimos el nombre del ganador con .write, confirmamos
+		 * cambios con .flush y cerramos el FileWriter para que no se quede abierto. Si
+		 * tiene éxito la impresión se nos mostrará un JOptionPane indicandonos que todo
+		 * ha salido bien.
+		 */
 		JButton imprimirGanador = new BotonAnimado("IMPRIMIR GANADOR");
 		imprimirGanador.addMouseListener(new MouseAdapter() {
 			@Override
@@ -96,8 +104,7 @@ public class Resultado extends JPanel {
 		add(imprimirGanador);
 
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(
-				"./background/mancha_peque\u00F1a.png"));
+		lblNewLabel.setIcon(new ImageIcon("./background/mancha_peque\u00F1a.png"));
 		lblNewLabel.setBounds(180, 311, 462, 156);
 		add(lblNewLabel);
 
@@ -120,14 +127,12 @@ public class Resultado extends JPanel {
 		add(manchaTop);
 
 		JLabel manchaBlancaRight = new JLabel("");
-		manchaBlancaRight.setIcon(new ImageIcon(
-				"./background/manchaBlanca.png"));
+		manchaBlancaRight.setIcon(new ImageIcon("./background/manchaBlanca.png"));
 		manchaBlancaRight.setBounds(420, 385, 561, 215);
 		add(manchaBlancaRight);
 
 		JLabel manchaBlancaLeft = new JLabel("");
-		manchaBlancaLeft.setIcon(new ImageIcon(
-				"./background/manchaBlancaInv.png"));
+		manchaBlancaLeft.setIcon(new ImageIcon("./background/manchaBlancaInv.png"));
 		manchaBlancaLeft.setBounds(-265, 385, 594, 215);
 		add(manchaBlancaLeft);
 

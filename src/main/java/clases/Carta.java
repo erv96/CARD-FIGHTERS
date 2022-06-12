@@ -10,7 +10,7 @@ import utils.ConexionBD;
  * con esta clase lograremos crear las cartas comunes básicas que tendrá cada
  * jugador.
  * 
- * NOTA: he tenido que añadir las variables 
+ * NOTA: he tenido que añadir las variables
  * 
  * @author toled
  *
@@ -34,13 +34,15 @@ public class Carta extends ElementoNombreDescripcion {
 	 * tipo: el tipo que puede ser la carta, básico, especial o ultimate
 	 */
 	private String tipo;
-	
+
 	/**
-	 * Introduzco en esta clase un objeto de tipo ultimate para poder heredar sus métodos y poder mostrar los costes de vida en la pantalla ListaCarta
+	 * Introduzco en esta clase un objeto de tipo ultimate para poder heredar sus
+	 * métodos y poder mostrar los costes de vida en la pantalla ListaCarta
 	 */
 	private Ultimate heredarMetodoVida;
 	/**
-	 * Introduzco en esta clase un objeto de tipo especial para poder heredar sus métodos y poder mostrar los costes de energia en la pantalla ListaCarta
+	 * Introduzco en esta clase un objeto de tipo especial para poder heredar sus
+	 * métodos y poder mostrar los costes de energia en la pantalla ListaCarta
 	 */
 	private Especial heredarMetodoEnergia;
 
@@ -67,58 +69,69 @@ public class Carta extends ElementoNombreDescripcion {
 		this.alcance = alcance;
 		this.tipo = tipo;
 	}
-	
+
 	/**
-	 * Metodo para retornar el coste de vida con el método del objeto ultimate getCosteVida
+	 * Metodo para retornar el coste de vida con el método del objeto ultimate
+	 * getCosteVida
+	 * 
 	 * @return
 	 */
 	public byte getCosteVida() {
 		return heredarMetodoVida.getCosteVida();
 	}
-	
-	
+
 	/**
-	 * Metodo para retornar el costeEnergia con el método del objeto especial getCosteEnergia
+	 * Metodo para retornar el costeEnergia con el método del objeto especial
+	 * getCosteEnergia
+	 * 
 	 * @return
 	 */
 	public byte getCosteEnergia() {
 		return heredarMetodoEnergia.getCosteEnergia();
 	}
 
-
+	/**
+	 * Método que usamos para comprobar clasificar los tipos de carta para realizar
+	 * unas u otras acciones en la PantallaCombate.
+	 * 
+	 * @return devuelve el tipo de la carta
+	 */
 	public String getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
+	/**
+	 * Método para obtener los puntos de ataque que tiene una carta
+	 * 
+	 * @return devuelve los puntos de ataque de la carta
+	 */
 	public byte getPuntosAtaque() {
 		return puntosAtaque;
 	}
 
-	public void setPuntosAtaque(byte puntosAtaque) {
-		this.puntosAtaque = puntosAtaque;
-	}
-
+	/**
+	 * Método que usamos para obtener los puntos de velocidad de una carta
+	 * 
+	 * @return devuelve los puntos de velocidad de la carta
+	 */
 	public byte getVelocidad() {
 		return velocidad;
 	}
 
-	public void setVelocidad(byte velocidad) {
-		this.velocidad = velocidad;
-	}
-
+	/**
+	 * Método que usamos para obtener el alcance de una carta
+	 * 
+	 * @return devuelve el alcance de la carta
+	 */
 	public byte getAlcance() {
 		return alcance;
 	}
 
-	public void setAlcance(byte alcance) {
-		this.alcance = alcance;
-	}
-
+	
 	@Override
+	/**
+	 * toString que usamos para imprimir sólo el nombre de la carta con el método getNombre de la clase ElementoNombreDescripcion.
+	 */
 	public String toString() {
 		return "Carta: " + getNombre();
 

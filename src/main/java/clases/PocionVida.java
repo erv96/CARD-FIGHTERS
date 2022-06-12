@@ -43,17 +43,4 @@ public class PocionVida extends Consumible {
 
 	}
 
-	public byte getAumentoVida() {
-		return aumentoVida;
-	}
-
-	public void setAumentoVida(byte aumentoVida) {
-		this.aumentoVida = aumentoVida;
-	}
-
-	@Override
-	public String toString() {
-		return "PocionVida [aumentoVida=" + aumentoVida + ", getDescripcion()=" + getDescripcion() + "]";
-	}
-
 }

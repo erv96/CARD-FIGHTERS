@@ -42,16 +42,4 @@ public class PocionEnergia extends Consumible {
 
 	}
 
-	public byte getAumentoEnergia() {
-		return aumentoEnergia;
-	}
-
-	public void setAumentoEnergia(byte aumentoEnergia) {
-		this.aumentoEnergia = aumentoEnergia;
-	}
-
-	@Override
-	public String toString() {
-		return "PocionEnergia [aumentoEnergia=" + aumentoEnergia + ", getDescripcion()=" + getDescripcion() + "]";
-	}
 }

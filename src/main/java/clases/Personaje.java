@@ -120,44 +120,61 @@ public class Personaje extends ElementoNombreDescripcion {
 
 	}
 
+	/**
+	 * Método que utilizamos para obtener la vida tanto del rival como del jugador
+	 * 
+	 * @return devuelve un byte con la vida del rival o del jugador
+	 */
 	public byte getVida() {
 		return vida;
 	}
 
-	public void setVida(byte vida) {
-		this.vida = vida;
-	}
-
+	/**
+	 * Método que utilizamos para obtener la posición del rival o del jugador en el
+	 * mapa
+	 * 
+	 * @return devuelve un byte con la posición del rival o del jugador.
+	 */
 	public byte getPosicion() {
 		return posicion;
 	}
 
+	/**
+	 * Método que utilizamos para asignar una posición al rival o al jugador en el
+	 * mapa
+	 * 
+	 * @param posicion la posición que queremos asignar al rival o al jugador.
+	 */
 	public void setPosicion(byte posicion) {
 		this.posicion = posicion;
 	}
 
+	/**
+	 * Método que utilizamos para obtener la baraja del jugador o del rival
+	 * 
+	 * @return devuelve un ArrayList de Carta con las cartas pertenecientes al
+	 *         personaje
+	 */
 	public ArrayList<Carta> getBaraja() {
 		return baraja;
 	}
 
-	public void setBaraja(ArrayList<Carta> baraja) {
-
-		this.baraja = baraja;
-	}
-
+	/**
+	 * Método que utilizamos para obtener los puntos de energía actuales del
+	 * personaje
+	 * 
+	 * @return devuelve un byte con los puntos de energía.
+	 */
 	public byte getEnergia() {
 		return energia;
 	}
-
-	public void setEnergia(byte energia) {
-		this.energia = energia;
-	}
-
+	/**
+	 * toString de personaje que muestra el nombre del personaje, su baraja y su descripción.
+	 */
 	@Override
 	public String toString() {
 		return getNombre() + "\n" + "\tBaraja: " + baraja + "\n" + "\n\tDescripción: " + getDescripcion();
 	}
-
 
 	/**
 	 * Método que nos servirá para guardar en un ArrayList todo el roster de

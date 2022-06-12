@@ -44,17 +44,4 @@ public class PocionFuerza extends Consumible {
 
 	}
 
-	public byte getAumentoFuerza() {
-		return aumentoFuerza;
-	}
-
-	public void setAumentoFuerza(byte aumentoFuerza) {
-		this.aumentoFuerza = aumentoFuerza;
-	}
-
-	@Override
-	public String toString() {
-		return "PocionFuerza [aumentoFuerza=" + aumentoFuerza + ", getDescripcion()=" + getDescripcion() + "]";
-	}
-
 }

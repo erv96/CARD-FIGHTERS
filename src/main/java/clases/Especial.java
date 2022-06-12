@@ -33,14 +33,18 @@ public class Especial extends Carta {
 		this.costeEnergia = costeEnergia;
 	}
 
+	/**
+	 * Método que utilizamos para obtener el coste de energía de la carta
+	 * 
+	 * @return devuelve un byte con el coste de energía.
+	 */
 	public byte getCosteEnergia() {
 		return costeEnergia;
 	}
-
-	public void setCosteEnergia(byte costeEnergia) {
-		this.costeEnergia = costeEnergia;
-	}
-
+	
+	/**
+	 * toString que utilizamos para imprimir el nombre de la carta gracias al método getNombre de la clase ElementoNombreDescripcion.
+	 */
 	@Override
 	public String toString() {
 		return getNombre();
